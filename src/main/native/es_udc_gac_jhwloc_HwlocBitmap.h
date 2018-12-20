@@ -57,6 +57,30 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1set
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_set_range
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1set_1range
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_clr
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1clr
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_clr_range
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1clr_1range
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
  * Method:    jhwloc_bitmap_only
  * Signature: (I)I
  */
@@ -213,6 +237,62 @@ JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1asp
  * Signature: ()Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1list_1asprintf
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_first
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1first
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_first_unset
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1first_1unset
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_last
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1last
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_last_unset
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1last_1unset
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_next
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1next
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_next_unset
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1next_1unset
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_weight
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1weight
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

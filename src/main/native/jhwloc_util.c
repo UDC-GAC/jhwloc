@@ -93,6 +93,9 @@ static void setHwlocAPI()
 	api.jhwloc_bitmap_alloc_full = &hwloc_bitmap_alloc_full;
 	api.jhwloc_bitmap_copy = &hwloc_bitmap_copy;
 	api.jhwloc_bitmap_set = &hwloc_bitmap_set;
+	api.jhwloc_bitmap_set_range = &hwloc_bitmap_set_range;
+	api.jhwloc_bitmap_clr = &hwloc_bitmap_clr;
+	api.jhwloc_bitmap_clr_range = &hwloc_bitmap_clr_range;
 	api.jhwloc_bitmap_only = &hwloc_bitmap_only;
 	api.jhwloc_bitmap_allbut = &hwloc_bitmap_allbut;	
 	api.jhwloc_bitmap_isincluded = &hwloc_bitmap_isincluded;
@@ -115,6 +118,13 @@ static void setHwlocAPI()
 	api.jhwloc_bitmap_isfull = &hwloc_bitmap_isfull;
 	api.jhwloc_bitmap_asprintf = &hwloc_bitmap_asprintf;
 	api.jhwloc_bitmap_list_asprintf = &hwloc_bitmap_list_asprintf;
+	api.jhwloc_bitmap_first = &hwloc_bitmap_first;
+	api.jhwloc_bitmap_first_unset = &hwloc_bitmap_first_unset;
+	api.jhwloc_bitmap_last = &hwloc_bitmap_last;
+	api.jhwloc_bitmap_last_unset = &hwloc_bitmap_last_unset;
+	api.jhwloc_bitmap_next = &hwloc_bitmap_next;
+	api.jhwloc_bitmap_next_unset = &hwloc_bitmap_next_unset;
+	api.jhwloc_bitmap_weight = &hwloc_bitmap_weight;
 	api.jhwloc_set_cpubind = &hwloc_set_cpubind;
 	api.jhwloc_set_proc_cpubind = &hwloc_set_proc_cpubind;
 	api.jhwloc_set_thread_cpubind = &hwloc_set_thread_cpubind;

@@ -77,6 +77,45 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1set
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_set_range
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1set_1range
+  (JNIEnv *env, jobject this, jint begin, jint end)
+{
+	hwloc_bitmap_t bitmap = (hwloc_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return api.jhwloc_bitmap_set_range(bitmap, begin, end);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_clr
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1clr
+  (JNIEnv *env, jobject this, jint id)
+{
+	hwloc_bitmap_t bitmap = (hwloc_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return api.jhwloc_bitmap_clr(bitmap, id);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_clr_range
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1clr_1range
+  (JNIEnv *env, jobject this, jint begin, jint end)
+{
+	hwloc_bitmap_t bitmap = (hwloc_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return api.jhwloc_bitmap_clr_range(bitmap, begin, end);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
  * Method:    jhwloc_bitmap_only
  * Signature: (I)I
  */
@@ -399,5 +438,96 @@ JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1lis
 	free(string);
 
 	return str;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_first
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1first
+  (JNIEnv *env, jobject this)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return 	api.jhwloc_bitmap_first(bitmap);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_first_unset
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1first_1unset
+  (JNIEnv *env, jobject this)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return 	api.jhwloc_bitmap_first_unset(bitmap);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_last
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1last
+  (JNIEnv *env, jobject this)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return 	api.jhwloc_bitmap_last(bitmap);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_last_unset
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1last_1unset
+  (JNIEnv *env, jobject this)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return 	api.jhwloc_bitmap_last_unset(bitmap);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_next
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1next
+  (JNIEnv *env, jobject this, jint prev)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return 	api.jhwloc_bitmap_next(bitmap, prev);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_next_unset
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1next_1unset
+  (JNIEnv *env, jobject this, jint prev)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return 	api.jhwloc_bitmap_next_unset(bitmap, prev);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_weight
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1weight
+  (JNIEnv *env, jobject this)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+
+	return 	api.jhwloc_bitmap_weight(bitmap);
 }
 

@@ -64,6 +64,9 @@ typedef struct jhwloc_api {
 	hwloc_bitmap_t (*jhwloc_bitmap_alloc_full)(void);
 	int (*jhwloc_bitmap_copy)(hwloc_bitmap_t dst, hwloc_const_bitmap_t src);
 	int (*jhwloc_bitmap_set)(hwloc_bitmap_t bitmap, unsigned id);
+	int (*jhwloc_bitmap_set_range)(hwloc_bitmap_t bitmap, unsigned being, int end);
+	int (*jhwloc_bitmap_clr)(hwloc_bitmap_t bitmap, unsigned id);
+	int (*jhwloc_bitmap_clr_range)(hwloc_bitmap_t bitmap, unsigned being, int end);
 	int (*jhwloc_bitmap_only)(hwloc_bitmap_t bitmap, unsigned id);
 	int (*jhwloc_bitmap_allbut)(hwloc_bitmap_t bitmap, unsigned id);
 	int (*jhwloc_bitmap_isincluded)(hwloc_const_bitmap_t sub_bitmap, hwloc_const_bitmap_t super_bitmap);
@@ -86,6 +89,13 @@ typedef struct jhwloc_api {
 	int (*jhwloc_bitmap_isfull)(hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_bitmap_asprintf)(char **strp, hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_bitmap_list_asprintf)(char **strp, hwloc_const_bitmap_t bitmap);
+	int (*jhwloc_bitmap_first)(hwloc_const_bitmap_t bitmap);
+	int (*jhwloc_bitmap_first_unset)(hwloc_const_bitmap_t bitmap);
+	int (*jhwloc_bitmap_last)(hwloc_const_bitmap_t bitmap);
+	int (*jhwloc_bitmap_last_unset)(hwloc_const_bitmap_t bitmap);
+	int (*jhwloc_bitmap_next)(hwloc_const_bitmap_t bitmap, int prev);
+	int (*jhwloc_bitmap_next_unset)(hwloc_const_bitmap_t bitmap, int prev);
+	int (*jhwloc_bitmap_weight)(hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_set_cpubind)(hwloc_topology_t topology, hwloc_const_cpuset_t set, int flags);
 	int (*jhwloc_set_proc_cpubind)(hwloc_topology_t topology, hwloc_pid_t pid, hwloc_const_cpuset_t set, int flags);
 	int (*jhwloc_set_thread_cpubind)(hwloc_topology_t topology, hwloc_thread_t tid, hwloc_const_cpuset_t set, int flags);

@@ -90,13 +90,50 @@ public class HwlocBitmap implements Cloneable {
 	 * @param id Index
 	 * @return 0 on success, -1 on error.
 	 */
-	public boolean set(int id) {
-		int rc = jhwloc_bitmap_set(id);
+	public int set(int id) {
+		return jhwloc_bitmap_set(id);
+	}
 
-		if(rc == 1)
-			return true;
+	/**
+	 * Add indexes from <tt>begin</tt> to <tt>end</tt> in this bitmap.
+	 * <p>
+	 * If <tt>end</tt> is -1, the range is infinite. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_set_range()</tt>.
+	 * 
+	 * @param begin Start index
+	 * @param end End index
+	 * @return 0 on success, -1 on error.
+	 */
+	public int set_range(int begin, int end) {
+		return jhwloc_bitmap_set_range(begin, end);
+	}
 
-		return false;
+	/**
+	 * Remove index <tt>id</tt> from this bitmap.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_clr()</tt>.
+	 * 
+	 * @param id Index
+	 * @return 0 on success, -1 on error.
+	 */
+	public int clr(int id) {
+		return jhwloc_bitmap_clr(id);
+	}
+
+	/**
+	 * Remove indexes from <tt>begin</tt> to <tt>end</tt> in this bitmap.
+	 * <p>
+	 * If <tt>end</tt> is -1, the range is infinite. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_clr_range()</tt>.
+	 * 
+	 * @param begin Start index
+	 * @param end End index
+	 * @return 0 on success, -1 on error.
+	 */
+	public int clr_range(int begin, int end) {
+		return jhwloc_bitmap_clr_range(begin, end);
 	}
 
 	/**
@@ -107,13 +144,8 @@ public class HwlocBitmap implements Cloneable {
 	 * @param id Index
 	 * @return 0 on success, -1 on error.
 	 */
-	public boolean only(int id) {
-		int rc = jhwloc_bitmap_only(id);
-
-		if(rc == 1)
-			return true;
-
-		return false;
+	public int only(int id) {
+		return jhwloc_bitmap_only(id);
 	}
 
 	/**
@@ -124,13 +156,8 @@ public class HwlocBitmap implements Cloneable {
 	 * @param id Index
 	 * @return 0 on success, -1 on error.
 	 */
-	public boolean allbut(int id) {
-		int rc = jhwloc_bitmap_allbut(id);
-
-		if(rc == 1)
-			return true;
-
-		return false;
+	public int allbut(int id) {
+		return jhwloc_bitmap_allbut(id);
 	}
 
 	/**
@@ -440,6 +467,90 @@ public class HwlocBitmap implements Cloneable {
 		return false;
 	}
 
+	/**
+	 * Compute the first index (least significant bit) in this bitmap. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_first()</tt>.
+	 * 
+	 * @return -1 if no index is set.
+	 */
+	public int first() {
+		return jhwloc_bitmap_first();
+	}
+
+	/**
+	 * Compute the first unset index (least significant bit) in this bitmap. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_first_unset()</tt>.
+	 * 
+	 * @return -1 if no index is unset.
+	 */
+	public int first_unset() {
+		return jhwloc_bitmap_first_unset();
+	}
+
+	/**
+	 * Compute the last index (most significant bit) in this bitmap. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_last()</tt>.
+	 * 
+	 * @return -1 if no index is set or if this bitmap is infinitely set.
+	 */
+	public int last() {
+		return jhwloc_bitmap_last();
+	}
+
+	/**
+	 * Compute the last unset index (most significant bit) in this bitmap. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_last_unset()</tt>.
+	 * 
+	 * @return -1 if no index is unset or if this bitmap is infinitely set.
+	 */
+	public int last_unset() {
+		return jhwloc_bitmap_last_unset();
+	}
+
+	/**
+	 * Compute the next index in this bitmap which is after index <tt>prev</tt>.
+	 * <p>
+	 * If <tt>prev</tt> is -1, the first index is returned. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_next()</tt>.
+	 * 
+	 * @param prev Previous index
+	 * @return -1 no index with higher index is set.
+	 */
+	public int next(int prev) {
+		return jhwloc_bitmap_next(prev);
+	}
+
+	/**
+	 * Compute the next unset index in this bitmap which is after index <tt>prev</tt>.
+	 * <p>
+	 * If <tt>prev</tt> is -1, the first unset index is returned. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_next_unset()</tt>.
+	 * 
+	 * @param prev Previous index
+	 * @return -1 no index with higher index is unset.
+	 */
+	public int next_unset(int prev) {
+		return jhwloc_bitmap_next_unset(prev);
+	}
+
+	/**
+	 * Compute the "weight" of this bitmap. 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_weight()</tt>.
+	 * 
+	 * @return The number of indexes that are in this bitmap or -1 if this bitmap
+	 * is infinitely set.
+	 */
+	public int weight() {
+		return jhwloc_bitmap_weight();
+	}
+
 	@Override
 	public int hashCode() {
 		int hash = 7;
@@ -458,6 +569,9 @@ public class HwlocBitmap implements Cloneable {
 	private native long jhwloc_bitmap_dup();
 	private static native int jhwloc_bitmap_copy(HwlocBitmap dst, HwlocBitmap src);
 	private native int jhwloc_bitmap_set(int id);
+	private native int jhwloc_bitmap_set_range(int begin, int end);
+	private native int jhwloc_bitmap_clr(int id);
+	private native int jhwloc_bitmap_clr_range(int begin, int end);
 	private native int jhwloc_bitmap_only(int id);
 	private native int jhwloc_bitmap_allbut(int id);
 	private native long jhwloc_bitmap_or(HwlocBitmap bitmap);
@@ -478,4 +592,11 @@ public class HwlocBitmap implements Cloneable {
 	private native int jhwloc_bitmap_isfull();
 	private native String jhwloc_bitmap_asprintf();
 	private native String jhwloc_bitmap_list_asprintf();
+	private native int jhwloc_bitmap_first();
+	private native int jhwloc_bitmap_first_unset();
+	private native int jhwloc_bitmap_last();
+	private native int jhwloc_bitmap_last_unset();
+	private native int jhwloc_bitmap_next(int prev);
+	private native int jhwloc_bitmap_next_unset(int prev);
+	private native int jhwloc_bitmap_weight();
 }
