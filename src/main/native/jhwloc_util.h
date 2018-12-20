@@ -61,6 +61,7 @@ typedef struct jhwloc_api {
 	hwloc_obj_t (*jhwloc_get_next_obj_by_depth)(hwloc_topology_t topology, int depth, hwloc_obj_t prev);
 	hwloc_obj_t (*jhwloc_get_next_obj_by_type)(hwloc_topology_t topology, hwloc_obj_type_t type, hwloc_obj_t prev);
 	hwloc_bitmap_t (*jhwloc_bitmap_alloc)(void);
+	hwloc_bitmap_t (*jhwloc_bitmap_alloc_full)(void);
 	int (*jhwloc_bitmap_copy)(hwloc_bitmap_t dst, hwloc_const_bitmap_t src);
 	int (*jhwloc_bitmap_isincluded)(hwloc_const_bitmap_t sub_bitmap, hwloc_const_bitmap_t super_bitmap);
 	void (*jhwloc_bitmap_free)(hwloc_bitmap_t bitmap);

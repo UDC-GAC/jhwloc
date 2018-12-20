@@ -52,6 +52,24 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
+	 * Allocate a new full bitmap.
+	 * <p>
+	 * The bitmap should be freed by a corresponding call to <tt>free()</tt>.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_alloc_full()</tt>.
+	 *
+	 * @return A valid bitmap or <tt>null</tt>.
+	 */
+	public static HwlocBitmap alloc_full() {
+		long rc = jhwloc_bitmap_alloc_full();
+
+		if(rc == -1)
+			return null;
+
+		return new HwlocBitmap(rc);
+	}
+	
+	/**
 	 * Copy the contents of bitmap <tt>src</tt> into the already allocated bitmap <tt>dst</tt>.
 	 * <p>
 	 * Java binding of the hwloc operation <tt>hwloc_bitmap_copy()</tt>.
@@ -79,7 +97,7 @@ public class HwlocBitmap implements Cloneable {
 	 * @return <code>true</code> if <tt>sub_bitmap</tt> is part of <tt>super_bitmap</tt>,
 	 * <code>false</code> instead.
 	 */
-	public static boolean isIncluded(HwlocBitmap sub_bitmap, HwlocBitmap super_bitmap) {
+	public static boolean isincluded(HwlocBitmap sub_bitmap, HwlocBitmap super_bitmap) {
 		int rc = jhwloc_bitmap_isincluded(sub_bitmap, super_bitmap);
 
 		if(rc == 1)
@@ -384,10 +402,10 @@ public class HwlocBitmap implements Cloneable {
 
 	/********************** PRIVATE NATIVE METHODS 	**********************/
 	protected static native long jhwloc_bitmap_alloc();
-	private static native int jhwloc_bitmap_copy(HwlocBitmap dst, HwlocBitmap src);
-	private static native int jhwloc_bitmap_isincluded(HwlocBitmap sub_bitmap, HwlocBitmap super_bitmap);
+	protected static native long jhwloc_bitmap_alloc_full();
 	private native void jhwloc_bitmap_free();
 	private native long jhwloc_bitmap_dup();
+	private static native int jhwloc_bitmap_copy(HwlocBitmap dst, HwlocBitmap src);
 	private native long jhwloc_bitmap_or(HwlocBitmap bitmap);
 	private native long jhwloc_bitmap_and(HwlocBitmap bitmap);
 	private native long jhwloc_bitmap_andnot(HwlocBitmap bitmap);
@@ -395,6 +413,7 @@ public class HwlocBitmap implements Cloneable {
 	private native long jhwloc_bitmap_not();
 	private native int jhwloc_bitmap_singlify();
 	private native int jhwloc_bitmap_intersects(HwlocBitmap bitmap);
+	private static native int jhwloc_bitmap_isincluded(HwlocBitmap sub_bitmap, HwlocBitmap super_bitmap);
 	private native int jhwloc_bitmap_isequal(HwlocBitmap bitmap);
 	private native int jhwloc_bitmap_compare(HwlocBitmap bitmap);
 	private native int jhwloc_bitmap_compare_first(HwlocBitmap bitmap);

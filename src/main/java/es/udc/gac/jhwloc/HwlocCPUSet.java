@@ -38,7 +38,25 @@ public class HwlocCPUSet extends HwlocBitmap {
 	 * @return A valid bitmap or <tt>null</tt>.
 	 */
 	public static HwlocCPUSet alloc() {
-		long rc = HwlocBitmap.jhwloc_bitmap_alloc();
+		long rc = jhwloc_bitmap_alloc();
+
+		if(rc == -1)
+			return null;
+
+		return new HwlocCPUSet(rc);
+	}
+
+	/**
+	 * Allocate a new full bitmap.
+	 * <p>
+	 * The bitmap should be freed by a corresponding call to <tt>free()</tt>.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_alloc_full()</tt>.
+	 *
+	 * @return A valid bitmap or <tt>null</tt>.
+	 */
+	public static HwlocCPUSet alloc_full() {
+		long rc = jhwloc_bitmap_alloc_full();
 
 		if(rc == -1)
 			return null;

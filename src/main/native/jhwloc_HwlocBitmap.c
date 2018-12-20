@@ -37,6 +37,19 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1alloc
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_alloc_full
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1alloc_1full
+  (JNIEnv *env, jclass this)
+{
+	hwloc_bitmap_t bitmap = api.jhwloc_bitmap_alloc_full();
+
+	return (bitmap == NULL)? -1 : (jlong) bitmap;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
  * Method:    jhwloc_bitmap_copy
  * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;Les/udc/gac/jhwloc/HwlocBitmap;)I
  */

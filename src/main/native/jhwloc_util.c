@@ -90,6 +90,7 @@ static void setHwlocAPI()
 	api.jhwloc_obj_type_is_dcache = &hwloc_obj_type_is_dcache;
 	api.jhwloc_obj_type_is_icache = &hwloc_obj_type_is_icache;
 	api.jhwloc_bitmap_alloc = &hwloc_bitmap_alloc;
+	api.jhwloc_bitmap_alloc_full = &hwloc_bitmap_alloc_full;
 	api.jhwloc_bitmap_copy = &hwloc_bitmap_copy;
 	api.jhwloc_bitmap_isincluded = &hwloc_bitmap_isincluded;
 	api.jhwloc_bitmap_free = &hwloc_bitmap_free;

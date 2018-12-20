@@ -17,19 +17,11 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1alloc
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
- * Method:    jhwloc_bitmap_copy
- * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;Les/udc/gac/jhwloc/HwlocBitmap;)I
+ * Method:    jhwloc_bitmap_alloc_full
+ * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1copy
-  (JNIEnv *, jclass, jobject, jobject);
-
-/*
- * Class:     es_udc_gac_jhwloc_HwlocBitmap
- * Method:    jhwloc_bitmap_isincluded
- * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;Les/udc/gac/jhwloc/HwlocBitmap;)I
- */
-JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1isincluded
-  (JNIEnv *, jclass, jobject, jobject);
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1alloc_1full
+  (JNIEnv *, jclass);
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
@@ -46,6 +38,14 @@ JNIEXPORT void JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1free
  */
 JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1dup
   (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_copy
+ * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;Les/udc/gac/jhwloc/HwlocBitmap;)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1copy
+  (JNIEnv *, jclass, jobject, jobject);
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
@@ -102,6 +102,14 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1singli
  */
 JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1intersects
   (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_isincluded
+ * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;Les/udc/gac/jhwloc/HwlocBitmap;)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1isincluded
+  (JNIEnv *, jclass, jobject, jobject);
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
