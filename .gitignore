@@ -1,0 +1,25 @@
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Eclipse and java files
+.classpath
+.settings/
+.project
+.metadata
+
+# Virtual machine crash logs
+hs_err_pid*
+
+# Mac OSX files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux files
+*~
+.Trash-*
+
+# Target folder
+/target/
