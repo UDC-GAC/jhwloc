@@ -23,3 +23,6 @@ hs_err_pid*
 
 # Target folder
 /target/
+
+# Object files
+/src/main/native/
