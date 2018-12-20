@@ -1,4 +1,4 @@
-# jhwloc: Java Portable Hardware Locality library
+# jhwloc: Java Hardware Locality library
 
 **jhwloc** is a Java wrapper for the Portable Hardware Locality (hwloc) library available at:
 
