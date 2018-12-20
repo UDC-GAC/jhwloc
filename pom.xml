@@ -23,6 +23,7 @@
 		<mojo-exec-maven.version>1.6.0</mojo-exec-maven.version>
 		<maven.javadoc.version>3.0.1</maven.javadoc.version>
 		<native.path>./src/main/native/</native.path>
+		<maven.javadoc.path>./javadoc/</maven.javadoc.path>
 	</properties>
 
 	<build>
@@ -76,6 +77,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${maven.javadoc.version}</version>
+				<configuration>
+					<outputDirectory>${maven.javadoc.path}</outputDirectory>
+					<quiet>true</quiet>
+				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -83,7 +88,7 @@
 							<goal>jar</goal>
 						</goals>
 					</execution>
-			</executions>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
