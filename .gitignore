@@ -1,5 +1,7 @@
 # Package Files
-*.jar
+*.zip
+*.tar.gz
+*.tgz
 *.war
 *.ear
 
@@ -20,6 +22,9 @@ hs_err_pid*
 # Linux files
 *~
 .Trash-*
+
+# Target folder
+/target/
 
 # Object files
 /src/main/native/
