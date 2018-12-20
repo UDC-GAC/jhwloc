@@ -1,20 +1,19 @@
 # jhwloc: Java Portable Hardware Locality library
--------------------------------------------------
 
 **jhwloc** is a Java wrapper for the Portable Hardware Locality (hwloc) library available at:
 
-[Portable Hardware Locality (hwloc)](http://www.open-mpi.org/projects/hwloc)
+[http://www.open-mpi.org/projects/hwloc](http://www.open-mpi.org/projects/hwloc)
 
 ## Getting Started
 
 ### Prerequisites
 
-* Make sure you have Java Develpment Environment (JDK) version 1.6 or above
+* Make sure you have Java Develpment Environment (JDK) version 1.7 or above
 
 * Make sure you have a working Apache Maven distribution version 3 or above
   * See [Installing Apache Maven](https://maven.apache.org/install.html)
 
-* Make sure you have a working hwloc distribution version 1.7 or above
+* Make sure you have a working hwloc distribution version 2.0 or above
   * See [hwloc's Documentation](https://www.open-mpi.org/projects/hwloc/doc)
 
 ### Installation
