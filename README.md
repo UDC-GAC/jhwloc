@@ -9,12 +9,14 @@
 ### Prerequisites
 
 * Make sure you have Java Develpment Environment (JDK) version 1.7 or above
-
+  * JAVA_HOME environmental variable must be set accordingly
+ 
 * Make sure you have a working Apache Maven distribution version 3 or above
   * See [Installing Apache Maven](https://maven.apache.org/install.html)
 
 * Make sure you have a working hwloc distribution version 2.0 or above
   * See [hwloc's Documentation](https://www.open-mpi.org/projects/hwloc/doc)
+  * HWLOC_HOME environmental variable must be set accordingly
 
 ### Installation
 
@@ -41,6 +43,22 @@ In order to use the jhwloc library in your projects, add the following dependenc
 ...
 </dependencies>
 ```
+
+## Running the examples
+
+You can test your installation running some of the examples included in jhwloc:
+
+```bash
+java -cp /path/to/jhwloc/target/jhwloc-1.0.jar -Djava.library.path=/path/to/jhwloc/lib es.udc.gac.jhwloc.examples.HelloWorld
+```
+
+If your native hwloc library (i.e. libhwloc.so) is not installed in a standard location (e.g. /usr/lib64), you need to set **LD_LIBRARY_PATH** environmental variable to the directory containing it (i.e. $HWLOC_HOME/lib). For instance, if hwloc is installed at /opt/hwloc (i.e. HWLOC_HOME=/opt/hwloc):
+
+```bash
+export LD_LIBRARY_PATH=$HWLOC_HOME/lib:$LD_LIBRARY_PATH
+java -cp /path/to/jhwloc/target/jhwloc-1.0.jar -Djava.library.path=/path/to/jhwloc/lib es.udc.gac.jhwloc.examples.HelloWorld
+```
+
 ## Projects using jhwloc
 
 * [Flame-MR: efficient MapReduce-based data processing](http://flamemr.des.udc.es)
