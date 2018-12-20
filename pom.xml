@@ -20,7 +20,6 @@
                 <maven.compiler.version>3.8.0</maven.compiler.version>
                 <maven.compiler.source>1.7</maven.compiler.source>
                 <maven.compiler.target>1.7</maven.compiler.target>
-                <maven.assembly.version>3.1.0</maven.assembly.version>
 		<mojo-exec-maven.version>1.6.0</mojo-exec-maven.version>
 		<maven.javadoc.version>3.0.1</maven.javadoc.version>
 		<native.path>./src/main/native/</native.path>
@@ -72,27 +71,6 @@
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven.assembly.version}</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<finalName>${project.artifactId}-bin</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
-					<attach>false</attach>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
