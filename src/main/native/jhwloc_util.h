@@ -63,6 +63,9 @@ typedef struct jhwloc_api {
 	hwloc_bitmap_t (*jhwloc_bitmap_alloc)(void);
 	hwloc_bitmap_t (*jhwloc_bitmap_alloc_full)(void);
 	int (*jhwloc_bitmap_copy)(hwloc_bitmap_t dst, hwloc_const_bitmap_t src);
+	int (*jhwloc_bitmap_set)(hwloc_bitmap_t bitmap, unsigned id);
+	int (*jhwloc_bitmap_only)(hwloc_bitmap_t bitmap, unsigned id);
+	int (*jhwloc_bitmap_allbut)(hwloc_bitmap_t bitmap, unsigned id);
 	int (*jhwloc_bitmap_isincluded)(hwloc_const_bitmap_t sub_bitmap, hwloc_const_bitmap_t super_bitmap);
 	void (*jhwloc_bitmap_free)(hwloc_bitmap_t bitmap);
 	hwloc_bitmap_t (*jhwloc_bitmap_dup)(hwloc_const_bitmap_t bitmap);

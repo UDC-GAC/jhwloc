@@ -92,6 +92,9 @@ static void setHwlocAPI()
 	api.jhwloc_bitmap_alloc = &hwloc_bitmap_alloc;
 	api.jhwloc_bitmap_alloc_full = &hwloc_bitmap_alloc_full;
 	api.jhwloc_bitmap_copy = &hwloc_bitmap_copy;
+	api.jhwloc_bitmap_set = &hwloc_bitmap_set;
+	api.jhwloc_bitmap_only = &hwloc_bitmap_only;
+	api.jhwloc_bitmap_allbut = &hwloc_bitmap_allbut;	
 	api.jhwloc_bitmap_isincluded = &hwloc_bitmap_isincluded;
 	api.jhwloc_bitmap_free = &hwloc_bitmap_free;
 	api.jhwloc_bitmap_dup = &hwloc_bitmap_dup;

@@ -49,6 +49,30 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1copy
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_set
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1set
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_only
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1only
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_allbut
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1allbut
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
  * Method:    jhwloc_bitmap_or
  * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;)J
  */

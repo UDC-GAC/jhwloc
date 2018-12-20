@@ -68,7 +68,7 @@ public class HwlocBitmap implements Cloneable {
 
 		return new HwlocBitmap(rc);
 	}
-	
+
 	/**
 	 * Copy the contents of bitmap <tt>src</tt> into the already allocated bitmap <tt>dst</tt>.
 	 * <p>
@@ -80,6 +80,57 @@ public class HwlocBitmap implements Cloneable {
 	 */
 	public static int copy(HwlocBitmap dst, HwlocBitmap src) {
 		return jhwloc_bitmap_copy(dst, src);
+	}
+
+	/**
+	 * Add index <tt>id</tt> in this bitmap.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_set()</tt>.
+	 * 
+	 * @param id Index
+	 * @return 0 on success, -1 on error.
+	 */
+	public boolean set(int id) {
+		int rc = jhwloc_bitmap_set(id);
+
+		if(rc == 1)
+			return true;
+
+		return false;
+	}
+
+	/**
+	 * Empty this bitmap bitmap and add bit <tt>id</tt>.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_only()</tt>.
+	 * 
+	 * @param id Index
+	 * @return 0 on success, -1 on error.
+	 */
+	public boolean only(int id) {
+		int rc = jhwloc_bitmap_only(id);
+
+		if(rc == 1)
+			return true;
+
+		return false;
+	}
+
+	/**
+	 * Fill this bitmap and clear the index <tt>id</tt>.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_allbut()</tt>.
+	 * 
+	 * @param id Index
+	 * @return 0 on success, -1 on error.
+	 */
+	public boolean allbut(int id) {
+		int rc = jhwloc_bitmap_allbut(id);
+
+		if(rc == 1)
+			return true;
+
+		return false;
 	}
 
 	/**
@@ -406,6 +457,9 @@ public class HwlocBitmap implements Cloneable {
 	private native void jhwloc_bitmap_free();
 	private native long jhwloc_bitmap_dup();
 	private static native int jhwloc_bitmap_copy(HwlocBitmap dst, HwlocBitmap src);
+	private native int jhwloc_bitmap_set(int id);
+	private native int jhwloc_bitmap_only(int id);
+	private native int jhwloc_bitmap_allbut(int id);
 	private native long jhwloc_bitmap_or(HwlocBitmap bitmap);
 	private native long jhwloc_bitmap_and(HwlocBitmap bitmap);
 	private native long jhwloc_bitmap_andnot(HwlocBitmap bitmap);
