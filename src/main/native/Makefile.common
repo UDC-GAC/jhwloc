@@ -1,0 +1,26 @@
+CC = gcc
+JAVAC = javac
+JAVAH = javah
+MKDIR = mkdir
+RMR = rm -rf
+CP = cp
+MAKE = make
+SRC_DIR = ../java
+BUILD_DIR = build
+LIB_DIR = ../../../lib
+
+# JAVA_HOME
+ifndef JAVA_HOME
+$(error JAVA_HOME must be set)
+endif
+
+# HWLOC_HOME
+ifndef HWLOC_HOME
+$(error HWLOC_HOME must be set)
+endif
+
+HWLOC_INCLUDE = -I$(HWLOC_HOME)/include
+HWLOC_LIBS = -lhwloc -L$(HWLOC_HOME)/lib
+JAVA_HOME_INCLUDES = -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux
+CC_FLAGS = -O3 -Wall -c -fPIC $(JAVA_HOME_INCLUDES) $(HWLOC_INCLUDE)
+LIBJHWLOC_FLAGS = -shared $(HWLOC_LIBS)
