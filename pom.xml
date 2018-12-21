@@ -22,6 +22,7 @@
                 <maven.compiler.target>1.7</maven.compiler.target>
 		<mojo-exec-maven.version>1.6.0</mojo-exec-maven.version>
 		<maven.javadoc.version>3.0.1</maven.javadoc.version>
+		<maven.jar.version>3.1.1</maven.jar.version>
 		<native.path>./src/main/native/</native.path>
 		<maven.javadoc.path>./javadoc/</maven.javadoc.path>
 	</properties>
@@ -89,6 +90,14 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.version}</version>
+				<configuration>
+					<outputDirectory>./lib</outputDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
