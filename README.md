@@ -62,6 +62,7 @@ java -cp /path/to/jhwloc/lib/jhwloc-1.0.jar -Djava.library.path=/path/to/jhwloc/
 ## Projects using jhwloc
 
 * [Flame-MR: efficient MapReduce-based data processing](http://flamemr.des.udc.es)
+* [FastMPJ: Fast Message Passing in Java](http://gac.udc.es/~rober/fastmpj)
 
 ## Authors
 
