@@ -97,6 +97,7 @@
 				<version>${maven.jar.version}</version>
 				<configuration>
 					<outputDirectory>./lib</outputDirectory>
+			                <forceCreation>true</forceCreation>
 				</configuration>
 			</plugin>
 		</plugins>
