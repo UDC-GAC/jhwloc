@@ -8,7 +8,7 @@
 
 ### Prerequisites
 
-* Make sure you have Java Develpment Environment (JDK) version 1.7 or above
+* Make sure you have Java Develpment Kit (JDK) version 1.7 or above
   * JAVA_HOME environmental variable must be set accordingly
  
 * Make sure you have a working Apache Maven distribution version 3 or above
@@ -68,6 +68,7 @@ java -cp /path/to/jhwloc/lib/jhwloc-1.0.jar -Djava.library.path=/path/to/jhwloc/
 
 * **Roberto R. Expósito** (http://gac.udc.es/~rober)
 * **Jorge Veiga** (http://gac.udc.es/~jorge.veiga)
+* **Juan Touriño** (http://gac.udc.es/~juan)
 
 ## License
 
