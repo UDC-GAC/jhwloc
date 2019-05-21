@@ -18,22 +18,17 @@
  */
 package es.udc.gac.jhwloc;
 
-public class HwlocException extends RuntimeException {
+import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectType;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8865287217115502153L;
+public abstract class HwlocObjectAttr {
 
-	HwlocException() {
-		super();
+	private HwlocObjectType type;
+
+	protected HwlocObjectAttr(int type) {
+		this.type = HwlocObjectType.GetType(type);
 	}
 
-	HwlocException(String message) {
-		super(message);
-	}
-
-	HwlocException(String message, Throwable throwable) {
-		super(message, throwable);
+	public HwlocObjectType getType() {
+		return this.type;
 	}
 }

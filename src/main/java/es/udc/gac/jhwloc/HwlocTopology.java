@@ -389,7 +389,7 @@ public class HwlocTopology implements Cloneable {
 	/**
 	 * Set OR'ed flags of <tt>HwlocTopologyFlags</tt> to this non-yet-loaded topology.
 	 * <p>
-	 * If this function is called multiple times, the last invokation will erase and replace the 
+	 * If this function is called multiple times, the last invocation will erase and replace the 
 	 * set of flags that was previously set.
 	 * <p>
 	 * The flags set in the topology may be retrieved with <tt>get_flags()</tt>.

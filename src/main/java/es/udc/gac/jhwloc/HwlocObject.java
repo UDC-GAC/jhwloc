@@ -29,9 +29,14 @@ public class HwlocObject {
 	private String name;
 	private int depth;
 	private int logical_index;
+	private long gp_index;
 	private int arity;
+	private int io_arity;
+	private int memory_arity;
+	private int misc_arity;
 	private long parent_handler;
 	private HwlocObject[] children;
+	private HwlocObjectAttr attr;
 	private HwlocCPUSet cpuset;
 	private HwlocNodeSet nodeset;
 
@@ -44,6 +49,7 @@ public class HwlocObject {
 		this.parent_handler = parent_handler;
 		this.cpuset = new HwlocCPUSet();
 		this.nodeset = new HwlocNodeSet();
+		this.attr = null;
 	}
 
 	public HwlocObjectType getType() {
@@ -66,6 +72,10 @@ public class HwlocObject {
 		return this.logical_index;
 	}
 
+	public long getGP_index() {
+		return this.gp_index;
+	}
+
 	public HwlocObject getParent() {
 		if(this.parent_handler != -1)
 			return HwlocTopology.GetHwlocObject(this.topology.get_root_obj(), this.parent_handler);
@@ -77,6 +87,17 @@ public class HwlocObject {
 		return this.arity;
 	}
 
+	public int getIOArity() {
+		return this.io_arity;
+	}
+
+	public int getMemoryArity() {
+		return this.memory_arity;
+	}
+
+	public int getMicsArity() {
+		return this.misc_arity;
+	}
 
 	public HwlocObject[] getChildren() {
 		return this.children;
@@ -94,6 +115,10 @@ public class HwlocObject {
 			return this.children[this.arity-1];
 		else
 			return null;
+	}
+
+	public HwlocObjectAttr getAttr() {
+		return this.attr;
 	}
 
 	public HwlocCPUSet getCPUSet() {

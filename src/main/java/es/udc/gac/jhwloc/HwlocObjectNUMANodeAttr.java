@@ -18,22 +18,16 @@
  */
 package es.udc.gac.jhwloc;
 
-public class HwlocException extends RuntimeException {
+public class HwlocObjectNUMANodeAttr extends HwlocObjectAttr {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8865287217115502153L;
+	private long local_memory;
 
-	HwlocException() {
-		super();
+	HwlocObjectNUMANodeAttr(int objectType, long local_memory) {
+		super(objectType);
+		this.local_memory = local_memory;
 	}
 
-	HwlocException(String message) {
-		super(message);
-	}
-
-	HwlocException(String message, Throwable throwable) {
-		super(message, throwable);
+	public long getLocalMemory() {
+		return local_memory;
 	}
 }

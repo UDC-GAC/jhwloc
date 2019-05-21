@@ -35,9 +35,25 @@ jfieldID FID_jhwloc_HwlocObject_os_index;
 jfieldID FID_jhwloc_HwlocObject_name;
 jfieldID FID_jhwloc_HwlocObject_depth;
 jfieldID FID_jhwloc_HwlocObject_logical_index;
+jfieldID FID_jhwloc_HwlocObject_gp_index;
+jfieldID FID_jhwloc_HwlocObject_io_arity;
+jfieldID FID_jhwloc_HwlocObject_memory_arity;
+jfieldID FID_jhwloc_HwlocObject_misc_arity;
 jfieldID FID_jhwloc_HwlocObject_children;
+jfieldID FID_jhwloc_HwlocObject_attr;
 jfieldID FID_jhwloc_HwlocObject_cpuset;
 jfieldID FID_jhwloc_HwlocObject_nodeset;
+
+/* HwlocObjectAttr */
+jclass CL_jhwloc_HwlocObjectAttr;
+
+/* HwlocObjectCacheAttr */
+jclass CL_jhwloc_HwlocObjectCacheAttr;
+jmethodID MID_HwlocObjectCacheAttr_constructor;
+
+/* HwlocObjectNUMANodeAttr */
+jclass CL_jhwloc_HwlocObjectNUMANodeAttr;
+jmethodID MID_HwlocObjectNUMANodeAttr_constructor;
 
 /* HwlocBitmap */
 jclass CL_jhwloc_HwlocBitmap;
@@ -210,6 +226,11 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 	if (FID_jhwloc_HwlocObject_os_index == NULL)
 		return JNI_ERR;
 
+	FID_jhwloc_HwlocObject_gp_index = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"gp_index","J");
+
+		if (FID_jhwloc_HwlocObject_gp_index == NULL)
+			return JNI_ERR;
+
 	FID_jhwloc_HwlocObject_name = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"name","Ljava/lang/String;");
 
 	if (FID_jhwloc_HwlocObject_name == NULL)
@@ -225,10 +246,30 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 	if (FID_jhwloc_HwlocObject_logical_index == NULL)
 		return JNI_ERR;
 
+	FID_jhwloc_HwlocObject_io_arity = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"io_arity","I");
+
+	if (FID_jhwloc_HwlocObject_io_arity == NULL)
+		return JNI_ERR;
+
+	FID_jhwloc_HwlocObject_memory_arity = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"memory_arity","I");
+
+	if (FID_jhwloc_HwlocObject_memory_arity == NULL)
+		return JNI_ERR;
+
+	FID_jhwloc_HwlocObject_misc_arity = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"misc_arity","I");
+
+	if (FID_jhwloc_HwlocObject_misc_arity == NULL)
+		return JNI_ERR;
+
 	FID_jhwloc_HwlocObject_children = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"children","[Les/udc/gac/jhwloc/HwlocObject;");
 
 	if (FID_jhwloc_HwlocObject_children == NULL)
 		return JNI_ERR;
+
+	FID_jhwloc_HwlocObject_attr = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"attr","Les/udc/gac/jhwloc/HwlocObjectAttr;");
+
+		if (FID_jhwloc_HwlocObject_attr == NULL)
+			return JNI_ERR;
 
 	FID_jhwloc_HwlocObject_cpuset = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"cpuset","Les/udc/gac/jhwloc/HwlocCPUSet;");
 
@@ -291,6 +332,52 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 	if (FID_jhwloc_HwlocNodeSet_handler == NULL)
 		return JNI_ERR;
 
+	cls = (*env)->FindClass(env,"es/udc/gac/jhwloc/HwlocObjectAttr");
+
+	if (cls == NULL)
+		return JNI_ERR;
+
+	CL_jhwloc_HwlocObjectAttr = (*env)->NewWeakGlobalRef(env, cls);
+
+	if (CL_jhwloc_HwlocObjectAttr == NULL)
+		return JNI_ERR;
+
+	(*env)->DeleteLocalRef(env, cls);
+
+	cls = (*env)->FindClass(env,"es/udc/gac/jhwloc/HwlocObjectCacheAttr");
+
+	if (cls == NULL)
+		return JNI_ERR;
+
+	CL_jhwloc_HwlocObjectCacheAttr = (*env)->NewWeakGlobalRef(env, cls);
+
+	if (CL_jhwloc_HwlocObjectCacheAttr == NULL)
+		return JNI_ERR;
+
+	(*env)->DeleteLocalRef(env, cls);
+
+	MID_HwlocObjectCacheAttr_constructor = (*env)->GetMethodID(env, CL_jhwloc_HwlocObjectCacheAttr, "<init>", "(IIJIII)V");
+
+	if (MID_HwlocObjectCacheAttr_constructor == NULL)
+		return JNI_ERR;
+
+	cls = (*env)->FindClass(env,"es/udc/gac/jhwloc/HwlocObjectNUMANodeAttr");
+
+	if (cls == NULL)
+		return JNI_ERR;
+
+	CL_jhwloc_HwlocObjectNUMANodeAttr = (*env)->NewWeakGlobalRef(env, cls);
+
+	if (CL_jhwloc_HwlocObjectNUMANodeAttr == NULL)
+		return JNI_ERR;
+
+	(*env)->DeleteLocalRef(env, cls);
+
+	MID_HwlocObjectNUMANodeAttr_constructor = (*env)->GetMethodID(env, CL_jhwloc_HwlocObjectNUMANodeAttr, "<init>", "(IJ)V");
+
+	if (MID_HwlocObjectNUMANodeAttr_constructor == NULL)
+		return JNI_ERR;
+
 	cls = (*env)->FindClass(env,"java/lang/String");
 
 	if (cls == NULL)
@@ -318,6 +405,9 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *jvm, void *reserved)
 
 	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocTopology);
 	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocObject);
+	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocObjectAttr);
+	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocObjectCacheAttr);
+	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocObjectNUMANodeAttr);
 	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocBitmap);
 	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocCPUSet);
 	(*env)->DeleteWeakGlobalRef(env, CL_jhwloc_HwlocNodeSet);
@@ -510,39 +600,63 @@ jobject CreateHwlocObject(JNIEnv *env, jobject topo, hwloc_obj_t obj)
 	int i;
 	jobject child;
 	jobjectArray children;
+	jobject attr;
 	jobject cpuset;
 	jobject nodeset;
 	jlong parent;
 	int jhwloc_obj_type = GetHwlocObjectTypeJava(env, obj->type);
 	jstring name = GetStringJava(env, obj->name);
 
-	if(obj->parent != NULL)
+	if (obj->parent != NULL)
 		parent = (jlong) obj->parent;
 	else
 		parent = -1;
 
 	jobject new_hwloc_obj = (*env)->NewObject(env, CL_jhwloc_HwlocObject, MID_HwlocObject_constructor, topo, (jlong) obj, jhwloc_obj_type, obj->arity, parent);
 
-	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_os_index, obj->os_index);
 	(*env)->SetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_name, name);
 	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_depth, obj->depth);
+	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_os_index, obj->os_index);
 	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_logical_index, obj->logical_index);
+	(*env)->SetLongField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_gp_index, (jlong)obj->gp_index);
+	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_io_arity, obj->io_arity);
+	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_memory_arity, obj->memory_arity);
+	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_misc_arity, obj->misc_arity);
 
 	cpuset = (*env)->GetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_cpuset);
 	nodeset = (*env)->GetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_nodeset);
 	(*env)->SetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler, (jlong)obj->cpuset);
 	(*env)->SetLongField(env, nodeset, FID_jhwloc_HwlocNodeSet_handler, (jlong)obj->nodeset);
 
-	if(obj->arity > 0)
-	{
+	if (obj->attr != NULL) {
+		if (hwloc_obj_type_is_cache(obj->type)) {
+			attr = (*env)->NewObject(env, CL_jhwloc_HwlocObjectCacheAttr, MID_HwlocObjectCacheAttr_constructor,
+					jhwloc_obj_type,
+					GetHwlocObjectCacheTypeJava(env, obj->attr->cache.type),
+					obj->attr->cache.size,
+					obj->attr->cache.depth,
+					obj->attr->cache.linesize,
+					obj->attr->cache.associativity);
+
+			(*env)->SetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_attr, attr);
+		} else if (hwloc_obj_type_is_memory(obj->type)) {
+			attr = (*env)->NewObject(env, CL_jhwloc_HwlocObjectNUMANodeAttr, MID_HwlocObjectNUMANodeAttr_constructor,
+					jhwloc_obj_type,
+					obj->attr->numanode.local_memory);
+
+			(*env)->SetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_attr, attr);
+		}
+	}
+
+	if (obj->arity > 0) {
 		children = (*env)->GetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_children);
 
-		for(i=0; i<obj->arity; i++)
-		{
+		for (i=0; i<obj->arity; i++) {
 			child = CreateHwlocObject(env, topo, obj->children[i]);
 			(*env)->SetObjectArrayElement(env, children, i, child);
 		}
 	}
+
 	return new_hwloc_obj;
 }
 
