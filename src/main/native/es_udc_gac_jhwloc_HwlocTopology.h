@@ -73,10 +73,34 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1depth_1
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_memory_parents_depth
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1memory_1parents_1depth
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
  * Method:    jhwloc_get_type_depth
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1depth
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_type_or_above_depth
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1or_1above_1depth
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_type_or_below_depth
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1or_1below_1depth
   (JNIEnv *, jobject, jint);
 
 /*

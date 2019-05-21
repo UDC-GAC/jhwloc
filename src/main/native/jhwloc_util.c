@@ -87,8 +87,11 @@ static void setHwlocAPI()
 	api.jhwloc_topology_set_flags = &hwloc_topology_set_flags;
 	api.jhwloc_topology_export_xml = &hwloc_topology_export_xml;
 	api.jhwloc_topology_get_depth = &hwloc_topology_get_depth;
+	api.jhwloc_get_memory_parents_depth = &hwloc_get_memory_parents_depth;
 	api.jhwloc_get_depth_type = &hwloc_get_depth_type;
 	api.jhwloc_get_type_depth = &hwloc_get_type_depth;
+	api.jhwloc_get_type_or_above_depth = &hwloc_get_type_or_above_depth;
+	api.jhwloc_get_type_or_below_depth = &hwloc_get_type_or_below_depth;
 	api.jhwloc_get_nbobjs_by_depth = &hwloc_get_nbobjs_by_depth;
 	api.jhwloc_get_nbobjs_by_type = &hwloc_get_nbobjs_by_type;
 	api.jhwloc_topology_is_thissystem = &hwloc_topology_is_thissystem;
@@ -99,7 +102,6 @@ static void setHwlocAPI()
 	api.jhwloc_get_root_obj = &hwloc_get_root_obj;
 	api.jhwloc_get_next_obj_by_depth = &hwloc_get_next_obj_by_depth;
 	api.jhwloc_get_next_obj_by_type = &hwloc_get_next_obj_by_type;
-	api.jhwloc_obj_type_string = &hwloc_obj_type_string;
 	api.jhwloc_obj_type_is_normal = &hwloc_obj_type_is_normal;
 	api.jhwloc_obj_type_is_io = &hwloc_obj_type_is_io;
 	api.jhwloc_obj_type_is_memory = &hwloc_obj_type_is_memory;
@@ -528,7 +530,7 @@ int GetHwlocGetTypeDepthJava(JNIEnv *env, enum hwloc_get_type_depth_e type)
 		case HWLOC_TYPE_DEPTH_BRIDGE:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_BRIDGE_TYPE;
 		case HWLOC_TYPE_DEPTH_PCI_DEVICE:	return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_PCI_DEVICE_TYPE;
 		case HWLOC_TYPE_DEPTH_OS_DEVICE:	return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_OS_DEVICE_TYPE;
-		case HWLOC_TYPE_DEPTH_MISC:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_MISC_TYPE;
+		case HWLOC_TYPE_DEPTH_MISC:			return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_MISC_TYPE;
 		case HWLOC_TYPE_DEPTH_UNKNOWN:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_UNKNOWN_TYPE;
 		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TYPE_DEPTH_UNKNOWN: "+type);
 	}
@@ -539,8 +541,8 @@ int GetHwlocTypeFilterJava(JNIEnv *env, enum hwloc_type_filter_e filter)
 {
 	switch(filter)
 	{
-		case HWLOC_TYPE_FILTER_KEEP_ALL:	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_ALL_TYPE;
-		case HWLOC_TYPE_FILTER_KEEP_NONE:	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_NONE_TYPE;
+		case HWLOC_TYPE_FILTER_KEEP_ALL:		return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_ALL_TYPE;
+		case HWLOC_TYPE_FILTER_KEEP_NONE:		return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_NONE_TYPE;
 		case HWLOC_TYPE_FILTER_KEEP_STRUCTURE:	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_STRUCTURE_TYPE;
 		case HWLOC_TYPE_FILTER_KEEP_IMPORTANT:	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_IMPORTANT_TYPE;
 		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TYPE_FILTER_UNKNOWN: "+filter);

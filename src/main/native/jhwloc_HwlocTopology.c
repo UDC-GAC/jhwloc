@@ -132,10 +132,23 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1depth_1
   (JNIEnv *env, jobject this, jint depth)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
-	
+
 	hwloc_obj_type_t chwloc_obj_type = api.jhwloc_get_depth_type(topo, depth);
 
 	return (chwloc_obj_type == -1)? -1 : GetHwlocObjectTypeJava(env, chwloc_obj_type);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_memory_parents_depth
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1memory_1parents_1depth
+  (JNIEnv *env, jobject this)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+
+	return api.jhwloc_get_memory_parents_depth(topo);
 }
 
 /*
@@ -153,6 +166,44 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1d
 
 	if (rc == HWLOC_TYPE_DEPTH_UNKNOWN)
 		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_UNKNOWN);
+
+	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
+		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);
+
+	return rc;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_type_or_above_depth
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1or_1above_1depth
+  (JNIEnv *env, jobject this, jint jhwloc_obj_type)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+
+	int rc = api.jhwloc_get_type_or_above_depth(topo, chwloc_obj_type);
+
+	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
+		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);
+
+	return rc;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_type_or_below_depth
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1or_1below_1depth
+  (JNIEnv *env, jobject this, jint jhwloc_obj_type)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+
+	int rc = api.jhwloc_get_type_or_below_depth(topo, chwloc_obj_type);
 
 	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
 		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);

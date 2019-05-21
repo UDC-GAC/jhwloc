@@ -230,12 +230,15 @@ public class HwlocTopology implements Cloneable {
 	 * present on the underlying architecture, or if the OS doesn't provide this kind
 	 * of information, the function returns HWLOC.TYPE_DEPTH_UNKNOWN.
 	 * <p>
+	 * If type is absent but a similar type is acceptable, see also <tt>get_type_or_below_depth()</tt>
+	 * and <tt>get_type_or_above_depth()</tt>.
+	 * <p>
 	 * If HWLOC.OBJ_GROUP is given, the function may return HWLOC.TYPE_DEPTH_MULTIPLE
 	 * if multiple levels of Groups exist.
 	 * <p>
 	 * If a NUMA node, I/O or Misc object type is given, the function returns a virtual
 	 * value because these objects are stored in special levels that are not CPU-related.
-	 * This virtual depth may be passed to other hwloc functions such as get_obj_by_depth()
+	 * This virtual depth may be passed to other hwloc functions such as <tt>get_obj_by_depth()</tt>
 	 * but it should not be considered as an actual depth by the application. In particular,
 	 * it should not be compared with any other object depth or with the entire topology depth.
 	 */
@@ -243,6 +246,44 @@ public class HwlocTopology implements Cloneable {
 		return jhwloc_get_type_depth(HwlocObjectType.GetType(type));
 	}
 
+	/**
+	 * Returns the depth of objects of type <tt>type</tt> or above.
+	 * <p> 
+	 * Java binding of the hwloc operation <tt>hwloc_get_type_or_above_depth()</tt>.
+	 *
+	 * @param type Object type.
+	 * @return the depth of objects of type <tt>type</tt> or above. If no object of this type is
+	 * present on the underlying architecture, the function returns the depth of the first
+	 * "present" object typically containing <tt>type</tt>.
+	 * <p>
+	 * This function is only meaningful for normal object types.  If a memory, I/O or Misc 
+	 * object type is given, the corresponding virtual depth is always returned (see <tt>get_type_depth()</tt>).
+	 * <p>
+	 * May return HWLOC.TYPE_DEPTH_MULTIPLE for HWLOC.OBJ_GROUP just like <tt>get_type_depth()</tt>.
+	 */
+	public int get_type_or_above_depth(HwlocObjectType type) {
+		return jhwloc_get_type_or_above_depth(HwlocObjectType.GetType(type));
+	}
+	
+	/**
+	 * Returns the depth of objects of type <tt>type</tt> or below.
+	 * <p> 
+	 * Java binding of the hwloc operation <tt>hwloc_get_type_or_below_depth()</tt>.
+	 *
+	 * @param type Object type.
+	 * @return the depth of objects of type <tt>type</tt> or below. If no object of this type is
+	 * present on the underlying architecture, the function returns the depth of the first
+	 * "present" object typically found inside <tt>type</tt>.
+	 * <p>
+	 * This function is only meaningful for normal object types.  If a memory, I/O or Misc 
+	 * object type is given, the corresponding virtual depth is always returned (see <tt>get_type_depth()</tt>).
+	 * <p>
+	 * May return HWLOC.TYPE_DEPTH_MULTIPLE for HWLOC.OBJ_GROUP just like <tt>get_type_depth()</tt>.
+	 */
+	public int get_type_or_below_depth(HwlocObjectType type) {
+		return jhwloc_get_type_or_below_depth(HwlocObjectType.GetType(type));
+	}
+	
 	/**
 	 * Returns the width of level type <tt>type</tt>.
 	 * <p>
@@ -883,6 +924,22 @@ public class HwlocTopology implements Cloneable {
 		return jhwloc_topology_set_io_types_filter(HwlocTypeFilter.GetType(filter));
 	}
 
+	/**
+	 * Returns the depth of parents where memory objects are attached.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_get_memory_parents_depth()</tt>.	
+	 * 
+	 * @return The depth of Normal parents of all memory children if all these parents have 
+	 * the same depth. For instance, the depth of the Package level if all NUMA nodes are 
+	 * attached to Package objects.
+	 * HWLOC.TYPE_DEPTH_MULTIPLE if Normal parents of all memory children do not have the same 
+	 * depth., For instance if some NUMA nodes are attached to Packages while others are attached
+	 * to Groups.
+	 */
+	public int get_memory_parents_depth() {
+		return jhwloc_get_memory_parents_depth();
+	}
+	
 	static HwlocObject GetHwlocObject(HwlocObject rootHwlocObject, long handler) {
 		if (rootHwlocObject.getHandler() == handler)
 			return rootHwlocObject;
@@ -928,7 +985,10 @@ public class HwlocTopology implements Cloneable {
 	private native void jhwloc_topology_check();
 	private native int jhwloc_topology_get_depth();
 	private native int jhwloc_get_depth_type(int depth);
+	private native int jhwloc_get_memory_parents_depth();
 	private native int jhwloc_get_type_depth(int jhwloc_obj_type);
+	private native int jhwloc_get_type_or_above_depth(int jhwloc_obj_type);
+	private native int jhwloc_get_type_or_below_depth(int jhwloc_obj_type);
 	private native int jhwloc_get_nbobjs_by_type(int jhwloc_obj_type);
 	private native int jhwloc_get_nbobjs_by_depth(int depth);
 	private native int jhwloc_topology_is_thissystem();

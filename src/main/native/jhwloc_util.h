@@ -43,7 +43,10 @@ typedef struct jhwloc_api {
 	int (*jhwloc_topology_export_xml)(hwloc_topology_t topology, const char *xmlpath, unsigned long flags);
 	int (*jhwloc_topology_get_depth)(hwloc_topology_t topology);
 	hwloc_obj_type_t (*jhwloc_get_depth_type)(hwloc_topology_t topology, int depth);
+	int (*jhwloc_get_memory_parents_depth)(hwloc_topology_t topology);
 	int (*jhwloc_get_type_depth)(hwloc_topology_t topology, hwloc_obj_type_t type);
+	int (*jhwloc_get_type_or_above_depth)(hwloc_topology_t topology, hwloc_obj_type_t type);
+	int (*jhwloc_get_type_or_below_depth)(hwloc_topology_t topology, hwloc_obj_type_t type);
 	unsigned (*jhwloc_get_nbobjs_by_depth)(hwloc_topology_t topology, int depth);
 	int (*jhwloc_get_nbobjs_by_type)(hwloc_topology_t topology, hwloc_obj_type_t type);
 	int (*jhwloc_topology_is_thissystem)(hwloc_topology_t topology);

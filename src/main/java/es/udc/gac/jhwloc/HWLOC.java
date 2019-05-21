@@ -20,6 +20,7 @@ package es.udc.gac.jhwloc;
 
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocCPUBindFlags;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocCompareTypes;
+import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocGetTypeDepth;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectBridgeType;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectCacheType;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectOSDevType;
@@ -88,6 +89,13 @@ public class HWLOC {
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_NONE = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_NONE;
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_STRUCTURE = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_STRUCTURE;
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_IMPORTANT = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_IMPORTANT;
+	public static final HwlocGetTypeDepth TYPE_DEPTH_UNKNOWN = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_UNKNOWN;
+	public static final HwlocGetTypeDepth TYPE_DEPTH_MULTIPLE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_MULTIPLE;
+	public static final HwlocGetTypeDepth TYPE_DEPTH_NUMANODE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_NUMANODE;
+	public static final HwlocGetTypeDepth TYPE_DEPTH_BRIDGE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_BRIDGE;
+	public static final HwlocGetTypeDepth TYPE_DEPTH_PCI_DEVICE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_PCI_DEVICE;
+	public static final HwlocGetTypeDepth TYPE_DEPTH_OS_DEVICE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_OS_DEVICE;
+	public static final HwlocGetTypeDepth TYPE_DEPTH_MISC = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_MISC;
 
 	/**
 	 * Indicate at runtime which hwloc API version was used at build time.
