@@ -21,7 +21,7 @@ public class NUMA {
 		for(i=0; i<nodes; i++) {
 			obj = topo.get_obj_by_type(HWLOC.OBJ_NUMANODE, i);
 			numaAttr = (HwlocObjectNUMANodeAttr) obj.getAttr();
-			System.out.println("NUMA node "+nodes+" with "+numaAttr.getLocalMemory()+" bytes of local memory");
+			System.out.println("NUMA node "+i+" with "+numaAttr.getLocalMemory()/(1024*1024)+" MiB of local memory");
 		}
 
 		long total = topo.get_root_obj().getTotalMemory() / (1024*1024);
