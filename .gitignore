@@ -27,4 +27,4 @@ hs_err_pid*
 /target/
 
 # Object files
-/src/main/native/
+/src/main/native/build
