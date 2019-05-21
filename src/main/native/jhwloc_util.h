@@ -52,6 +52,8 @@ typedef struct jhwloc_api {
 	int (*jhwloc_topology_is_thissystem)(hwloc_topology_t topology);
 	unsigned long (*jhwloc_topology_get_flags)(hwloc_topology_t topology);
 	hwloc_obj_t (*jhwloc_get_obj_by_depth)(hwloc_topology_t topology, int depth, unsigned idx);
+	hwloc_obj_t (*jhwloc_get_numanode_obj_by_os_index)(hwloc_topology_t topology, unsigned os_index);
+	hwloc_obj_t (*jhwloc_get_pu_obj_by_os_index)(hwloc_topology_t topology, unsigned os_index);
 	hwloc_obj_t (*jhwloc_get_obj_by_type)(hwloc_topology_t topology, hwloc_obj_type_t type, unsigned idx);
 	const char* (*jhwloc_obj_type_string)(hwloc_obj_type_t type);
 	int (*jhwloc_obj_type_is_normal)(hwloc_obj_type_t type);
@@ -119,6 +121,8 @@ typedef struct jhwloc_api {
 	int (*jhwloc_topology_set_cache_types_filter)(hwloc_topology_t topology, enum hwloc_type_filter_e filter);
 	int (*jhwloc_topology_set_icache_types_filter)(hwloc_topology_t topology, enum hwloc_type_filter_e filter);
 	int (*jhwloc_topology_set_io_types_filter)(hwloc_topology_t topology, enum hwloc_type_filter_e filter);
+	int (*jhwloc_get_membind)(hwloc_topology_t topology, hwloc_bitmap_t bitmap, hwloc_membind_policy_t *policy, int flags);
+	int (*jhwloc_get_proc_membind)(hwloc_topology_t topology, hwloc_pid_t pid, hwloc_bitmap_t bitmap, hwloc_membind_policy_t *policy, int flags);
 } jhwloc_api_t;
 
 void ThrowByName(JNIEnv *env, const char *name, const char *msg);
@@ -126,6 +130,8 @@ hwloc_obj_type_t GetHwlocObjectTypeNative(JNIEnv *env, int jhwloc_obj_type);
 int GetHwlocObjectTypeJava(JNIEnv *env, hwloc_obj_type_t type);
 hwloc_obj_cache_type_t GetHwlocObjectCacheTypeNative(JNIEnv *env, int jhwloc_obj_cache_type);
 int GetHwlocObjectCacheTypeJava(JNIEnv *env, hwloc_obj_cache_type_t type);
+int GetHwlocMEMBindPolicyTypeNative(JNIEnv *env, int jhwloc_policy);
+int GetHwlocMEMBindPolicyTypeJava(JNIEnv *env, hwloc_membind_policy_t hwloc_policy);
 int GetHwlocCompareTypesJava(JNIEnv *env, enum hwloc_compare_types_e type);
 int GetHwlocGetTypeDepthJava(JNIEnv *env, enum hwloc_get_type_depth_e type);
 int GetHwlocTypeFilterJava(JNIEnv *env, enum hwloc_type_filter_e filter);

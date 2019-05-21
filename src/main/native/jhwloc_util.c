@@ -97,6 +97,8 @@ static void setHwlocAPI()
 	api.jhwloc_topology_is_thissystem = &hwloc_topology_is_thissystem;
 	api.jhwloc_topology_get_flags = &hwloc_topology_get_flags;
 	api.jhwloc_get_obj_by_depth = &hwloc_get_obj_by_depth;
+	api.jhwloc_get_numanode_obj_by_os_index = &hwloc_get_numanode_obj_by_os_index;
+	api.jhwloc_get_pu_obj_by_os_index = &hwloc_get_pu_obj_by_os_index;
 	api.jhwloc_get_obj_by_type = &hwloc_get_obj_by_type;
 	api.jhwloc_obj_type_string = &hwloc_obj_type_string;
 	api.jhwloc_get_root_obj = &hwloc_get_root_obj;
@@ -164,6 +166,8 @@ static void setHwlocAPI()
 	api.jhwloc_topology_set_cache_types_filter = &hwloc_topology_set_cache_types_filter;
 	api.jhwloc_topology_set_icache_types_filter = &hwloc_topology_set_icache_types_filter;
 	api.jhwloc_topology_set_io_types_filter = &hwloc_topology_set_io_types_filter;
+	api.jhwloc_get_membind = &hwloc_get_membind;
+	api.jhwloc_get_proc_membind = &hwloc_get_proc_membind;
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
@@ -467,7 +471,7 @@ int GetHwlocObjectTypeJava(JNIEnv *env, hwloc_obj_type_t type)
 		case HWLOC_OBJ_MACHINE:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_MACHINE_TYPE;
 		case HWLOC_OBJ_PACKAGE:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_PACKAGE_TYPE;
 		case HWLOC_OBJ_CORE:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CORE_TYPE;
-		case HWLOC_OBJ_PU:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_PU_TYPE;
+		case HWLOC_OBJ_PU:			return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_PU_TYPE;
 		case HWLOC_OBJ_L1CACHE:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_L1CACHE_TYPE;
 		case HWLOC_OBJ_L2CACHE:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_L2CACHE_TYPE;
 		case HWLOC_OBJ_L3CACHE:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_L3CACHE_TYPE;
@@ -504,11 +508,41 @@ int GetHwlocObjectCacheTypeJava(JNIEnv *env, hwloc_obj_cache_type_t type)
 	switch(type)
 	{
 		case HWLOC_OBJ_CACHE_UNIFIED:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_UNIFIED_TYPE;
-		case HWLOC_OBJ_CACHE_DATA:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_DATA_TYPE;
+		case HWLOC_OBJ_CACHE_DATA:			return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_DATA_TYPE;
 		case HWLOC_OBJ_CACHE_INSTRUCTION:	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_INSTRUCTION_TYPE;
 		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_OBJ_CACHE_UNKNOWN: "+type);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_UNKNOWN_TYPE;
+}
+
+int GetHwlocMEMBindPolicyTypeNative(JNIEnv *env, int jhwloc_policy)
+{
+	switch(jhwloc_policy)
+	{
+		case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_DEFAULT_TYPE:     return HWLOC_MEMBIND_DEFAULT;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_FIRSTTOUCH_TYPE:	return HWLOC_MEMBIND_FIRSTTOUCH;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BIND_TYPE:      	return HWLOC_MEMBIND_BIND;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_INTERLEAVE_TYPE:	return HWLOC_MEMBIND_INTERLEAVE;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NEXTTOUCH_TYPE:   return HWLOC_MEMBIND_NEXTTOUCH;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIXED_TYPE:		return HWLOC_MEMBIND_MIXED;
+	    default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "MEMBIND_UNKNOWN_POLICY_TYPE: "+jhwloc_policy);
+	}
+	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_POLICY_TYPE;
+}
+
+int GetHwlocMEMBindPolicyTypeJava(JNIEnv *env, hwloc_membind_policy_t hwloc_policy)
+{
+	switch(hwloc_policy)
+	{
+		case HWLOC_MEMBIND_DEFAULT:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_DEFAULT_TYPE;
+        case HWLOC_MEMBIND_FIRSTTOUCH:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_FIRSTTOUCH_TYPE;
+        case HWLOC_MEMBIND_BIND:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BIND_TYPE;
+        case HWLOC_MEMBIND_INTERLEAVE:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_INTERLEAVE_TYPE;
+        case HWLOC_MEMBIND_NEXTTOUCH:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NEXTTOUCH_TYPE;
+        case HWLOC_MEMBIND_MIXED:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIXED_TYPE;
+        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "MEMBIND_UNKNOWN_POLICY: "+hwloc_policy);
+     }
+     return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
 }
 
 int GetHwlocCompareTypesJava(JNIEnv *env, enum hwloc_compare_types_e type)

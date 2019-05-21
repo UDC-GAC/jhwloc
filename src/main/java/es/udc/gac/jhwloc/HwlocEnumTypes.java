@@ -415,7 +415,7 @@ public final class HwlocEnumTypes {
 		 */
 		HWLOC_TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES,
 		/**
-		 * Unkown hwloc topology flag.
+		 * Unknown hwloc topology flag.
 		 */
 		HWLOC_TOPOLOGY_FLAG_UNKNOWN;
 
@@ -521,7 +521,7 @@ public final class HwlocEnumTypes {
 		 */
 		HWLOC_CPUBIND_NOMEMBIND,
 		/**
-		 * Unkown hwloc CPU binding flag.
+		 * Unknown hwloc CPU binding flag.
 		 */
 		HWLOC_CPUBIND_UNKNOWN;
 
@@ -564,6 +564,185 @@ public final class HwlocEnumTypes {
 	private static final int CPUBIND_THREAD_TYPE = 301;
 	private static final int CPUBIND_STRICT_TYPE = 302;
 	private static final int CPUBIND_NOMEMBIND_TYPE = 303;
+
+	enum HwlocMEMBindFlags {
+		/**
+		 * Set policy for all threads of the specified (possibly multithreaded) process.
+		 * <p>
+		 * This flag is mutually exclusive with HWLOC_MEMBIND_THREAD.
+		 */
+		HWLOC_MEMBIND_PROCESS,
+		/**
+		 * Set policy for a specific thread of the current process.
+		 * <p>
+		 * This flag is mutually exclusive with HWLOC_MEMBIND_PROCESS.
+		 */		
+		HWLOC_MEMBIND_THREAD,
+		/**
+		 * Request strict binding from the OS. The function will fail if the binding can not 
+		 * be guaranteed / completely enforced. This flag has slightly different meanings
+		 * depending on which function it is used with.
+		 */				
+		HWLOC_MEMBIND_STRICT,
+		/**
+		 * Migrate existing allocated memory. If the memory cannot be migrated and the 
+		 * HWLOC_MEMBIND_STRICT flag is passed, an error will be returned.
+		 */		
+		HWLOC_MEMBIND_MIGRATE,
+		/**
+		 * Avoid any effect on CPU binding.
+		 * <p>
+		 * On some operating systems, some underlying memory binding functions also bind
+		 * the application to the corresponding CPU(s). Using this flag will cause hwloc
+		 * to avoid using OS functions that could potentially affect CPU bindings. Note,
+		 * however, that using NOCPUBIND may reduce hwloc's overall memory binding
+		 * support, i.e. potentially return -1 and throw HwlocException.
+		 */		
+		HWLOC_MEMBIND_NOCPUBIND,
+		/**
+		 * Consider the bitmap argument as a nodeset.
+		 * <p>
+		 * The bitmap argument is considered a nodeset if this flag is given, or a cpuset 
+		 * otherwise by default.
+		 * <p>
+		 * Memory binding by CPU set cannot work for CPU-less NUMA memory nodes. Binding by 
+		 * nodeset should therefore be preferred whenever possible.
+		 */		
+		HWLOC_MEMBIND_BYNODESET,
+		/**
+		 * Unknown hwloc MEM binding flag.
+		 */
+		HWLOC_MEMBIND_UNKNOWN;
+
+		private HwlocMEMBindFlags() {}
+
+		static final EnumSet<HwlocMEMBindFlags> MEMBINDING_FLAGS = EnumSet.allOf(HwlocMEMBindFlags.class);
+
+		static int Java2HwlocFlags(EnumSet<HwlocMEMBindFlags> flags)
+		{
+			int hwloc_flags = 0;
+			int i = 0;
+
+			for (HwlocMEMBindFlags flag: flags)
+			{
+				if(i==0)
+					hwloc_flags = java2hwloc_membindflag(HwlocMEMBindFlags.GetFlag(flag));
+				else
+					hwloc_flags = hwloc_flags | java2hwloc_membindflag(HwlocMEMBindFlags.GetFlag(flag));
+
+				i++;
+			}
+			return hwloc_flags;
+		}
+
+		static int GetFlag(HwlocMEMBindFlags flag) {
+
+			switch(flag)
+			{
+			case HWLOC_MEMBIND_PROCESS:		return MEMBIND_PROCESS_TYPE;
+			case HWLOC_MEMBIND_THREAD:		return MEMBIND_THREAD_TYPE;
+			case HWLOC_MEMBIND_STRICT:		return MEMBIND_STRICT_TYPE;
+			case HWLOC_MEMBIND_MIGRATE:		return MEMBIND_MIGRATE_TYPE;
+			case HWLOC_MEMBIND_NOCPUBIND:	return MEMBIND_NOCPUBIND_TYPE;
+			case HWLOC_MEMBIND_BYNODESET:	return MEMBIND_BYNODESET_TYPE;
+			default: 						return MEMBIND_UNKNOWN_TYPE;
+			}
+		}
+	}
+
+	private static final int MEMBIND_UNKNOWN_TYPE = -4;
+	private static final int MEMBIND_PROCESS_TYPE = 400;
+	private static final int MEMBIND_THREAD_TYPE = 401;
+	private static final int MEMBIND_STRICT_TYPE = 402;
+	private static final int MEMBIND_MIGRATE_TYPE = 403;
+	private static final int MEMBIND_NOCPUBIND_TYPE = 404;
+	private static final int MEMBIND_BYNODESET_TYPE = 405;
+
+	public enum HwlocMEMBindPolicy {
+		/**
+		 * Reset the memory allocation policy to the system default.
+		 * <p>
+		 * Depending on the operating system, this may correspond to HWLOC_MEMBIND_FIRSTTOUCH (Linux),
+		 * or HWLOC_MEMBIND_BIND (AIX, HP-UX, Solaris, Windows). This policy is never returned by get 
+		 * membind functions. The nodeset argument is ignored
+		 */
+		HWLOC_MEMBIND_DEFAULT,
+		/**
+		 * Allocate each memory page individually on the local NUMA node of the thread that touches it.
+		 * <p>
+		 * The given nodeset should usually be <tt>hwloc_topology_get_topology_nodeset()</tt> so that 
+		 * the touching thread may run and allocate on any node in the system. On AIX, if the nodeset is
+		 * smaller, pages are allocated locally (if the local node is in the nodeset) or from a random
+		 * non-local node (otherwise).
+		 */		
+		HWLOC_MEMBIND_FIRSTTOUCH,
+		/**
+		 * Allocate memory on the specified nodes.
+		 */				
+		HWLOC_MEMBIND_BIND,
+		/**
+		 * Allocate memory on the given nodes in an interleaved / round-robin manner.
+		 * <p>
+		 * The precise layout of the memory across multiple NUMA nodes is OS/system specific. Interleaving
+		 * can be useful when threads distributed across the specified NUMA nodes will all be accessing the
+		 * whole memory range concurrently, since the interleave will then balance the memory references.
+		 */		
+		HWLOC_MEMBIND_INTERLEAVE,
+		/**
+		 * For each page bound with this policy, by next time it is touched (and next time only), it is moved
+		 * from its current location to the local NUMA node of the thread where the memory reference occurred
+		 * (if it needs to be moved at all).
+		 */		
+		HWLOC_MEMBIND_NEXTTOUCH,
+		/**
+		 * Returned by get_membind() functions when multiple threads or parts of a memory area have differing
+		 * memory binding policies. Also returned when binding is unknown because binding hooks are empty when
+		 * the topology is loaded from XML without HWLOC_THISSYSTEM=1, etc.
+		 */		
+		HWLOC_MEMBIND_MIXED,
+		/**
+		 * Unknown hwloc MEM binding policy.
+		 */
+		HWLOC_MEMBIND_UNKNOWN;
+
+		private HwlocMEMBindPolicy() {}
+
+		static HwlocMEMBindPolicy GetType(int type)
+		{
+			switch(type)
+			{
+			case MEMBIND_DEFAULT_TYPE:		return HWLOC_MEMBIND_DEFAULT;
+			case MEMBIND_FIRSTTOUCH_TYPE:	return HWLOC_MEMBIND_FIRSTTOUCH;
+			case MEMBIND_BIND_TYPE:			return HWLOC_MEMBIND_BIND;
+			case MEMBIND_INTERLEAVE_TYPE:	return HWLOC_MEMBIND_INTERLEAVE;
+			case MEMBIND_NEXTTOUCH_TYPE:	return HWLOC_MEMBIND_NEXTTOUCH;
+			case MEMBIND_MIXED_TYPE:		return HWLOC_MEMBIND_MIXED;
+			default: 						return HWLOC_MEMBIND_UNKNOWN;
+			}
+		}
+
+		static int GetType(HwlocMEMBindPolicy type) {
+
+			switch(type)
+			{
+			case HWLOC_MEMBIND_DEFAULT:		return MEMBIND_DEFAULT_TYPE;
+			case HWLOC_MEMBIND_FIRSTTOUCH:	return MEMBIND_FIRSTTOUCH_TYPE;
+			case HWLOC_MEMBIND_BIND:		return MEMBIND_BIND_TYPE;
+			case HWLOC_MEMBIND_INTERLEAVE:	return MEMBIND_INTERLEAVE_TYPE;
+			case HWLOC_MEMBIND_NEXTTOUCH:	return MEMBIND_NEXTTOUCH_TYPE;
+			case HWLOC_MEMBIND_MIXED:		return MEMBIND_MIXED_TYPE;
+			default: 						return MEMBIND_UNKNOWN_POLICY_TYPE;
+			}
+		}
+	}
+
+	private static final int MEMBIND_UNKNOWN_POLICY_TYPE = -5;
+	private static final int MEMBIND_DEFAULT_TYPE = 500;
+	private static final int MEMBIND_FIRSTTOUCH_TYPE = 501;
+	private static final int MEMBIND_BIND_TYPE = 502;
+	private static final int MEMBIND_INTERLEAVE_TYPE = 503;
+	private static final int MEMBIND_NEXTTOUCH_TYPE = 504;
+	private static final int MEMBIND_MIXED_TYPE = 505;
 
 	enum HwlocCompareTypes {
 		/**
@@ -642,7 +821,7 @@ public final class HwlocEnumTypes {
 		 */ 
 		HWLOC_TYPE_FILTER_KEEP_IMPORTANT,
 		/**
-		 * Unkown hwloc type filter.
+		 * Unknown hwloc type filter.
 		 */
 		HWLOC_TYPE_FILTER_UNKNOWN;
 
@@ -734,6 +913,8 @@ public final class HwlocEnumTypes {
 	/********************** PRIVATE NATIVE METHODS 	**********************/
 	private static native int java2hwloc_cpubindflag(int jhwloc_flag);
 	private static native int hwloc2java_cpubindflag(int hwloc_flag);
+	private static native int java2hwloc_membindflag(int jhwloc_flag);
+	private static native int hwloc2java_membindflag(int hwloc_flag);
 	private static native long java2hwloc_topologyflag(long jhwloc_flag);
 	private static native long hwloc2java_topologyflag(long hwloc_flag);
 }

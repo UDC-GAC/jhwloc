@@ -23,6 +23,7 @@ extern jhwloc_api_t api;
 extern jfieldID FID_jhwloc_HwlocTopology_handler;
 extern jfieldID FID_jhwloc_HwlocObject_handler;
 extern jfieldID FID_jhwloc_HwlocCPUSet_handler;
+extern jfieldID FID_jhwloc_HwlocBitmap_handler;
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocTopology
@@ -293,6 +294,38 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1obj_1b
 	hwloc_obj_t obj = NULL;
 
 	obj = api.jhwloc_get_obj_by_depth(topo, depth, idx);
+
+	return (obj == NULL)? -1 : (jlong) obj;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_numanode_obj_by_os_index
+ * Signature: (I)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1numanode_1obj_1by_1os_1index
+  (JNIEnv *env, jobject this, jint os_index)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	hwloc_obj_t obj = NULL;
+
+	obj = api.jhwloc_get_numanode_obj_by_os_index(topo, os_index);
+
+	return (obj == NULL)? -1 : (jlong) obj;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_pu_obj_by_os_index
+ * Signature: (I)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1pu_1obj_1by_1os_1index
+  (JNIEnv *env, jobject this, jint os_index)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	hwloc_obj_t obj = NULL;
+
+	obj = api.jhwloc_get_pu_obj_by_os_index(topo, os_index);
 
 	return (obj == NULL)? -1 : (jlong) obj;
 }
@@ -751,4 +784,44 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
 	enum hwloc_type_filter_e chwloc_type_filter = GetHwlocTypeFilterNative(env, jhwloc_type_filter);
 
 	return api.jhwloc_topology_set_io_types_filter(topo, chwloc_type_filter);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_membind
+ * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1membind
+  (JNIEnv *env, jobject this, jobject jhwloc_bitmap, jint flags)
+{
+    hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+    hwloc_bitmap_t set = (hwloc_bitmap_t) (*env)->GetLongField(env, jhwloc_bitmap, FID_jhwloc_HwlocBitmap_handler);
+    hwloc_membind_policy_t policy;
+
+    int rc = api.jhwloc_get_membind(topo, set, &policy, flags);
+
+    if (rc < 0)
+    	return -1;
+
+    return GetHwlocMEMBindPolicyTypeJava(env, policy);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_proc_membind
+ * Signature: (ILes/udc/gac/jhwloc/HwlocBitmap;I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1proc_1membind
+  (JNIEnv *env, jobject this, jint pid, jobject jhwloc_bitmap, jint flags)
+{
+    hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+    hwloc_bitmap_t set = (hwloc_bitmap_t) (*env)->GetLongField(env, jhwloc_bitmap, FID_jhwloc_HwlocBitmap_handler);
+    hwloc_membind_policy_t policy;
+
+    int rc = api.jhwloc_get_proc_membind(topo, pid, set, &policy, flags);
+
+    if (rc < 0)
+    	return -1;
+
+    return GetHwlocMEMBindPolicyTypeJava(env, policy);
 }

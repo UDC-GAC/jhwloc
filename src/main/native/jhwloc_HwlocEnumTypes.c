@@ -32,12 +32,12 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_java2hwloc_1cpubind
 	switch(jhwloc_flag)
 	{
 		case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_PROCESS_TYPE:              return HWLOC_CPUBIND_PROCESS;
-                case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_THREAD_TYPE:               return HWLOC_CPUBIND_THREAD;
-                case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_STRICT_TYPE:               return HWLOC_CPUBIND_STRICT;
-                case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE:            return HWLOC_CPUBIND_NOMEMBIND;
-                default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_CPUBIND_UNKNOWN_TYPE: "+jhwloc_flag);
-        }
-        return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_UNKNOWN_TYPE;
+		case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_THREAD_TYPE:               return HWLOC_CPUBIND_THREAD;
+        case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_STRICT_TYPE:               return HWLOC_CPUBIND_STRICT;
+        case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE:            return HWLOC_CPUBIND_NOMEMBIND;
+        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_CPUBIND_UNKNOWN_TYPE: "+jhwloc_flag);
+    }
+    return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_UNKNOWN_TYPE;
 }
 
 /*
@@ -51,12 +51,54 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_hwloc2java_1cpubind
 	switch(hwloc_flag)
 	{
 		case HWLOC_CPUBIND_PROCESS:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_PROCESS_TYPE;
-                case HWLOC_CPUBIND_THREAD:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_THREAD_TYPE;
-                case HWLOC_CPUBIND_STRICT:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_STRICT_TYPE;
-                case HWLOC_CPUBIND_NOMEMBIND:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE;
-                default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_CPUBIND_UNKNOWN: "+hwloc_flag);
-        }
-        return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_UNKNOWN_TYPE;
+        case HWLOC_CPUBIND_THREAD:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_THREAD_TYPE;
+        case HWLOC_CPUBIND_STRICT:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_STRICT_TYPE;
+        case HWLOC_CPUBIND_NOMEMBIND:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE;
+        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_CPUBIND_UNKNOWN: "+hwloc_flag);
+     }
+     return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_UNKNOWN_TYPE;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocEnumTypes
+ * Method:    java2hwloc_membindflag
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_java2hwloc_1membindflag
+  (JNIEnv *env, jclass this, jint jhwloc_flag)
+{
+	switch(jhwloc_flag)
+	{
+		case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_PROCESS_TYPE:     return HWLOC_MEMBIND_PROCESS;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_THREAD_TYPE:      return HWLOC_MEMBIND_THREAD;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_STRICT_TYPE:      return HWLOC_MEMBIND_STRICT;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIGRATE_TYPE:		return HWLOC_MEMBIND_MIGRATE;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NOCPUBIND_TYPE:   return HWLOC_MEMBIND_NOCPUBIND;
+	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BYNODESET_TYPE:	return HWLOC_MEMBIND_BYNODESET;
+	    default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_MEMBIND_UNKNOWN_TYPE: "+jhwloc_flag);
+	}
+	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocEnumTypes
+ * Method:    hwloc2java_membindflag
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_hwloc2java_1membindflag
+  (JNIEnv *env, jclass this, jint hwloc_flag)
+{
+	switch(hwloc_flag)
+	{
+		case HWLOC_MEMBIND_PROCESS:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_PROCESS_TYPE;
+        case HWLOC_MEMBIND_THREAD:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_THREAD_TYPE;
+        case HWLOC_MEMBIND_STRICT:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_STRICT_TYPE;
+        case HWLOC_MEMBIND_MIGRATE:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIGRATE_TYPE;
+        case HWLOC_MEMBIND_NOCPUBIND:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NOCPUBIND_TYPE;
+        case HWLOC_MEMBIND_BYNODESET:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BYNODESET_TYPE;
+        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_MEMBIND_UNKNOWN: "+hwloc_flag);
+     }
+     return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
 }
 
 /*

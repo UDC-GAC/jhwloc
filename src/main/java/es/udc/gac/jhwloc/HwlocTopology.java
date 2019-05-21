@@ -21,6 +21,8 @@ package es.udc.gac.jhwloc;
 import java.util.EnumSet;
 
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocCPUBindFlags;
+import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocMEMBindFlags;
+import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocMEMBindPolicy;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectType;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocTopologyFlags;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocTypeFilter;
@@ -264,7 +266,7 @@ public class HwlocTopology implements Cloneable {
 	public int get_type_or_above_depth(HwlocObjectType type) {
 		return jhwloc_get_type_or_above_depth(HwlocObjectType.GetType(type));
 	}
-	
+
 	/**
 	 * Returns the depth of objects of type <tt>type</tt> or below.
 	 * <p> 
@@ -283,7 +285,7 @@ public class HwlocTopology implements Cloneable {
 	public int get_type_or_below_depth(HwlocObjectType type) {
 		return jhwloc_get_type_or_below_depth(HwlocObjectType.GetType(type));
 	}
-	
+
 	/**
 	 * Returns the width of level type <tt>type</tt>.
 	 * <p>
@@ -491,8 +493,54 @@ public class HwlocTopology implements Cloneable {
 	 * there are multiple or no depth for given type, return <tt>null</tt> and let the caller fallback 
 	 * to <tt>get_next_obj_by_depth()</tt>.
 	 */
-	public HwlocObject get_next_obj_by_type(HwlocObjectType type, HwlocObject prev){
+	public HwlocObject get_next_obj_by_type(HwlocObjectType type, HwlocObject prev) {
 		long handler = jhwloc_get_next_obj_by_type(HwlocObjectType.GetType(type), prev);
+
+		if(handler == -1)
+			return null;
+
+		return HwlocTopology.GetHwlocObject(this.root, handler);
+	}
+
+	/**
+	 * Returns the object of type HWLOC.OBJ_NUMANODE with <tt>os_index</tt>.
+	 * <p>
+	 * This function is useful for converting a nodeset into the NUMA node objects it 
+	 * contains. When retrieving the current binding (e.g.  with <tt>get_membind()</tt> with
+	 * HWLOC.MEMBIND_BYNODESET), one may iterate over the bits of the resulting nodeset and
+	 * find the corresponding NUMA nodes with this function.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_get_numanode_obj_by_os_index()</tt>.
+	 * 
+	 * @param os_index OS index.
+	 * @return Return the object of type HWLOC.OBJ_NUMANODE with <tt>os_index</tt> or <tt>null</tt>
+	 * otherwise.
+	 */
+	public HwlocObject get_numanode_obj_by_os_index(int os_index) {
+		long handler = jhwloc_get_numanode_obj_by_os_index(os_index);
+
+		if(handler == -1)
+			return null;
+
+		return HwlocTopology.GetHwlocObject(this.root, handler);
+	}
+
+	/**
+	 * Returns the object of type HWLOC.OBJ_PU with <tt>os_index</tt>.
+	 * <p>
+	 * This function is useful for converting a CPU set into the PU objects it contains
+	 *  When retrieving the current binding (e.g. with <tt>get_cpubind()</tt>), one may
+	 *  iterate over the bits of the resulting CPU set and find the corresponding PUs with
+	 *  this function.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_get_pu_obj_by_os_index()</tt>.
+	 * 
+	 * @param os_index OS index.
+	 * @return Return the object of type HWLOC.OBJ_PU with <tt>os_index</tt> or <tt>null</tt>
+	 * otherwise.
+	 */
+	public HwlocObject get_pu_obj_by_os_index(int os_index) {
+		long handler = jhwloc_get_pu_obj_by_os_index(os_index);
 
 		if(handler == -1)
 			return null;
@@ -589,7 +637,7 @@ public class HwlocTopology implements Cloneable {
 	/**
 	 * Get current process or thread binding.
 	 * <p>
-	 * Writes into set the physical <tt>cpuset</tt> which the process or thread (according to
+	 * Writes into <tt>cpuset</tt> the physical cpuset which the process or thread (according to
 	 * <tt>flags</tt>) was last bound to.
 	 * <p>
 	 * Java binding of the hwloc operation <tt>hwloc_get_cpubind()</tt>.
@@ -939,7 +987,84 @@ public class HwlocTopology implements Cloneable {
 	public int get_memory_parents_depth() {
 		return jhwloc_get_memory_parents_depth();
 	}
-	
+
+	/**
+	 * Query the default memory binding policy and physical locality of the current process or thread.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_get_membind(()</tt>.	
+	 * 
+	 * @param set Bitmap set.
+	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
+	 * @return This function has two output parameters: <tt>set</tt> and <tt>policy</tt>. The values returned
+	 * depend on both the <tt>flags</tt> passed in and the current memory binding policies and nodesets in
+	 * the queried target.
+	 * <p>
+	 * Passing the HWLOC.MEMBIND_PROCESS flag specifies that the query target is the current policies and
+	 * nodesets for all the threads in the current process. Passing HWLOC.MEMBIND_THREAD specifies that 
+	 * the query target is the current policy and nodeset for only the thread invoking this function.
+	 * <p>
+	 * If neither of these flags are passed (which is the most portable method), the process is assumed to
+	 * be single threaded. This allows hwloc to use either process-based OS functions or thread-based OS
+	 * functions, depending on which are available.
+	 * <p>
+	 * HWLOC.MEMBIND_STRICT is only meaningful when HWLOC.MEMBIND_PROCESS is also specified. In this 
+	 * case, hwloc will check the default memory policies and nodesets for all threads in the process. If
+	 * they are not identical, <tt>null</tt> is returned. If they are identical, the values are returned
+	 * in <tt>set</tt> and <tt>policy</tt>.
+	 * <p>
+	 * Otherwise, if HWLOC.MEMBIND_PROCESS is specified (and HWLOC.MEMBIND_STRICT is not specified), the
+	 * default set from each thread is logically OR'ed together. If all threads' default policies are the same,
+	 * <tt>policy</tt> is set to that policy. If they are different, <tt>policy</tt> is set to HWLOC.MEMBIND_MIXED.
+	 * <p>
+	 * In the HWLOC.MEMBIND_THREAD case (or when neither HWLOC.MEMBIND_PROCESS or HWLOC.MEMBIND_THREAD is 
+	 * specified), there is only one set and policy; they are returned in <tt>set</tt> and <tt>policy</tt>, respectively.
+	 * <p>
+	 * If HWLOC.MEMBIND_BYNODESET is specified, <tt>set</tt> is considered a nodeset. Otherwise it's a cpuset.
+	 * <p>
+	 * If any other flags are specified, <tt>null</tt> is returned.
+	 */
+	public HwlocMEMBindPolicy get_membind(HwlocBitmap set, EnumSet<HwlocMEMBindFlags> flags) {
+		int hwloc_flags;
+
+		if(flags == null)
+			hwloc_flags = 0;
+		else
+			hwloc_flags = HwlocMEMBindFlags.Java2HwlocFlags(flags);
+
+		int rc = jhwloc_get_membind(set, hwloc_flags);
+
+		if(rc < 0)
+			return null;
+
+		return HwlocMEMBindPolicy.GetType(rc);
+	}
+
+	/**
+	 * Query the default memory binding policy and physical locality of the specified process.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_get_proc_membind(()</tt>.	
+	 * 
+	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param set Bitmap set.
+	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
+	 * @return See <tt>get_membind()</tt>.
+	 */
+	public HwlocMEMBindPolicy get_proc_membind(int pid, HwlocBitmap set, EnumSet<HwlocMEMBindFlags> flags) {
+		int hwloc_flags;
+
+		if(flags == null)
+			hwloc_flags = 0;
+		else
+			hwloc_flags = HwlocMEMBindFlags.Java2HwlocFlags(flags);
+
+		int rc = jhwloc_get_proc_membind(pid, set, hwloc_flags);
+
+		if(rc < 0)
+			return null;
+
+		return HwlocMEMBindPolicy.GetType(rc);
+	}
+
 	static HwlocObject GetHwlocObject(HwlocObject rootHwlocObject, long handler) {
 		if (rootHwlocObject.getHandler() == handler)
 			return rootHwlocObject;
@@ -995,6 +1120,8 @@ public class HwlocTopology implements Cloneable {
 	private native long jhwloc_topology_get_flags();
 	private native long jhwloc_get_obj_by_type(int jhwloc_obj_type, int idx);
 	private native long jhwloc_get_obj_by_depth(int depth, int idx);
+	private native long jhwloc_get_numanode_obj_by_os_index(int os_index);
+	private native long jhwloc_get_pu_obj_by_os_index(int os_index);
 	private native int jhwloc_topology_export_xml(String xmlpath);
 	private native int jhwloc_topology_set_xml(String xmlpath);
 	private native int jhwloc_topology_set_synthetic(String description);
@@ -1023,4 +1150,7 @@ public class HwlocTopology implements Cloneable {
 	private native int jhwloc_topology_set_cache_types_filter(int jhwloc_type_filter);
 	private native int jhwloc_topology_set_icache_types_filter(int jhwloc_type_filter);
 	private native int jhwloc_topology_set_io_types_filter(int jhwloc_type_filter);
+	private native int jhwloc_get_membind(HwlocBitmap jhwloc_bitmap, int flags);
+	private native int jhwloc_get_proc_membind(int pid, HwlocBitmap jhwloc_bitmap, int flags);
+
 }

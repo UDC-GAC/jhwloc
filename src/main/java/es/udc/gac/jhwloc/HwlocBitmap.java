@@ -558,7 +558,7 @@ public class HwlocBitmap implements Cloneable {
 		return hash;
 	}
 
-	private void setHandler(long handler) {
+	protected void setHandler(long handler) {
 		this.handler = handler;
 	}
 

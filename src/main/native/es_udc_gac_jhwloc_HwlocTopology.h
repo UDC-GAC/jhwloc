@@ -153,6 +153,22 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1obj_1b
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_numanode_obj_by_os_index
+ * Signature: (I)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1numanode_1obj_1by_1os_1index
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_pu_obj_by_os_index
+ * Signature: (I)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1pu_1obj_1by_1os_1index
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
  * Method:    jhwloc_topology_export_xml
  * Signature: (Ljava/lang/String;)I
  */
@@ -374,6 +390,22 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
  */
 JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1set_1io_1types_1filter
   (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_membind
+ * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1membind
+  (JNIEnv *, jobject, jobject, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_proc_membind
+ * Signature: (ILes/udc/gac/jhwloc/HwlocBitmap;I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1proc_1membind
+  (JNIEnv *, jobject, jint, jobject, jint);
 
 #ifdef __cplusplus
 }

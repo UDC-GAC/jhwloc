@@ -91,6 +91,34 @@ extern "C" {
 #define es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_STRICT_TYPE 302L
 #undef es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE
 #define es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE 303L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE -4L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_PROCESS_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_PROCESS_TYPE 400L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_THREAD_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_THREAD_TYPE 401L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_STRICT_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_STRICT_TYPE 402L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIGRATE_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIGRATE_TYPE 403L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NOCPUBIND_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NOCPUBIND_TYPE 404L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BYNODESET_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BYNODESET_TYPE 405L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_POLICY_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_POLICY_TYPE -5L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_DEFAULT_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_DEFAULT_TYPE 500L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_FIRSTTOUCH_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_FIRSTTOUCH_TYPE 501L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BIND_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BIND_TYPE 502L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_INTERLEAVE_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_INTERLEAVE_TYPE 503L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NEXTTOUCH_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NEXTTOUCH_TYPE 504L
+#undef es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIXED_TYPE
+#define es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIXED_TYPE 505L
 #undef es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNKNOWN_TYPE
 #define es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNKNOWN_TYPE -7L
 #undef es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNORDERED_TYPE
@@ -133,6 +161,22 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_java2hwloc_1cpubind
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_hwloc2java_1cpubindflag
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocEnumTypes
+ * Method:    java2hwloc_membindflag
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_java2hwloc_1membindflag
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocEnumTypes
+ * Method:    hwloc2java_membindflag
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_hwloc2java_1membindflag
   (JNIEnv *, jclass, jint);
 
 /*
