@@ -26,7 +26,9 @@ public class TreeBrowsing {
 
 		HwlocObject[] children = obj.getChildren();
 
-		for(int i=0;i<children.length;i++)
-			print(children[i]);
+		if (children != null) {
+			for(int i=0;i<children.length;i++)
+				print(children[i]);
+		}
 	}
 }

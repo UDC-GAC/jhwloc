@@ -884,21 +884,35 @@ public class HwlocTopology implements Cloneable {
 	}
 
 	static HwlocObject GetHwlocObject(HwlocObject rootHwlocObject, long handler) {
+		if (rootHwlocObject.getHandler() == handler)
+			return rootHwlocObject;
+
 		HwlocObject obj;
 		HwlocObject[] children = rootHwlocObject.getChildren();
 
-		for(int i=0;i<children.length;i++){
+		if (children != null) {
+			for (int i=0;i<children.length;i++) {
 
-			obj = GetHwlocObject(children[i], handler);
+				obj = GetHwlocObject(children[i], handler);
 
-			if(obj != null)
-				return obj;
+				if(obj != null)
+					return obj;
+			}
 		}
 
-		if(rootHwlocObject.getHandler() == handler)
-			return rootHwlocObject;
-		else
-			return null;
+		children = rootHwlocObject.getMemoryChildren();
+
+		if (children != null) {
+			for (int i=0;i<children.length;i++) {
+
+				obj = GetHwlocObject(children[i], handler);
+
+				if(obj != null)
+					return obj;
+			}
+		}
+
+		return null;
 	}
 
 	private void setHandler(long handler) {

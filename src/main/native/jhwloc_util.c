@@ -37,9 +37,10 @@ jfieldID FID_jhwloc_HwlocObject_depth;
 jfieldID FID_jhwloc_HwlocObject_logical_index;
 jfieldID FID_jhwloc_HwlocObject_gp_index;
 jfieldID FID_jhwloc_HwlocObject_io_arity;
-jfieldID FID_jhwloc_HwlocObject_memory_arity;
+jfieldID FID_jhwloc_HwlocObject_total_memory;
 jfieldID FID_jhwloc_HwlocObject_misc_arity;
 jfieldID FID_jhwloc_HwlocObject_children;
+jfieldID FID_jhwloc_HwlocObject_memory_children;
 jfieldID FID_jhwloc_HwlocObject_attr;
 jfieldID FID_jhwloc_HwlocObject_cpuset;
 jfieldID FID_jhwloc_HwlocObject_nodeset;
@@ -211,7 +212,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 
 	(*env)->DeleteLocalRef(env, cls);
 
-	MID_HwlocObject_constructor = (*env)->GetMethodID(env, CL_jhwloc_HwlocObject, "<init>", "(Les/udc/gac/jhwloc/HwlocTopology;JIIJ)V");
+	MID_HwlocObject_constructor = (*env)->GetMethodID(env, CL_jhwloc_HwlocObject, "<init>", "(Les/udc/gac/jhwloc/HwlocTopology;JIIIJ)V");
 
 	if (MID_HwlocObject_constructor == NULL)
 		return JNI_ERR;
@@ -251,20 +252,25 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 	if (FID_jhwloc_HwlocObject_io_arity == NULL)
 		return JNI_ERR;
 
-	FID_jhwloc_HwlocObject_memory_arity = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"memory_arity","I");
-
-	if (FID_jhwloc_HwlocObject_memory_arity == NULL)
-		return JNI_ERR;
-
 	FID_jhwloc_HwlocObject_misc_arity = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"misc_arity","I");
 
 	if (FID_jhwloc_HwlocObject_misc_arity == NULL)
+		return JNI_ERR;
+
+	FID_jhwloc_HwlocObject_total_memory = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"total_memory","J");
+
+	if (FID_jhwloc_HwlocObject_total_memory == NULL)
 		return JNI_ERR;
 
 	FID_jhwloc_HwlocObject_children = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"children","[Les/udc/gac/jhwloc/HwlocObject;");
 
 	if (FID_jhwloc_HwlocObject_children == NULL)
 		return JNI_ERR;
+
+	FID_jhwloc_HwlocObject_memory_children = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"memory_children","[Les/udc/gac/jhwloc/HwlocObject;");
+
+		if (FID_jhwloc_HwlocObject_memory_children == NULL)
+			return JNI_ERR;
 
 	FID_jhwloc_HwlocObject_attr = (*env)->GetFieldID(env,CL_jhwloc_HwlocObject,"attr","Les/udc/gac/jhwloc/HwlocObjectAttr;");
 
@@ -600,6 +606,7 @@ jobject CreateHwlocObject(JNIEnv *env, jobject topo, hwloc_obj_t obj)
 	int i;
 	jobject child;
 	jobjectArray children;
+	jobjectArray memory_children;
 	jobject attr;
 	jobject cpuset;
 	jobject nodeset;
@@ -612,7 +619,8 @@ jobject CreateHwlocObject(JNIEnv *env, jobject topo, hwloc_obj_t obj)
 	else
 		parent = -1;
 
-	jobject new_hwloc_obj = (*env)->NewObject(env, CL_jhwloc_HwlocObject, MID_HwlocObject_constructor, topo, (jlong) obj, jhwloc_obj_type, obj->arity, parent);
+	jobject new_hwloc_obj = (*env)->NewObject(env, CL_jhwloc_HwlocObject, MID_HwlocObject_constructor,
+			topo, (jlong) obj, jhwloc_obj_type, obj->arity, obj->memory_arity, parent);
 
 	(*env)->SetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_name, name);
 	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_depth, obj->depth);
@@ -620,7 +628,7 @@ jobject CreateHwlocObject(JNIEnv *env, jobject topo, hwloc_obj_t obj)
 	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_logical_index, obj->logical_index);
 	(*env)->SetLongField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_gp_index, (jlong)obj->gp_index);
 	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_io_arity, obj->io_arity);
-	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_memory_arity, obj->memory_arity);
+	(*env)->SetLongField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_total_memory, (jlong)obj->total_memory);
 	(*env)->SetIntField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_misc_arity, obj->misc_arity);
 
 	cpuset = (*env)->GetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_cpuset);
@@ -657,6 +665,16 @@ jobject CreateHwlocObject(JNIEnv *env, jobject topo, hwloc_obj_t obj)
 		}
 	}
 
+	if (obj->memory_arity > 0) {
+			memory_children = (*env)->GetObjectField(env, new_hwloc_obj, FID_jhwloc_HwlocObject_memory_children);
+			hwloc_obj_t memory_child = obj->memory_first_child;
+
+			for (i=0; i<obj->memory_arity; i++) {
+				child = CreateHwlocObject(env, topo, memory_child);
+				(*env)->SetObjectArrayElement(env, memory_children, i, child);
+				memory_child = memory_child->next_sibling;
+			}
+	}
+
 	return new_hwloc_obj;
 }
-

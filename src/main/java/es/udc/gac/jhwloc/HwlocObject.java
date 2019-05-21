@@ -35,17 +35,27 @@ public class HwlocObject {
 	private int memory_arity;
 	private int misc_arity;
 	private long parent_handler;
+	private long total_memory;
 	private HwlocObject[] children;
+	private HwlocObject[] memory_children;
 	private HwlocObjectAttr attr;
 	private HwlocCPUSet cpuset;
 	private HwlocNodeSet nodeset;
 
-	private HwlocObject(HwlocTopology topology, long handler, int type, int arity, long parent_handler) {
+	private HwlocObject(HwlocTopology topology, long handler, int type, int arity, int memory_arity, long parent_handler) {
 		this.topology = topology;
 		this.handler = handler;
 		this.type = HwlocObjectType.GetType(type);
 		this.arity = arity;
-		this.children = new HwlocObject[this.arity];
+		if (this.arity > 0)
+			this.children = new HwlocObject[this.arity];
+		else
+			this.children = null;
+		this.memory_arity = memory_arity;
+		if (this.memory_arity > 0)
+			this.memory_children = new HwlocObject[this.memory_arity];
+		else
+			this.memory_children = null;
 		this.parent_handler = parent_handler;
 		this.cpuset = new HwlocCPUSet();
 		this.nodeset = new HwlocNodeSet();
@@ -103,6 +113,10 @@ public class HwlocObject {
 		return this.children;
 	}
 
+	public HwlocObject[] getMemoryChildren() {
+		return this.memory_children;
+	}
+
 	public HwlocObject getFirst_child() {
 		if(this.arity > 0)
 			return this.children[0];
@@ -117,6 +131,20 @@ public class HwlocObject {
 			return null;
 	}
 
+	public HwlocObject getMemoryFirst_child() {
+		if(this.memory_arity > 0)
+			return this.memory_children[0];
+		else
+			return null;
+	}
+
+	public HwlocObject getMemoryLast_child() {
+		if(this.memory_arity > 0)
+			return this.memory_children[this.memory_arity-1];
+		else
+			return null;
+	}
+	
 	public HwlocObjectAttr getAttr() {
 		return this.attr;
 	}
@@ -127,6 +155,10 @@ public class HwlocObject {
 
 	public HwlocNodeSet getNodeSet() {
 		return this.nodeset;
+	}
+
+	public long getTotalMemory() {
+		return this.total_memory;
 	}
 
 	long getHandler() {
