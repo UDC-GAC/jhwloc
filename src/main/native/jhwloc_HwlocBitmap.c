@@ -442,6 +442,25 @@ JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1lis
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_taskset_asprintf
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1taskset_1asprintf
+  (JNIEnv *env, jobject this)
+{
+	hwloc_const_bitmap_t bitmap = (hwloc_const_bitmap_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocBitmap_handler);
+	char *string;
+
+	api.jhwloc_bitmap_taskset_asprintf(&string, bitmap);
+
+	jstring str = GetStringJava(env, string);
+	free(string);
+
+	return str;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
  * Method:    jhwloc_bitmap_first
  * Signature: ()I
  */

@@ -268,8 +268,19 @@ public class HwlocBitmap implements Cloneable {
 	 *
 	 * @return The list string representation.
 	 */
-	public String toListString() {
+	public String toStringList() {
 		return jhwloc_bitmap_list_asprintf();
+	}
+	
+	/**
+	 * Stringify a bitmap into a newly allocated taskset-specific string.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_bitmap_taskset_asprintf()</tt>.
+	 *
+	 * @return The taskset-specific string representation.
+	 */
+	public String toStringTasket() {
+		return jhwloc_bitmap_taskset_asprintf();
 	}
 
 	/**
@@ -622,6 +633,7 @@ public class HwlocBitmap implements Cloneable {
 	private native int jhwloc_bitmap_isfull();
 	private native String jhwloc_bitmap_asprintf();
 	private native String jhwloc_bitmap_list_asprintf();
+	private native String jhwloc_bitmap_taskset_asprintf();
 	private native int jhwloc_bitmap_first();
 	private native int jhwloc_bitmap_first_unset();
 	private native int jhwloc_bitmap_last();

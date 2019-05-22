@@ -995,7 +995,7 @@ public class HwlocTopology implements Cloneable {
 	/**
 	 * Query the default memory binding policy and physical locality of the current process or thread.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_membind(()</tt>.	
+	 * Java binding of the hwloc operation <tt>hwloc_get_membind()</tt>.	
 	 * 
 	 * @param set Bitmap set.
 	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
@@ -1046,7 +1046,7 @@ public class HwlocTopology implements Cloneable {
 	/**
 	 * Query the default memory binding policy and physical locality of the specified process.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_proc_membind(()</tt>.	
+	 * Java binding of the hwloc operation <tt>hwloc_get_proc_membind()</tt>.	
 	 * 
 	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
 	 * @param set Bitmap set.
@@ -1079,7 +1079,7 @@ public class HwlocTopology implements Cloneable {
 	 * <p>
 	 * If HWLOC.MEMBIND_BYNODESET is specified, set is considered a nodeset. Otherwise it's a cpuset.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_set_membind(()</tt>.	
+	 * Java binding of the hwloc operation <tt>hwloc_set_membind()</tt>.	
 	 * 
 	 * @param set Bitmap set.
 	 * @param policy Memory binding policy
@@ -1114,7 +1114,7 @@ public class HwlocTopology implements Cloneable {
 	 * <p>
 	 * If HWLOC.MEMBIND_BYNODESET is specified, set is considered a nodeset. Otherwise it's a cpuset.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_set_proc_membind(()</tt>.	
+	 * Java binding of the hwloc operation <tt>hwloc_set_proc_membind()</tt>.	
 	 * 
 	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
 	 * @param set Bitmap set.
@@ -1140,6 +1140,54 @@ public class HwlocTopology implements Cloneable {
 			throw new HwlocException("Binding cannnot be enforced");
 	}
 
+	/**
+	 * Convert a NUMA node set into a CPU set and handle non-NUMA cases.
+	 * <p>
+	 * If the topology contains no NUMA nodes, the machine is considered as a single memory 
+	 * node, and the following behavior is used: if <tt>nodeset</tt> is empty, the returned
+	 * cpuset will be emptied as well. Otherwise, the returned cpuset will be entirely filled.
+	 * This is useful for manipulating memory binding sets
+	 * 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_cpuset_from_nodeset()</tt>.	
+	 * 
+	 * @param nodeset NUMA node set.
+	 * @return CPU set or <tt>null</tt> on error. 
+	 */
+	public HwlocCPUSet cpuset_from_nodeset(HwlocNodeSet nodeset) {
+		long handler = jhwloc_cpuset_from_nodeset(nodeset);
+		
+		if (handler == -1)
+			return null;
+		
+		return new HwlocCPUSet(handler); 
+	}
+	
+	/**
+	 * Convert a CPU set into a NUMA node set and handle non-NUMA cases.
+	 * <p>
+	 * If some NUMA nodes have no CPUs at all, this function never sets their indexes in 
+	 * the return node set, even if a full CPU set is given in input.
+	 * <p>
+	 * If the topology contains no NUMA nodes, the machine is considered as a single memory
+	 * node, and the following behavior is used: If <tt>cpuset</tt> is empty, the returned
+	 * nodeset will be emptied as well. Otherwise, the returned nodeset will be entirely filled.
+	 * 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_cpuset_to_nodeset()</tt>.	
+	 * 
+	 * @param cpuset CPU set.
+	 * @return NUMA node set or <tt>null</tt> on error.
+	 */
+	public HwlocNodeSet cpuset_to_nodeset(HwlocCPUSet cpuset) {
+		long handler = jhwloc_cpuset_to_nodeset(cpuset);
+		
+		if (handler == -1)
+			return null;
+		
+		return new HwlocNodeSet(handler); 
+	}
+	
 	static HwlocObject GetHwlocObject(HwlocObject rootHwlocObject, long handler) {
 		if (rootHwlocObject.getHandler() == handler)
 			return rootHwlocObject;
@@ -1221,8 +1269,10 @@ public class HwlocTopology implements Cloneable {
 	private native int jhwloc_topology_set_cache_types_filter(int jhwloc_type_filter);
 	private native int jhwloc_topology_set_icache_types_filter(int jhwloc_type_filter);
 	private native int jhwloc_topology_set_io_types_filter(int jhwloc_type_filter);
-	private native int jhwloc_get_membind(HwlocBitmap jhwloc_bitmap, int flags);
-	private native int jhwloc_get_proc_membind(int pid, HwlocBitmap jhwloc_bitmap, int flags);
-	private native int jhwloc_set_membind(HwlocBitmap jhwloc_bitmap, int jhwloc_membindpolicy, int flags);
-	private native int jhwloc_set_proc_membind(int pid, HwlocBitmap jhwloc_bitmap, int jhwloc_membindpolicy, int flags);
+	private native int jhwloc_get_membind(HwlocBitmap bitmap, int flags);
+	private native int jhwloc_get_proc_membind(int pid, HwlocBitmap bitmap, int flags);
+	private native int jhwloc_set_membind(HwlocBitmap bitmap, int membindpolicy, int flags);
+	private native int jhwloc_set_proc_membind(int pid, HwlocBitmap bitmap, int membindpolicy, int flags);
+	private native long jhwloc_cpuset_from_nodeset(HwlocNodeSet nodeset);
+	private native long jhwloc_cpuset_to_nodeset(HwlocCPUSet cpuset);
 }

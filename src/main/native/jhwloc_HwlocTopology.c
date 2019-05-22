@@ -23,6 +23,7 @@ extern jhwloc_api_t api;
 extern jfieldID FID_jhwloc_HwlocTopology_handler;
 extern jfieldID FID_jhwloc_HwlocObject_handler;
 extern jfieldID FID_jhwloc_HwlocCPUSet_handler;
+extern jfieldID FID_jhwloc_HwlocNodeSet_handler;
 extern jfieldID FID_jhwloc_HwlocBitmap_handler;
 
 /*
@@ -865,13 +866,53 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1proc_1m
 
     int rc = api.jhwloc_set_proc_membind(topo, pid, set, policy, flags);
 
-	if(rc == -1)
+	if (rc == -1)
 	{
-		if(errno == ENOSYS)
+		if (errno == ENOSYS)
 			return -2;
-		if(errno == EXDEV)
+		if (errno == EXDEV)
 			return -3;
 	}
 
 	return rc;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_cpuset_from_nodeset
+ * Signature: (Les/udc/gac/jhwloc/HwlocNodeSet;)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1cpuset_1from_1nodeset
+  (JNIEnv *env, jobject this, jobject nodeset)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	hwloc_nodeset_t set = (hwloc_nodeset_t) (*env)->GetLongField(env, nodeset, FID_jhwloc_HwlocNodeSet_handler);
+	hwloc_cpuset_t cpuset = hwloc_bitmap_alloc();
+
+	if (cpuset == NULL)
+		return -1;
+
+	int rc = api.jhwloc_cpuset_from_nodeset(topo, cpuset, set);
+
+	return (rc < 0)? -1 : (jlong) cpuset;
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_cpuset_to_nodeset
+ * Signature: (Les/udc/gac/jhwloc/HwlocCPUSet;)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1cpuset_1to_1nodeset
+  (JNIEnv *env, jobject this, jobject cpuset)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	hwloc_cpuset_t set = (hwloc_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
+	hwloc_nodeset_t nodeset = hwloc_bitmap_alloc();
+
+	if (nodeset == NULL)
+		return -1;
+
+	int rc = api.jhwloc_cpuset_to_nodeset(topo, set, nodeset);
+
+	return (rc < 0)? -1 : (jlong) nodeset;
 }

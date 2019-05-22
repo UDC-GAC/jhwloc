@@ -94,6 +94,7 @@ typedef struct jhwloc_api {
 	int (*jhwloc_bitmap_isfull)(hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_bitmap_asprintf)(char **strp, hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_bitmap_list_asprintf)(char **strp, hwloc_const_bitmap_t bitmap);
+	int (*jhwloc_bitmap_taskset_asprintf)(char **strp, hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_bitmap_first)(hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_bitmap_first_unset)(hwloc_const_bitmap_t bitmap);
 	int (*jhwloc_bitmap_last)(hwloc_const_bitmap_t bitmap);
@@ -125,6 +126,8 @@ typedef struct jhwloc_api {
 	int (*jhwloc_get_proc_membind)(hwloc_topology_t topology, hwloc_pid_t pid, hwloc_bitmap_t bitmap, hwloc_membind_policy_t *policy, int flags);
 	int (*jhwloc_set_membind)(hwloc_topology_t topology, hwloc_const_bitmap_t bitmap, hwloc_membind_policy_t policy, int flags);
 	int (*jhwloc_set_proc_membind)(hwloc_topology_t topology, hwloc_pid_t pid, hwloc_const_bitmap_t bitmap, hwloc_membind_policy_t policy, int flags);
+	int (*jhwloc_cpuset_from_nodeset)(hwloc_topology_t topology, hwloc_cpuset_t cpuset, hwloc_const_nodeset_t nodeset);
+	int (*jhwloc_cpuset_to_nodeset)(hwloc_topology_t topology, hwloc_const_cpuset_t cpuset, hwloc_nodeset_t nodeset);
 } jhwloc_api_t;
 
 void ThrowByName(JNIEnv *env, const char *name, const char *msg);

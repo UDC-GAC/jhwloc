@@ -20,6 +20,8 @@ public class Bitmaps {
 		System.out.println("bitmap for last  PU is "+lastpu.getCPUSet());
 		HwlocBitmap res = set.or(lastpu.getCPUSet());
 		System.out.println("OR bitmap is "+res);
+		System.out.println("OR bitmap (list string) is "+res.toStringList());
+		System.out.println("OR bitmap (taskset string) is "+res.toStringTasket());
 		set.free();
 		res.free();
 

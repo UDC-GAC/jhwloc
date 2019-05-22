@@ -241,6 +241,14 @@ JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1lis
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocBitmap
+ * Method:    jhwloc_bitmap_taskset_asprintf
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocBitmap_jhwloc_1bitmap_1taskset_1asprintf
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocBitmap
  * Method:    jhwloc_bitmap_first
  * Signature: ()I
  */

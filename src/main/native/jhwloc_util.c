@@ -139,6 +139,7 @@ static void setHwlocAPI()
 	api.jhwloc_bitmap_isfull = &hwloc_bitmap_isfull;
 	api.jhwloc_bitmap_asprintf = &hwloc_bitmap_asprintf;
 	api.jhwloc_bitmap_list_asprintf = &hwloc_bitmap_list_asprintf;
+	api.jhwloc_bitmap_taskset_asprintf = &hwloc_bitmap_taskset_asprintf;
 	api.jhwloc_bitmap_first = &hwloc_bitmap_first;
 	api.jhwloc_bitmap_first_unset = &hwloc_bitmap_first_unset;
 	api.jhwloc_bitmap_last = &hwloc_bitmap_last;
@@ -170,6 +171,8 @@ static void setHwlocAPI()
 	api.jhwloc_get_proc_membind = &hwloc_get_proc_membind;
 	api.jhwloc_set_membind = &hwloc_set_membind;
 	api.jhwloc_set_proc_membind = &hwloc_set_proc_membind;
+	api.jhwloc_cpuset_to_nodeset = &hwloc_cpuset_to_nodeset;
+	api.jhwloc_cpuset_from_nodeset = &hwloc_cpuset_from_nodeset;
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)

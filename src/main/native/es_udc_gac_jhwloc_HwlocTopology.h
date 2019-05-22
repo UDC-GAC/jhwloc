@@ -423,6 +423,22 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1membind
 JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1proc_1membind
   (JNIEnv *, jobject, jint, jobject, jint, jint);
 
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_cpuset_from_nodeset
+ * Signature: (Les/udc/gac/jhwloc/HwlocNodeSet;)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1cpuset_1from_1nodeset
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_cpuset_to_nodeset
+ * Signature: (Les/udc/gac/jhwloc/HwlocCPUSet;)J
+ */
+JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1cpuset_1to_1nodeset
+  (JNIEnv *, jobject, jobject);
+
 #ifdef __cplusplus
 }
 #endif
