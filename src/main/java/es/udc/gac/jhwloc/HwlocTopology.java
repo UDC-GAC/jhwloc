@@ -40,6 +40,10 @@ public class HwlocTopology implements Cloneable {
 		this.root = null;
 	}
 
+	private void setHandler(long handler) {
+		this.handler = handler;
+	}
+
 	/**
 	 * Allocate a topology context.
 	 * <p>
@@ -1065,6 +1069,77 @@ public class HwlocTopology implements Cloneable {
 		return HwlocMEMBindPolicy.GetType(rc);
 	}
 
+	/**
+	 * Set the default memory binding policy of the current process or thread to prefer the NUMA 
+	 * node(s) specified by <tt>set</tt>.
+	 * <p>
+	 * If neither HWLOC.MEMBIND_PROCESS nor HWLOC_MEMBIND_THREAD is specified, the current process
+	 * is assumed to be single-threaded. This is the most portable form as it permits hwloc to use
+	 * either process-based OS functions or thread-based OS functions, depending on which are available.
+	 * <p>
+	 * If HWLOC.MEMBIND_BYNODESET is specified, set is considered a nodeset. Otherwise it's a cpuset.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_set_membind(()</tt>.	
+	 * 
+	 * @param set Bitmap set.
+	 * @param policy Memory binding policy
+	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
+	 * @throws HwlocException if the action is not supported or the binding cannot be enforced. 
+	 */
+	public void set_membind(HwlocBitmap set, HwlocMEMBindPolicy policy, EnumSet<HwlocMEMBindFlags> flags) throws HwlocException {
+		int hwloc_flags;
+
+		if(flags == null)
+			hwloc_flags = 0;
+		else
+			hwloc_flags = HwlocMEMBindFlags.Java2HwlocFlags(flags);
+
+		int rc = jhwloc_set_membind(set, HwlocMEMBindPolicy.GetType(policy), hwloc_flags);
+
+		if(rc == -1)
+			throw new HwlocException("An error has occurred");
+		if(rc == -2)
+			throw new HwlocException("Action is not supported");
+		if(rc == -3)
+			throw new HwlocException("Binding cannnot be enforced");
+	}
+
+	/**
+	 * Set the default memory binding policy of the specified process or thread to prefer the NUMA 
+	 * node(s) specified by <tt>set</tt>.
+	 * <p>
+	 * If neither HWLOC.MEMBIND_PROCESS nor HWLOC_MEMBIND_THREAD is specified, the current process
+	 * is assumed to be single-threaded. This is the most portable form as it permits hwloc to use
+	 * either process-based OS functions or thread-based OS functions, depending on which are available.
+	 * <p>
+	 * If HWLOC.MEMBIND_BYNODESET is specified, set is considered a nodeset. Otherwise it's a cpuset.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_set_proc_membind(()</tt>.	
+	 * 
+	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param set Bitmap set.
+	 * @param policy Memory binding policy
+	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
+	 * @throws HwlocException if the action is not supported or the binding cannot be enforced. 
+	 */
+	public void set_proc_membind(int pid, HwlocBitmap set, HwlocMEMBindPolicy policy, EnumSet<HwlocMEMBindFlags> flags) throws HwlocException {
+		int hwloc_flags;
+
+		if(flags == null)
+			hwloc_flags = 0;
+		else
+			hwloc_flags = HwlocMEMBindFlags.Java2HwlocFlags(flags);
+
+		int rc = jhwloc_set_proc_membind(pid, set, HwlocMEMBindPolicy.GetType(policy), hwloc_flags);
+
+		if(rc == -1)
+			throw new HwlocException("An error has occurred");
+		if(rc == -2)
+			throw new HwlocException("Action is not supported");
+		if(rc == -3)
+			throw new HwlocException("Binding cannnot be enforced");
+	}
+
 	static HwlocObject GetHwlocObject(HwlocObject rootHwlocObject, long handler) {
 		if (rootHwlocObject.getHandler() == handler)
 			return rootHwlocObject;
@@ -1095,10 +1170,6 @@ public class HwlocTopology implements Cloneable {
 		}
 
 		return null;
-	}
-
-	private void setHandler(long handler) {
-		this.handler = handler;
 	}
 
 	/********************** PRIVATE NATIVE METHODS 	**********************/
@@ -1152,5 +1223,6 @@ public class HwlocTopology implements Cloneable {
 	private native int jhwloc_topology_set_io_types_filter(int jhwloc_type_filter);
 	private native int jhwloc_get_membind(HwlocBitmap jhwloc_bitmap, int flags);
 	private native int jhwloc_get_proc_membind(int pid, HwlocBitmap jhwloc_bitmap, int flags);
-
+	private native int jhwloc_set_membind(HwlocBitmap jhwloc_bitmap, int jhwloc_membindpolicy, int flags);
+	private native int jhwloc_set_proc_membind(int pid, HwlocBitmap jhwloc_bitmap, int jhwloc_membindpolicy, int flags);
 }

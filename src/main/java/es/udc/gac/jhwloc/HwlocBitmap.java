@@ -33,6 +33,10 @@ public class HwlocBitmap implements Cloneable {
 		this.bitmap = this.toString();
 	}
 
+	private void setHandler(long handler) {
+		this.handler = handler;
+	}
+
 	/**
 	 * Allocate a new empty bitmap.
 	 * <p>
@@ -51,6 +55,18 @@ public class HwlocBitmap implements Cloneable {
 		return new HwlocBitmap(rc);
 	}
 
+	protected static HwlocBitmap alloc(boolean cpuset) {
+		long rc = jhwloc_bitmap_alloc();
+
+		if(rc == -1)
+			return null;
+
+		if (cpuset)
+			return new HwlocCPUSet(rc);
+		else
+			return new HwlocNodeSet(rc);
+	}
+
 	/**
 	 * Allocate a new full bitmap.
 	 * <p>
@@ -67,6 +83,18 @@ public class HwlocBitmap implements Cloneable {
 			return null;
 
 		return new HwlocBitmap(rc);
+	}
+
+	protected static HwlocBitmap alloc_full(boolean cpuset) {
+		long rc = jhwloc_bitmap_alloc_full();
+
+		if(rc == -1)
+			return null;
+
+		if (cpuset)
+			return new HwlocCPUSet(rc);
+		else
+			return new HwlocNodeSet(rc);
 	}
 
 	/**
@@ -350,6 +378,7 @@ public class HwlocBitmap implements Cloneable {
 	 * @return <code>true</code> if this bitmap is equals to <tt>bitmap</tt>,
 	 * <code>false</code> instead.
 	 */
+	@Override
 	public boolean equals(Object bitmap) {
 
 		if(bitmap == null)
@@ -551,6 +580,11 @@ public class HwlocBitmap implements Cloneable {
 		return jhwloc_bitmap_weight();
 	}
 
+	/**
+	 * Compute the hash code of this bitmap. 
+	 * 
+	 * @return hash code.
+	 */
 	@Override
 	public int hashCode() {
 		int hash = 7;
@@ -558,13 +592,9 @@ public class HwlocBitmap implements Cloneable {
 		return hash;
 	}
 
-	protected void setHandler(long handler) {
-		this.handler = handler;
-	}
-
 	/********************** PRIVATE NATIVE METHODS 	**********************/
-	protected static native long jhwloc_bitmap_alloc();
-	protected static native long jhwloc_bitmap_alloc_full();
+	private static native long jhwloc_bitmap_alloc();
+	private static native long jhwloc_bitmap_alloc_full();
 	private native void jhwloc_bitmap_free();
 	private native long jhwloc_bitmap_dup();
 	private static native int jhwloc_bitmap_copy(HwlocBitmap dst, HwlocBitmap src);

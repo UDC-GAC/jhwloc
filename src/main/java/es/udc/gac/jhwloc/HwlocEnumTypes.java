@@ -605,7 +605,7 @@ public final class HwlocEnumTypes {
 		 * The bitmap argument is considered a nodeset if this flag is given, or a cpuset 
 		 * otherwise by default.
 		 * <p>
-		 * Memory binding by CPU set cannot work for CPU-less NUMA memory nodes. Binding by 
+		 * Memory binding by cpuset cannot work for CPU-less NUMA memory nodes. Binding by 
 		 * nodeset should therefore be preferred whenever possible.
 		 */		
 		HWLOC_MEMBIND_BYNODESET,
@@ -670,7 +670,7 @@ public final class HwlocEnumTypes {
 		/**
 		 * Allocate each memory page individually on the local NUMA node of the thread that touches it.
 		 * <p>
-		 * The given nodeset should usually be <tt>hwloc_topology_get_topology_nodeset()</tt> so that 
+		 * The given nodeset should usually be <tt>get_topology_nodeset()</tt> so that 
 		 * the touching thread may run and allocate on any node in the system. On AIX, if the nodeset is
 		 * smaller, pages are allocated locally (if the local node is in the nodeset) or from a random
 		 * non-local node (otherwise).
@@ -695,9 +695,9 @@ public final class HwlocEnumTypes {
 		 */		
 		HWLOC_MEMBIND_NEXTTOUCH,
 		/**
-		 * Returned by get_membind() functions when multiple threads or parts of a memory area have differing
-		 * memory binding policies. Also returned when binding is unknown because binding hooks are empty when
-		 * the topology is loaded from XML without HWLOC_THISSYSTEM=1, etc.
+		 * Returned by <tt>get_membind()</tt> functions when multiple threads or parts of a memory area have 
+		 * differing memory binding policies. Also returned when binding is unknown because binding hooks are
+		 * empty when the topology is loaded from XML without HWLOC_THISSYSTEM=1, etc.
 		 */		
 		HWLOC_MEMBIND_MIXED,
 		/**

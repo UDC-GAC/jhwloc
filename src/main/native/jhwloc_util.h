@@ -123,6 +123,8 @@ typedef struct jhwloc_api {
 	int (*jhwloc_topology_set_io_types_filter)(hwloc_topology_t topology, enum hwloc_type_filter_e filter);
 	int (*jhwloc_get_membind)(hwloc_topology_t topology, hwloc_bitmap_t bitmap, hwloc_membind_policy_t *policy, int flags);
 	int (*jhwloc_get_proc_membind)(hwloc_topology_t topology, hwloc_pid_t pid, hwloc_bitmap_t bitmap, hwloc_membind_policy_t *policy, int flags);
+	int (*jhwloc_set_membind)(hwloc_topology_t topology, hwloc_const_bitmap_t bitmap, hwloc_membind_policy_t policy, int flags);
+	int (*jhwloc_set_proc_membind)(hwloc_topology_t topology, hwloc_pid_t pid, hwloc_const_bitmap_t bitmap, hwloc_membind_policy_t policy, int flags);
 } jhwloc_api_t;
 
 void ThrowByName(JNIEnv *env, const char *name, const char *msg);

@@ -168,6 +168,8 @@ static void setHwlocAPI()
 	api.jhwloc_topology_set_io_types_filter = &hwloc_topology_set_io_types_filter;
 	api.jhwloc_get_membind = &hwloc_get_membind;
 	api.jhwloc_get_proc_membind = &hwloc_get_proc_membind;
+	api.jhwloc_set_membind = &hwloc_set_membind;
+	api.jhwloc_set_proc_membind = &hwloc_set_proc_membind;
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)

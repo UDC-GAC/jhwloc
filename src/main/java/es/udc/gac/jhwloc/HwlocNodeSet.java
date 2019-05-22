@@ -38,12 +38,8 @@ public class HwlocNodeSet extends HwlocBitmap {
 	 * @return A valid bitmap or <tt>null</tt>.
 	 */
 	public static HwlocNodeSet alloc() {
-		long rc = jhwloc_bitmap_alloc();
+		return (HwlocNodeSet) HwlocBitmap.alloc(false);
 
-		if(rc == -1)
-			return null;
-
-		return new HwlocNodeSet(rc);
 	}
 
 	/**
@@ -56,11 +52,6 @@ public class HwlocNodeSet extends HwlocBitmap {
 	 * @return A valid bitmap or <tt>null</tt>.
 	 */
 	public static HwlocNodeSet alloc_full() {
-		long rc = jhwloc_bitmap_alloc_full();
-
-		if(rc == -1)
-			return null;
-
-		return new HwlocNodeSet(rc);
+		return (HwlocNodeSet) HwlocBitmap.alloc_full(false);
 	}
 }

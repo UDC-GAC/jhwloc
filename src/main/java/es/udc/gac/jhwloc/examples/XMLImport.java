@@ -50,7 +50,18 @@ public class XMLImport {
 
 		System.out.println("XML topology file loaded from "+args[0]);
 
+		System.out.println("Display the first object of each level:");
+		HwlocObject obj = null;
+		for(int i=0; i<topo.get_depth(); i++) {
+			obj = topo.get_obj_by_depth(i, 0);
+			print(obj);
+		}
+
 		/* terminate this topology context */
 		topo.destroy();
+	}
+
+	private static void print(HwlocObject obj) {
+		System.out.println("obj type "+obj.toString()+" depth "+obj.getDepth()+" os_index "+obj.getOS_index());
 	}
 }

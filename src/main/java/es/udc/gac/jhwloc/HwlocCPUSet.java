@@ -38,12 +38,7 @@ public class HwlocCPUSet extends HwlocBitmap {
 	 * @return A valid bitmap or <tt>null</tt>.
 	 */
 	public static HwlocCPUSet alloc() {
-		long rc = jhwloc_bitmap_alloc();
-
-		if(rc == -1)
-			return null;
-
-		return new HwlocCPUSet(rc);
+		return (HwlocCPUSet) HwlocBitmap.alloc(true);
 	}
 
 	/**
@@ -56,11 +51,6 @@ public class HwlocCPUSet extends HwlocBitmap {
 	 * @return A valid bitmap or <tt>null</tt>.
 	 */
 	public static HwlocCPUSet alloc_full() {
-		long rc = jhwloc_bitmap_alloc_full();
-
-		if(rc == -1)
-			return null;
-
-		return new HwlocCPUSet(rc);
+		return (HwlocCPUSet) HwlocBitmap.alloc_full(true);
 	}
 }

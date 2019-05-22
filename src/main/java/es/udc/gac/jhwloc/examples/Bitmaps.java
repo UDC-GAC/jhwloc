@@ -16,8 +16,10 @@ public class Bitmaps {
 		HwlocObject lastpu = topo.get_obj_by_type(HWLOC.OBJ_PU, nbpus-1);
 
 		HwlocBitmap set = (HwlocBitmap) firstpu.getCPUSet().clone();
+		System.out.println("bitmap for first PU is "+set);
+		System.out.println("bitmap for last  PU is "+lastpu.getCPUSet());
 		HwlocBitmap res = set.or(lastpu.getCPUSet());
-		System.out.println("bitmap is "+res);
+		System.out.println("OR bitmap is "+res);
 		set.free();
 		res.free();
 

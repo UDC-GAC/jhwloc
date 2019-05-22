@@ -407,6 +407,22 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1membind
 JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1proc_1membind
   (JNIEnv *, jobject, jint, jobject, jint);
 
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_set_membind
+ * Signature: (Les/udc/gac/jhwloc/HwlocBitmap;II)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1membind
+  (JNIEnv *, jobject, jobject, jint, jint);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_set_proc_membind
+ * Signature: (ILes/udc/gac/jhwloc/HwlocBitmap;II)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1proc_1membind
+  (JNIEnv *, jobject, jint, jobject, jint, jint);
+
 #ifdef __cplusplus
 }
 #endif
