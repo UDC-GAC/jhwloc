@@ -16,7 +16,7 @@ RMR = rm -rf
 CP = cp
 
 # 
-# DO NOT change the following code unless you know what you are doing
+# DO NOT change the following variables unless you know what you are doing
 #
 JAVAH = javah
 SRC_DIR = ../java
