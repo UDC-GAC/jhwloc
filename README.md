@@ -28,6 +28,8 @@ cd jhwloc
 mvn install
 ```
 
+In case you need to change any setting to compile the native C code in your system, you can modify the *Makefile.common* file located at the */src/main/native* directory.
+
 ### Usage
 
 In order to use the jhwloc library in your projects, add the following dependency section to your pom.xml:
