@@ -1,10 +1,24 @@
+#
+# Change these variables as needed according to your compiler and system
+#
+# C compiler
 CC = gcc
-JAVAC = javac
-JAVAH = javah
+# Extra flags for CC when compiling the library (e.g., optimization flags)
+# These flags must include options to produce object files (*.o) and to emit position-independent code suitable for dynamic linking
+CFLAGS = -O3 -c -fPIC
+# Extra flags to CC when creating the shared library
+CLIBFLAGS = -shared
+# Command to create a directory
 MKDIR = mkdir
+# Command to delete a directory
 RMR = rm -rf
+# Command to copy files
 CP = cp
-MAKE = make
+
+# 
+# DO NOT change the following code unless you know what you are doing
+#
+JAVAH = javah
 SRC_DIR = ../java
 BUILD_DIR = build
 LIB_DIR = ../../../lib
@@ -22,5 +36,5 @@ endif
 HWLOC_INCLUDE = -I$(HWLOC_HOME)/include
 HWLOC_LIBS = -lhwloc -L$(HWLOC_HOME)/lib
 JAVA_HOME_INCLUDES = -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux
-CC_FLAGS = -O3 -Wall -c -fPIC $(JAVA_HOME_INCLUDES) $(HWLOC_INCLUDE)
-LIBJHWLOC_FLAGS = -shared $(HWLOC_LIBS)
+CC_FLAGS = $(CFLAGS) $(JAVA_HOME_INCLUDES) $(HWLOC_INCLUDE)
+LIBJHWLOC_FLAGS = $(CLIBFLAGS) $(HWLOC_LIBS)
