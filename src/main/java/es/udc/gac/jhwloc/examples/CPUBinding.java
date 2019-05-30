@@ -49,7 +49,7 @@ public class CPUBinding {
 		if(topo.get_cpubind(cpuset, EnumSet.of(HWLOC.CPUBIND_THREAD)) < 0)
 			System.out.println("Error on get_cpubind");
 		else
-			System.out.println("main thread bound on "+cpuset);
+			System.out.println("main thread bound to "+cpuset);
 
 		// get the current thread CPU location
 		if(topo.get_last_cpu_location(cpuset, EnumSet.of(HWLOC.CPUBIND_THREAD)) < 0)
@@ -61,7 +61,7 @@ public class CPUBinding {
 		if(topo.get_cpubind(cpuset, EnumSet.of(HWLOC.CPUBIND_PROCESS)) < 0)
 			System.out.println("Error on get_cpubind");
 		else
-			System.out.println("process bound on "+cpuset);
+			System.out.println("process bound to "+cpuset);
 
 		// get the current process CPU location
 		if(topo.get_last_cpu_location(cpuset, EnumSet.of(HWLOC.CPUBIND_PROCESS)) < 0)
@@ -70,7 +70,7 @@ public class CPUBinding {
 			System.out.println("process running on "+cpuset);
 
 		// re-bind the main thread on a single PU of the last core
-		System.out.println("main thread rebinding the entire process on a single PU of the last core");
+		System.out.println("main thread rebinding the entire process to a single PU of the last core");
 		HwlocBitmap.copy(cpuset, lastcore.getCPUSet());
 		cpuset.singlify();
 		topo.set_cpubind(cpuset, EnumSet.of(HWLOC.CPUBIND_PROCESS));
@@ -79,7 +79,7 @@ public class CPUBinding {
 		if(topo.get_cpubind(cpuset, EnumSet.of(HWLOC.CPUBIND_THREAD)) < 0)
 			System.out.println("Error on get_cpubind");
 		else
-			System.out.println("main thread bound on "+cpuset);
+			System.out.println("main thread bound to "+cpuset);
 
 		// get the current thread CPU location
 		if(topo.get_last_cpu_location(cpuset, EnumSet.of(HWLOC.CPUBIND_THREAD)) < 0)
@@ -91,13 +91,42 @@ public class CPUBinding {
 		if(topo.get_cpubind(cpuset, EnumSet.of(HWLOC.CPUBIND_PROCESS)) < 0)
 			System.out.println("Error on get_cpubind");
 		else
-			System.out.println("process bound on "+cpuset);
+			System.out.println("process bound to "+cpuset);
 
 		// get the current process CPU location
 		if(topo.get_last_cpu_location(cpuset, EnumSet.of(HWLOC.CPUBIND_PROCESS)) < 0)
 			System.out.println("Error on get_last_cpu_location");
 		else
 			System.out.println("process running on "+cpuset);
+
+		// re-bind the main thread to the last PU
+		System.out.println("main thread rebinding the current thread to the last PU");
+		topo.set_cpubind(lastpu.getCPUSet(), EnumSet.of(HWLOC.CPUBIND_THREAD));
+
+		// get the current thread binding
+		if(topo.get_cpubind(cpuset, EnumSet.of(HWLOC.CPUBIND_THREAD)) < 0)
+			System.out.println("Error on get_cpubind");
+		else
+			System.out.println("main thread bound to "+cpuset);
+
+		// get the current thread CPU location
+		if(topo.get_last_cpu_location(cpuset, EnumSet.of(HWLOC.CPUBIND_THREAD)) < 0)
+			System.out.println("Error on get_last_cpu_location");
+		else
+			System.out.println("main thread running on "+cpuset);
+
+		// get the current process binding
+		if(topo.get_cpubind(cpuset, EnumSet.of(HWLOC.CPUBIND_PROCESS)) < 0)
+			System.out.println("Error on get_cpubind");
+		else
+			System.out.println("process bound to "+cpuset);
+
+		// get the current process CPU location
+		if(topo.get_last_cpu_location(cpuset, EnumSet.of(HWLOC.CPUBIND_PROCESS)) < 0)
+			System.out.println("Error on get_last_cpu_location");
+		else
+			System.out.println("process running on "+cpuset);
+
 
 		cpuset.free();
 
