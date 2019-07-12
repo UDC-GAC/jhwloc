@@ -86,6 +86,7 @@ static void setHwlocAPI()
 	api.jhwloc_topology_set_pid = &hwloc_topology_set_pid;
 	api.jhwloc_topology_set_flags = &hwloc_topology_set_flags;
 	api.jhwloc_topology_export_xml = &hwloc_topology_export_xml;
+	api.jhwloc_topology_export_synthetic = &hwloc_topology_export_synthetic;
 	api.jhwloc_topology_get_depth = &hwloc_topology_get_depth;
 	api.jhwloc_get_memory_parents_depth = &hwloc_get_memory_parents_depth;
 	api.jhwloc_get_depth_type = &hwloc_get_depth_type;

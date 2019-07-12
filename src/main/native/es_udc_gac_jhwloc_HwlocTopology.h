@@ -185,6 +185,14 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_topology_export_synthetic
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1export_1synthetic
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
  * Method:    jhwloc_topology_set_synthetic
  * Signature: (Ljava/lang/String;)I
  */

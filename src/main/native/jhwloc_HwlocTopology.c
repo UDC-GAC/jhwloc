@@ -384,6 +384,26 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
 
 /*
  * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_topology_export_synthetic
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1export_1synthetic
+  (JNIEnv *env, jobject this)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	char buffer[2048];
+
+	int rc = api.jhwloc_topology_export_synthetic(topo, buffer, sizeof(buffer), 0);
+
+	if (rc == -1) {
+		return NULL;
+	}
+
+	return GetStringJava(env, buffer);
+}
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
  * Method:    jhwloc_topology_set_pid
  * Signature: (I)I
  */

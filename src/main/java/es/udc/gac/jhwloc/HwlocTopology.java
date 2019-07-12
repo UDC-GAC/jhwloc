@@ -387,6 +387,20 @@ public class HwlocTopology implements Cloneable {
 	}
 
 	/**
+	 * Export the topology as a synthetic string.
+	 * <p>
+	 * The exported string may be given back to <tt>set_synthetic()</tt>.
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_topology_export_synthetic()</tt>.
+	 * 
+	 * @return The string representing the topology or <tt>null</tt> if the topology could not be 
+	 * exported, for instance if it is not symmetric.
+	 */
+	public String export_synthetic() {
+		return jhwloc_topology_export_synthetic();
+	}
+	
+	/**
 	 * Enable synthetic topology.
 	 * <p>
 	 * Gather topology information from the given description, a space-separated string of
@@ -1243,6 +1257,7 @@ public class HwlocTopology implements Cloneable {
 	private native long jhwloc_get_pu_obj_by_os_index(int os_index);
 	private native int jhwloc_topology_export_xml(String xmlpath);
 	private native int jhwloc_topology_set_xml(String xmlpath);
+	private native String jhwloc_topology_export_synthetic();
 	private native int jhwloc_topology_set_synthetic(String description);
 	private native int jhwloc_topology_set_pid(int pid);
 	private native int jhwloc_topology_set_flags(long flags);
