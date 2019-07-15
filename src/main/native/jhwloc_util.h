@@ -129,6 +129,7 @@ typedef struct jhwloc_api {
 	int (*jhwloc_set_proc_membind)(hwloc_topology_t topology, hwloc_pid_t pid, hwloc_const_bitmap_t bitmap, hwloc_membind_policy_t policy, int flags);
 	int (*jhwloc_cpuset_from_nodeset)(hwloc_topology_t topology, hwloc_cpuset_t cpuset, hwloc_const_nodeset_t nodeset);
 	int (*jhwloc_cpuset_to_nodeset)(hwloc_topology_t topology, hwloc_const_cpuset_t cpuset, hwloc_nodeset_t nodeset);
+	int (*jhwloc_get_cache_type_depth)(hwloc_topology_t topology, unsigned cachelevel, hwloc_obj_cache_type_t cachetype);
 } jhwloc_api_t;
 
 void ThrowByName(JNIEnv *env, const char *name, const char *msg);

@@ -174,6 +174,7 @@ static void setHwlocAPI()
 	api.jhwloc_set_proc_membind = &hwloc_set_proc_membind;
 	api.jhwloc_cpuset_to_nodeset = &hwloc_cpuset_to_nodeset;
 	api.jhwloc_cpuset_from_nodeset = &hwloc_cpuset_from_nodeset;
+	api.jhwloc_get_cache_type_depth = &hwloc_get_cache_type_depth;
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)

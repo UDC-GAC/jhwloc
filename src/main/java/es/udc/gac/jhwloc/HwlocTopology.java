@@ -23,6 +23,7 @@ import java.util.EnumSet;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocCPUBindFlags;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocMEMBindFlags;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocMEMBindPolicy;
+import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectCacheType;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectType;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocTopologyFlags;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocTypeFilter;
@@ -399,7 +400,7 @@ public class HwlocTopology implements Cloneable {
 	public String export_synthetic() {
 		return jhwloc_topology_export_synthetic();
 	}
-	
+
 	/**
 	 * Enable synthetic topology.
 	 * <p>
@@ -1170,13 +1171,13 @@ public class HwlocTopology implements Cloneable {
 	 */
 	public HwlocCPUSet cpuset_from_nodeset(HwlocNodeSet nodeset) {
 		long handler = jhwloc_cpuset_from_nodeset(nodeset);
-		
+
 		if (handler == -1)
 			return null;
-		
+
 		return new HwlocCPUSet(handler); 
 	}
-	
+
 	/**
 	 * Convert a CPU set into a NUMA node set and handle non-NUMA cases.
 	 * <p>
@@ -1195,13 +1196,39 @@ public class HwlocTopology implements Cloneable {
 	 */
 	public HwlocNodeSet cpuset_to_nodeset(HwlocCPUSet cpuset) {
 		long handler = jhwloc_cpuset_to_nodeset(cpuset);
-		
+
 		if (handler == -1)
 			return null;
-		
-		return new HwlocNodeSet(handler); 
+
+		return new HwlocNodeSet(handler);
 	}
-	
+
+	/**
+	 * Find the depth of cache objects matching cache level and type.
+	 * 
+	 * <p>
+	 * Java binding of the hwloc operation <tt>hwloc_get_cache_type_depth()</tt>.	
+	 * 
+	 * @param cachelevel Cache level.
+	 * @param cachetype Cache object type.
+	 * @return Return the depth of the topology level that contains cache objects whose attributes 
+	 * match <tt>cachelevel</tt> and <tt>cachetype</tt>.
+	 * <p>
+	 * If no cache level matches, HWLOC.TYPE_DEPTH_UNKNOWN is returned.
+	 * <p>
+	 * If <tt>cachetype</tt> is HWLOC.OBJ_CACHE_UNIFIED, the depth of the unique matching unified 
+	 * cache level is returned.
+	 * <p>
+	 * If cachetype is HWLOC.OBJ_CACHE_DATA or HWLOC.OBJ_CACHE_INSTRUCTION, either a matching 
+	 * cache, or a unified cache is returned.
+	 * <p>
+	 * If cachetype is -1, it is ignored and multiple levels may match. The function returns either 
+	 * the depth of a uniquely matching level or HWLOC.TYPE_DEPTH_MULTIPLE. 
+	 */
+	public int get_cache_type_depth(int cachelevel, HwlocObjectCacheType cachetype) {
+		return jhwloc_get_cache_type_depth(cachelevel, HwlocObjectCacheType.GetType(cachetype));
+	}
+
 	static HwlocObject GetHwlocObject(HwlocObject rootHwlocObject, long handler) {
 		if (rootHwlocObject.getHandler() == handler)
 			return rootHwlocObject;
@@ -1290,4 +1317,5 @@ public class HwlocTopology implements Cloneable {
 	private native int jhwloc_set_proc_membind(int pid, HwlocBitmap bitmap, int membindpolicy, int flags);
 	private native long jhwloc_cpuset_from_nodeset(HwlocNodeSet nodeset);
 	private native long jhwloc_cpuset_to_nodeset(HwlocCPUSet cpuset);
+	private native int jhwloc_get_cache_type_depth(int cachelevel, int jhwloc_obj_cache_type);
 }

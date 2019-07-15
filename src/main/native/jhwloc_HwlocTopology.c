@@ -936,3 +936,25 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1cpuset_1to_
 
 	return (rc < 0)? -1 : (jlong) nodeset;
 }
+
+/*
+ * Class:     es_udc_gac_jhwloc_HwlocTopology
+ * Method:    jhwloc_get_cache_type_depth
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1cache_1type_1depth
+  (JNIEnv *env, jobject this, jint cachelevel, jint jhwloc_obj_cache_type)
+{
+	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	hwloc_obj_cache_type_t chwloc_obj_cache_type = GetHwlocObjectCacheTypeNative(env, jhwloc_obj_cache_type);
+
+	int rc = api.jhwloc_get_cache_type_depth(topo, cachelevel, chwloc_obj_cache_type);
+
+	if (rc == HWLOC_TYPE_DEPTH_UNKNOWN)
+		return GetHwlocObjectCacheTypeJava(env, HWLOC_TYPE_DEPTH_UNKNOWN);
+
+	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
+		return GetHwlocObjectCacheTypeJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);
+
+	return rc;
+}
