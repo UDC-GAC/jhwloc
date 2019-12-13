@@ -68,6 +68,8 @@ java -cp /path/to/jhwloc/lib/jhwloc-1.0.jar -Djava.library.path=/path/to/jhwloc/
 
 ## Authors
 
+The jhwloc library is developed in the [Computer Architecture Group](http://gac.udc.es/english) at the [Universidade da Coruña](https://www.udc.es/en) by:
+
 * **Roberto R. Expósito** (http://gac.udc.es/~rober)
 * **Jorge Veiga** (http://gac.udc.es/~jorge.veiga)
 * **Juan Touriño** (http://gac.udc.es/~juan)
