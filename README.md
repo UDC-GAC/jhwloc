@@ -4,6 +4,10 @@
 
 [http://www.open-mpi.org/projects/hwloc](http://www.open-mpi.org/projects/hwloc)
 
+## Documentation
+
+A complete Javadoc in HTML format detailing all the methods of the public hwloc API is available [here](http://gac.udc.es/~rober/jhwloc/javadoc).
+
 ## Getting Started
 
 ### Prerequisites
