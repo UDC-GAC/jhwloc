@@ -1,8 +1,6 @@
 # jhwloc: Java Hardware Locality library
 
-**jhwloc** is a Java wrapper for the Portable Hardware Locality (hwloc) library available at:
-
-[http://www.open-mpi.org/projects/hwloc](http://www.open-mpi.org/projects/hwloc)
+**jhwloc** is a Java wrapper for the [Portable Hardware Locality (hwloc)](http://www.open-mpi.org/projects/hwloc)
 
 ## Documentation
 
