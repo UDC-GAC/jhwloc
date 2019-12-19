@@ -6,7 +6,7 @@
 
 ## Documentation
 
-A complete Javadoc in HTML format detailing all the methods of the public hwloc API is available [here](http://gac.udc.es/~rober/jhwloc/javadoc).
+The complete Javadoc in HTML format that details all the methods of the public jhwloc API is available [here](http://gac.udc.es/~rober/jhwloc/javadoc).
 
 ## Getting Started
 
