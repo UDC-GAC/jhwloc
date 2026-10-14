@@ -24,6 +24,7 @@
 		<maven.javadoc.version>3.12.0</maven.javadoc.version>
 		<maven.jar.version>3.5.1</maven.jar.version>
 		<maven.surefire.version>3.6.0</maven.surefire.version>
+		<maven.source.version>3.4.0</maven.source.version>
 		<!-- JUnit 6 needs Java 17, and jhwloc is built for Java 8 -->
 		<junit.version>5.14.4</junit.version>
 		<native.path>./src/main/native/</native.path>
@@ -134,7 +135,29 @@
 				<configuration>
 					<outputDirectory>./lib</outputDirectory>
 			                <forceCreation>true</forceCreation>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<!-- Name of the module when the jar is in the module path, instead of one derived from the file name -->
+							<Automatic-Module-Name>es.udc.gac.jhwloc</Automatic-Module-Name>
+						</manifestEntries>
+					</archive>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven.source.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
