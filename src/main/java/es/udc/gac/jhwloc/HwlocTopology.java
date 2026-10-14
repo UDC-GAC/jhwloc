@@ -10,7 +10,7 @@ import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectType;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocTopologyFlags;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocTypeFilter;
 
-public class HwlocTopology implements Cloneable {
+public class HwlocTopology implements Cloneable, AutoCloseable {
 	private long handler;
 	private HwlocObject root;
 
@@ -68,10 +68,26 @@ public class HwlocTopology implements Cloneable {
 	 * Terminate and free a topology context.
 	 * <p>
 	 * Java binding of the hwloc operation <tt>hwloc_topology_destroy()</tt>.
+	 * <p>
+	 * It can be called more than once: a topology that was already destroyed (or
+	 * that was never initialized) is ignored.
 	 */
 	public void destroy() {
-		jhwloc_topology_destroy();
+		if(handler != 0) {
+			jhwloc_topology_destroy();
+			handler = 0;
+		}
+
 		this.root = null;
+	}
+
+	/**
+	 * Terminate and free a topology context, as <tt>destroy()</tt> does. It allows to
+	 * use a topology in a try-with-resources statement.
+	 */
+	@Override
+	public void close() {
+		destroy();
 	}
 
 	/**

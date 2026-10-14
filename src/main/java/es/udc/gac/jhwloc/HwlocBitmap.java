@@ -198,9 +198,16 @@ public class HwlocBitmap implements Cloneable {
 	 * Free the C memory allocated by this bitmap.
 	 * <p>
 	 * Java binding of the hwloc operation <tt>hwloc_bitmap_free()</tt>.
+	 * <p>
+	 * It can be called more than once, the memory is only freed the first time. Only
+	 * bitmaps that were allocated by the user have to be freed: the ones that belong to
+	 * the topology (e.g. <tt>HwlocObject.getCPUSet()</tt>) must not be.
 	 */
 	public void free() {
-		jhwloc_bitmap_free();
+		if(handler != -1 && handler != 0) {
+			jhwloc_bitmap_free();
+			handler = -1;
+		}
 	}
 
 	/**
