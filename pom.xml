@@ -79,6 +79,7 @@
 				<configuration>
 					<outputDirectory>${maven.javadoc.path}</outputDirectory>
 					<quiet>true</quiet>
+					<doclint>none</doclint>
 				</configuration>
 				<executions>
 					<execution>
