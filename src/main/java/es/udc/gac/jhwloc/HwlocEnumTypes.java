@@ -22,7 +22,7 @@ import java.util.EnumSet;
 
 public final class HwlocEnumTypes {
 
-	enum HwlocObjectType {
+	public enum HwlocObjectType {
 		/**
 		 * Machine. The root object type. A set of processors and memory with cache coherency.
 		 */
@@ -204,7 +204,7 @@ public final class HwlocEnumTypes {
 	private static final int OBJ_OS_DEVICE_TYPE = 16;
 	private static final int OBJ_MISC_TYPE = 17;
 
-	enum HwlocObjectCacheType {
+	public enum HwlocObjectCacheType {
 		/**
 		 * Unified cache.
 		 */
@@ -252,7 +252,7 @@ public final class HwlocEnumTypes {
 	private static final int OBJ_CACHE_DATA_TYPE = 101;
 	private static final int OBJ_CACHE_INSTRUCTION_TYPE = 102;
 
-	enum HwlocObjectBridgeType {
+	public enum HwlocObjectBridgeType {
 		/**
 		 * Host-side of a bridge, only possible upstream.
 		 */
@@ -293,7 +293,7 @@ public final class HwlocEnumTypes {
 	private static final int OBJ_BRIDGE_HOST_TYPE = 400;
 	private static final int OBJ_BRIDGE_PCI_TYPE = 401;
 
-	enum HwlocObjectOSDevType {
+	public enum HwlocObjectOSDevType {
 		/**
 		 * Operating system block device. For instance "sda" on Linux.
 		 */
@@ -367,7 +367,7 @@ public final class HwlocEnumTypes {
 	private static final int OBJ_OSDEV_DMA_TYPE = 504;
 	private static final int OBJ_OSDEV_COPROC_TYPE = 505;
 
-	enum HwlocTopologyFlags {
+	public enum HwlocTopologyFlags {
 		/**
 		 * Detect the whole system, ignore reservations.
 		 * <p>
@@ -469,7 +469,7 @@ public final class HwlocEnumTypes {
 	private static final int TOPOLOGY_FLAG_IS_THISSYSTEM_TYPE = 201;
 	private static final int TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES_TYPE = 202;
 
-	enum HwlocCPUBindFlags {
+	public enum HwlocCPUBindFlags {
 		/**
 		 * Bind all threads of the current (possibly) multithreaded process.
 		 */
@@ -565,7 +565,7 @@ public final class HwlocEnumTypes {
 	private static final int CPUBIND_STRICT_TYPE = 302;
 	private static final int CPUBIND_NOMEMBIND_TYPE = 303;
 
-	enum HwlocMEMBindFlags {
+	public enum HwlocMEMBindFlags {
 		/**
 		 * Set policy for all threads of the specified (possibly multithreaded) process.
 		 * <p>
@@ -744,7 +744,7 @@ public final class HwlocEnumTypes {
 	private static final int MEMBIND_NEXTTOUCH_TYPE = 504;
 	private static final int MEMBIND_MIXED_TYPE = 505;
 
-	enum HwlocCompareTypes {
+	public enum HwlocCompareTypes {
 		/**
 		 * Value returned by <tt>hwloc_compare_types()</tt> when types can not
 		 * be compared. 
@@ -777,7 +777,7 @@ public final class HwlocEnumTypes {
 	private static final int TYPE_UNKNOWN_TYPE = -7;
 	private static final int TYPE_UNORDERED_TYPE = 600;
 
-	enum HwlocTypeFilter {
+	public enum HwlocTypeFilter {
 		/**
 		 * Keep all objects of this type.
 		 * <p>
@@ -856,7 +856,7 @@ public final class HwlocEnumTypes {
 	private static final int TYPE_FILTER_KEEP_STRUCTURE_TYPE = 703;
 	private static final int TYPE_FILTER_KEEP_IMPORTANT_TYPE = 704;
 
-	enum HwlocGetTypeDepth {
+	public enum HwlocGetTypeDepth {
 		/**
 		 * Objects of given type exist at different depth in the topology (only for Groups).
 		 */
