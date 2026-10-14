@@ -10,11 +10,13 @@ The complete Javadoc in HTML format that details all the methods of the public j
 
 ### Prerequisites
 
-* Make sure you have Java Develpment Kit (JDK) version 1.7 or above
+* Make sure you have Java Development Kit (JDK) version 8 or above (the JNI headers are generated with `javac -h`, so `javah` is not needed)
   * JAVA_HOME environmental variable must be set accordingly
  
 * Make sure you have a working Apache Maven distribution version 3 or above
   * See [Installing Apache Maven](https://maven.apache.org/install.html)
+
+* Make sure you have a C compiler (e.g. gcc) and make installed
 
 * Make sure you have a working hwloc distribution version 2.0 or above
   * See [hwloc's Documentation](https://www.open-mpi.org/projects/hwloc/doc)
@@ -25,7 +27,7 @@ The complete Javadoc in HTML format that details all the methods of the public j
 In order to download, compile, build and install the jhwloc library in your Maven local repository (by default ~/.m2), just execute the following commands:
 
 ```
-git clone https://github.com/rreye/jhwloc.git
+git clone https://github.com/UDC-GAC/jhwloc.git
 cd jhwloc
 mvn install
 ```
