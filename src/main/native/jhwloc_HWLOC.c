@@ -52,7 +52,9 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HWLOC_jhwloc_1compare_1types
  (JNIEnv *env, jclass this, jint jhwloc_obj_type1, jint jhwloc_obj_type2)
 {
 	hwloc_obj_type_t chwloc_obj_type1 = GetHwlocObjectTypeNative(env, jhwloc_obj_type1);
+	RETURN_IF_EXCEPTION(env, -1);
 	hwloc_obj_type_t chwloc_obj_type2 = GetHwlocObjectTypeNative(env, jhwloc_obj_type2);
+	RETURN_IF_EXCEPTION(env, -1);
 
 	int rc = api.jhwloc_compare_types(chwloc_obj_type1, chwloc_obj_type2);
 

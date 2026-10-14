@@ -134,6 +134,14 @@ typedef struct jhwloc_api {
 
 void ThrowByName(JNIEnv *env, const char *name, const char *msg);
 void ThrowUnknownValue(JNIEnv *env, const char *what, long value);
+
+/*
+ * The functions that convert the values of the Java enums throw a HwlocException when
+ * they find an unknown value. Use this after calling them, so that an invalid value is
+ * not passed to hwloc. The value is ignored by the JVM when an exception is pending.
+ */
+#define RETURN_IF_EXCEPTION(env, value) \
+	do { if ((*(env))->ExceptionCheck(env)) return (value); } while (0)
 hwloc_obj_type_t GetHwlocObjectTypeNative(JNIEnv *env, int jhwloc_obj_type);
 int GetHwlocObjectTypeJava(JNIEnv *env, hwloc_obj_type_t type);
 hwloc_obj_cache_type_t GetHwlocObjectCacheTypeNative(JNIEnv *env, int jhwloc_obj_cache_type);

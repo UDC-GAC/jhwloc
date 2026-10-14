@@ -30,6 +30,7 @@ JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocObject_jhwloc_1obj_1type_1
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+	RETURN_IF_EXCEPTION(env, NULL);
 	const char *cad = NULL;
 
 	cad = api.jhwloc_obj_type_string(chwloc_obj_type);
@@ -46,6 +47,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocObject_jhwloc_1obj_1type_1is_
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+	RETURN_IF_EXCEPTION(env, -1);
 
 	return api.jhwloc_obj_type_is_normal(chwloc_obj_type);
 }
@@ -59,6 +61,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocObject_jhwloc_1obj_1type_1is_
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+	RETURN_IF_EXCEPTION(env, -1);
 
 	return api.jhwloc_obj_type_is_io(chwloc_obj_type);
 }
@@ -72,6 +75,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocObject_jhwloc_1obj_1type_1is_
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+	RETURN_IF_EXCEPTION(env, -1);
 
 	return api.jhwloc_obj_type_is_memory(chwloc_obj_type);
 }
@@ -85,6 +89,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocObject_jhwloc_1obj_1type_1is_
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+	RETURN_IF_EXCEPTION(env, -1);
 
 	return api.jhwloc_obj_type_is_cache(chwloc_obj_type);
 }
@@ -98,6 +103,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocObject_jhwloc_1obj_1type_1is_
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+	RETURN_IF_EXCEPTION(env, -1);
 
 	return api.jhwloc_obj_type_is_dcache(chwloc_obj_type);
 }
@@ -111,6 +117,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocObject_jhwloc_1obj_1type_1is_
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
+	RETURN_IF_EXCEPTION(env, -1);
 
 	return api.jhwloc_obj_type_is_icache(chwloc_obj_type);
 }
