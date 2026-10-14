@@ -19,11 +19,11 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Allocate a new empty bitmap.
 	 * <p>
-	 * The bitmap should be freed by a corresponding call to <tt>free()</tt>.
+	 * The bitmap should be freed by a corresponding call to {@code free()}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_alloc()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_alloc()}.
 	 *
-	 * @return A valid bitmap or <tt>null</tt>.
+	 * @return A valid bitmap or {@code null}.
 	 */
 	public static HwlocBitmap alloc() {
 		long rc = jhwloc_bitmap_alloc();
@@ -49,11 +49,11 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Allocate a new full bitmap.
 	 * <p>
-	 * The bitmap should be freed by a corresponding call to <tt>free()</tt>.
+	 * The bitmap should be freed by a corresponding call to {@code free()}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_alloc_full()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_alloc_full()}.
 	 *
-	 * @return A valid bitmap or <tt>null</tt>.
+	 * @return A valid bitmap or {@code null}.
 	 */
 	public static HwlocBitmap alloc_full() {
 		long rc = jhwloc_bitmap_alloc_full();
@@ -77,9 +77,9 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Copy the contents of bitmap <tt>src</tt> into the already allocated bitmap <tt>dst</tt>.
+	 * Copy the contents of bitmap {@code src} into the already allocated bitmap {@code dst}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_copy()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_copy()}.
 	 * 
 	 * @param dst Destination bitmap.
 	 * @param src Source bitmap.
@@ -90,9 +90,9 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Add index <tt>id</tt> in this bitmap.
+	 * Add index {@code id} in this bitmap.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_set()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_set()}.
 	 * 
 	 * @param id Index
 	 * @return 0 on success, -1 on error.
@@ -102,11 +102,11 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Add indexes from <tt>begin</tt> to <tt>end</tt> in this bitmap.
+	 * Add indexes from {@code begin} to {@code end} in this bitmap.
 	 * <p>
-	 * If <tt>end</tt> is -1, the range is infinite. 
+	 * If {@code end} is -1, the range is infinite. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_set_range()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_set_range()}.
 	 * 
 	 * @param begin Start index
 	 * @param end End index
@@ -117,9 +117,9 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Remove index <tt>id</tt> from this bitmap.
+	 * Remove index {@code id} from this bitmap.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_clr()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_clr()}.
 	 * 
 	 * @param id Index
 	 * @return 0 on success, -1 on error.
@@ -129,11 +129,11 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Remove indexes from <tt>begin</tt> to <tt>end</tt> in this bitmap.
+	 * Remove indexes from {@code begin} to {@code end} in this bitmap.
 	 * <p>
-	 * If <tt>end</tt> is -1, the range is infinite. 
+	 * If {@code end} is -1, the range is infinite. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_clr_range()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_clr_range()}.
 	 * 
 	 * @param begin Start index
 	 * @param end End index
@@ -144,9 +144,9 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Empty this bitmap bitmap and add bit <tt>id</tt>.
+	 * Empty this bitmap bitmap and add bit {@code id}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_only()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_only()}.
 	 * 
 	 * @param id Index
 	 * @return 0 on success, -1 on error.
@@ -156,9 +156,9 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Fill this bitmap and clear the index <tt>id</tt>.
+	 * Fill this bitmap and clear the index {@code id}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_allbut()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_allbut()}.
 	 * 
 	 * @param id Index
 	 * @return 0 on success, -1 on error.
@@ -168,9 +168,9 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Test whether bitmap <tt>sub_bitmap</tt> is part of bitmap <tt>super_bitmap</tt>.
+	 * Test whether bitmap {@code sub_bitmap} is part of bitmap {@code super_bitmap}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_isincluded()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_isincluded()}.
 	 * <p>
 	 * Note
 	 * <ul>
@@ -179,7 +179,7 @@ public class HwlocBitmap implements Cloneable {
 	 * 
 	 * @param sub_bitmap Sub bitmap.
 	 * @param super_bitmap Super bitmap.
-	 * @return <code>true</code> if <tt>sub_bitmap</tt> is part of <tt>super_bitmap</tt>,
+	 * @return <code>true</code> if {@code sub_bitmap} is part of {@code super_bitmap},
 	 * <code>false</code> instead.
 	 */
 	public static boolean isincluded(HwlocBitmap sub_bitmap, HwlocBitmap super_bitmap) {
@@ -194,11 +194,11 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Free the C memory allocated by this bitmap.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_free()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_free()}.
 	 * <p>
 	 * It can be called more than once, the memory is only freed the first time. Only
 	 * bitmaps that were allocated by the user have to be freed: the ones that belong to
-	 * the topology (e.g. <tt>HwlocObject.getCPUSet()</tt>) must not be.
+	 * the topology (e.g. {@code HwlocObject.getCPUSet()}) must not be.
 	 */
 	public void free() {
 		if(handler != -1 && handler != 0) {
@@ -210,9 +210,9 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Duplicate this bitmap by allocating a new bitmap and copying bitmap contents.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_dup()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_dup()}.
 	 *
-	 * @return A copy of this bitmap object or <tt>null</tt>.
+	 * @return A copy of this bitmap object or {@code null}.
 	 */
 	@Override
 	public Object clone() {
@@ -237,7 +237,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Stringify this bitmap into a newly allocated string.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_asprintf()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_asprintf()}.
 	 *
 	 * @return The string representation.
 	 */
@@ -249,7 +249,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Stringify a bitmap into a newly allocated list string.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_list_asprintf()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_list_asprintf()}.
 	 *
 	 * @return The list string representation.
 	 */
@@ -260,7 +260,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Stringify a bitmap into a newly allocated taskset-specific string.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_taskset_asprintf()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_taskset_asprintf()}.
 	 *
 	 * @return The taskset-specific string representation.
 	 */
@@ -269,12 +269,12 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * <tt>OR</tt> this bitmap object and <tt>bitmap</tt>.
+	 * {@code OR} this bitmap object and {@code bitmap}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_or()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_or()}.
 	 *
-	 * @param bitmap Bitmap with which to perform the <tt>OR</tt> operation.
-	 * @return The bitmap result of the <tt>OR</tt> operation.
+	 * @param bitmap Bitmap with which to perform the {@code OR} operation.
+	 * @return The bitmap result of the {@code OR} operation.
 	 */
 	public HwlocBitmap or(HwlocBitmap bitmap) {
 		long handler = jhwloc_bitmap_or(bitmap);
@@ -282,12 +282,12 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * <tt>AND</tt> this bitmap object and <tt>bitmap</tt>.
+	 * {@code AND} this bitmap object and {@code bitmap}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_and()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_and()}.
 	 *
-	 * @param bitmap Bitmap with which to perform the <tt>AND</tt> operation.
-	 * @return The bitmap result of the <tt>AND</tt> operation.
+	 * @param bitmap Bitmap with which to perform the {@code AND} operation.
+	 * @return The bitmap result of the {@code AND} operation.
 	 */
 	public HwlocBitmap and(HwlocBitmap bitmap) {
 		long handler = jhwloc_bitmap_and(bitmap);
@@ -295,12 +295,12 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * <tt>AND</tt> this bitmap object and the NEGATION of <tt>bitmap</tt>.
+	 * {@code AND} this bitmap object and the NEGATION of {@code bitmap}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_andnot()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_andnot()}.
 	 *
-	 * @param bitmap Bitmap with which to perform the <tt>ANDNOT</tt> operation.
-	 * @return The bitmap result of the <tt>ANDNOT</tt> operation.
+	 * @param bitmap Bitmap with which to perform the {@code ANDNOT} operation.
+	 * @return The bitmap result of the {@code ANDNOT} operation.
 	 */
 	public HwlocBitmap andnot(HwlocBitmap bitmap) {
 		long handler = jhwloc_bitmap_andnot(bitmap);
@@ -308,12 +308,12 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * <tt>XOR</tt> this bitmap object and <tt>bitmap</tt>.
+	 * {@code XOR} this bitmap object and {@code bitmap}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_xor()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_xor()}.
 	 *
-	 * @param bitmap Bitmap with which to perform the <tt>XOR</tt> operation.
-	 * @return The bitmap result of the <tt>XOR</tt> operation.
+	 * @param bitmap Bitmap with which to perform the {@code XOR} operation.
+	 * @return The bitmap result of the {@code XOR} operation.
 	 */
 	public HwlocBitmap xor(HwlocBitmap bitmap) {
 		long handler = jhwloc_bitmap_xor(bitmap);
@@ -321,11 +321,11 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * <tt>NEGATE</tt> this bitmap object.
+	 * {@code NEGATE} this bitmap object.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_not()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_not()}.
 	 *
-	 * @return The bitmap result of the <tt>NOT</tt> operation.
+	 * @return The bitmap result of the {@code NOT} operation.
 	 */
 	public HwlocBitmap not() {
 		long handler = jhwloc_bitmap_not();
@@ -338,7 +338,7 @@ public class HwlocBitmap implements Cloneable {
 	 * May be useful before binding so that the process does not have a 
 	 * chance of migrating between multiple logical CPUs in the original mask.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_singlify()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_singlify()}.
 	 * 
 	 * @return 0 on success, -1 on error.
 	 */
@@ -347,12 +347,12 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Test whether this bitmap object and <tt>bitmap</tt> intersects.
+	 * Test whether this bitmap object and {@code bitmap} intersects.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_intersects()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_intersects()}.
 	 *
 	 * @param bitmap Bitmap with which to test intersection.
-	 * @return <code>true</code> if this bitmap intersect with <tt>bitmap</tt>,
+	 * @return <code>true</code> if this bitmap intersect with {@code bitmap},
 	 * <code>false</code> instead.
 	 */
 	public boolean intersects(HwlocBitmap bitmap) {
@@ -366,12 +366,12 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Test whether this bitmap object is equal to <tt>bitmap</tt>.
+	 * Test whether this bitmap object is equal to {@code bitmap}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_isequal()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_isequal()}.
 	 *
 	 * @param bitmap Bitmap with which to test equality.
-	 * @return <code>true</code> if this bitmap is equals to <tt>bitmap</tt>,
+	 * @return <code>true</code> if this bitmap is equals to {@code bitmap},
 	 * <code>false</code> instead.
 	 */
 	@Override
@@ -395,13 +395,13 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Compare this bitmap object and <tt>bitmap</tt> in lexicographic order.
+	 * Compare this bitmap object and {@code bitmap} in lexicographic order.
 	 * <p>
 	 * Lexicographic comparison of bitmaps, starting for their highest indexes.  Compare
 	 * last indexes first, then second, etc. The empty bitmap is considered lower than
 	 * anything.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_compare()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_compare()}.
 	 * 
 	 * @param bitmap Bitmap with which to perform the comparison.
 	 * @return Result of the comparison.
@@ -411,11 +411,11 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Compare this bitmap object and <tt>bitmap</tt> using their lowest index.
+	 * Compare this bitmap object and {@code bitmap} using their lowest index.
 	 * <p>
 	 * Smaller least significant bit is smaller. The empty bitmap is considered higher than anything.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_compare_first()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_compare_first()}.
 	 * 
 	 * @param bitmap Bitmap with which to perform the comparison.
 	 * @return Result of the comparison.
@@ -427,7 +427,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Empty this bitmap.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_zero()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_zero()}.
 	 */
 	public void zero() {
 		jhwloc_bitmap_zero();
@@ -436,19 +436,19 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Fill this bitmap with all possible indexes (even if those objects don’t exist or are otherwise unavailable).
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_fill()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_fill()}.
 	 */
 	public void fill() {
 		jhwloc_bitmap_fill();
 	}
 
 	/**
-	 * Test whether index <tt>id</tt> is part of this bitmap.
+	 * Test whether index {@code id} is part of this bitmap.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_isset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_isset()}.
 	 * 
 	 * @param id Index
-	 * @return <code>true</code> if <tt>id</tt> is part of this bitmap,
+	 * @return <code>true</code> if {@code id} is part of this bitmap,
 	 * <code>false</code> instead.
 	 */
 	public boolean isset(int id) {
@@ -463,7 +463,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Test whether this bitmap is empty.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_iszero()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_iszero()}.
 	 *
 	 * @return <code>true</code> if this bitmap is empty, <code>false</code> instead.
 	 */
@@ -479,7 +479,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Test whether this bitmap is completely full.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_isfull()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_isfull()}.
 	 *
 	 * @return <code>true</code> if this bitmap is completely full, <code>false</code> instead.
 	 */
@@ -495,7 +495,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Compute the first index (least significant bit) in this bitmap. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_first()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_first()}.
 	 * 
 	 * @return -1 if no index is set.
 	 */
@@ -506,7 +506,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Compute the first unset index (least significant bit) in this bitmap. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_first_unset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_first_unset()}.
 	 * 
 	 * @return -1 if no index is unset.
 	 */
@@ -517,7 +517,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Compute the last index (most significant bit) in this bitmap. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_last()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_last()}.
 	 * 
 	 * @return -1 if no index is set or if this bitmap is infinitely set.
 	 */
@@ -528,7 +528,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Compute the last unset index (most significant bit) in this bitmap. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_last_unset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_last_unset()}.
 	 * 
 	 * @return -1 if no index is unset or if this bitmap is infinitely set.
 	 */
@@ -537,11 +537,11 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Compute the next index in this bitmap which is after index <tt>prev</tt>.
+	 * Compute the next index in this bitmap which is after index {@code prev}.
 	 * <p>
-	 * If <tt>prev</tt> is -1, the first index is returned. 
+	 * If {@code prev} is -1, the first index is returned. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_next()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_next()}.
 	 * 
 	 * @param prev Previous index
 	 * @return -1 no index with higher index is set.
@@ -551,11 +551,11 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Compute the next unset index in this bitmap which is after index <tt>prev</tt>.
+	 * Compute the next unset index in this bitmap which is after index {@code prev}.
 	 * <p>
-	 * If <tt>prev</tt> is -1, the first unset index is returned. 
+	 * If {@code prev} is -1, the first unset index is returned. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_next_unset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_next_unset()}.
 	 * 
 	 * @param prev Previous index
 	 * @return -1 no index with higher index is unset.
@@ -567,7 +567,7 @@ public class HwlocBitmap implements Cloneable {
 	/**
 	 * Compute the "weight" of this bitmap. 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_weight()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_weight()}.
 	 * 
 	 * @return The number of indexes that are in this bitmap or -1 if this bitmap
 	 * is infinitely set.

@@ -362,14 +362,14 @@ public final class HwlocEnumTypes {
 		 * Assume that the selected backend provides the topology for the system on
 		 * which we are running.
 		 * <p>
-		 * This forces <tt>is_thissystem()</tt> to return 1, i.e. makes hwloc assume
+		 * This forces {@code is_thissystem()} to return 1, i.e. makes hwloc assume
 		 * that the selected backend provides the topology for the system on which we
 		 * are running, even if it is not the OS-specific backend but the XML backend
 		 * for instance. This means making the binding functions actually call the
 		 * OS-specific system calls and really do binding, while the XML backend would
 		 * otherwise provide empty hooks just returning success.
 		 * <p>
-		 * Setting the environment variable <tt>HWLOC_THISSYSTEM</tt> may also result in
+		 * Setting the environment variable {@code HWLOC_THISSYSTEM} may also result in
 		 * the same behavior.
 		 * <p>
 		 * This can be used for efficiency reasons to first detect the topology once, save
@@ -652,7 +652,7 @@ public final class HwlocEnumTypes {
 		/**
 		 * Allocate each memory page individually on the local NUMA node of the thread that touches it.
 		 * <p>
-		 * The given nodeset should usually be <tt>get_topology_nodeset()</tt> so that 
+		 * The given nodeset should usually be {@code get_topology_nodeset()} so that 
 		 * the touching thread may run and allocate on any node in the system. On AIX, if the nodeset is
 		 * smaller, pages are allocated locally (if the local node is in the nodeset) or from a random
 		 * non-local node (otherwise).
@@ -677,7 +677,7 @@ public final class HwlocEnumTypes {
 		 */		
 		HWLOC_MEMBIND_NEXTTOUCH,
 		/**
-		 * Returned by <tt>get_membind()</tt> functions when multiple threads or parts of a memory area have 
+		 * Returned by {@code get_membind()} functions when multiple threads or parts of a memory area have 
 		 * differing memory binding policies. Also returned when binding is unknown because binding hooks are
 		 * empty when the topology is loaded from XML without HWLOC_THISSYSTEM=1, etc.
 		 */		

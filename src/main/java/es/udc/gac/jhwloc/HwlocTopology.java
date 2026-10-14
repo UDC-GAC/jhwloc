@@ -30,7 +30,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Allocate a topology context.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_init()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_init()}.
 	 *
 	 * @return 0 on success, -1 on error.
 	 */
@@ -39,15 +39,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Build the actual topology once initialized with <tt>init()</tt>. No other routine may 
+	 * Build the actual topology once initialized with {@code init()}. No other routine may 
 	 * be called earlier using this topology.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_load()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_load()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>On failure, the topology is reinitialized. It should be either destroyed with 
-	 * <tt>destroy()</tt> or configured and loaded again.
+	 * {@code destroy()} or configured and loaded again.
 	 * <li>This function may be called only once per topology.
 	 * <li>The binding of the current thread or process may temporarily change during this
 	 * call but it will be restored before it returns.
@@ -67,11 +67,11 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Terminate and free a topology context.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_destroy()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_destroy()}.
 	 * <p>
 	 * It can be called more than once: a topology that was already destroyed (or
 	 * that was never initialized) is ignored. The other methods of a topology that is
-	 * not initialized or was destroyed throw an <tt>IllegalStateException</tt>.
+	 * not initialized or was destroyed throw an {@code IllegalStateException}.
 	 */
 	public void destroy() {
 		if(handler != 0) {
@@ -83,7 +83,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Terminate and free a topology context, as <tt>destroy()</tt> does. It allows to
+	 * Terminate and free a topology context, as {@code destroy()} does. It allows to
 	 * use a topology in a try-with-resources statement.
 	 */
 	@Override
@@ -102,7 +102,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * If all libraries/programs use the same hwloc installation, this function
 	 * always returns success.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_abi_check()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_abi_check()}.
 	 * 
 	 * @return 0 on success, -1 on error.
 	 */
@@ -114,12 +114,12 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * Run internal checks on a topology structure. The program aborts if an inconsistency 
 	 * is detected in the given topology.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_check()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_check()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>This routine is only useful to developers.
-	 * <li>The input topology should have been previously loaded with <tt>load()</tt>.
+	 * <li>The input topology should have been previously loaded with {@code load()}.
 	 * </ul>
 	 */
 	public void check() {
@@ -133,9 +133,9 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * <p>
 	 * This is useful for keeping a backup while modifying a topology.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_dup()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_dup()}.
 	 *
-	 * @return A copy of this topology object or <tt>null</tt>.
+	 * @return A copy of this topology object or {@code null}.
 	 */
 	@Override
 	public Object clone() {
@@ -160,7 +160,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get the depth of the hierarchical tree of objects.
 	 * <p>
-	 * This is the depth of <tt>HWLOC.OBJ_PU</tt> objects plus one.
+	 * This is the depth of {@code HWLOC.OBJ_PU} objects plus one.
 	 * <p>
 	 * Note
 	 * <ul>
@@ -168,7 +168,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * depth of the tree (they are placed on special levels).
 	 * </ul>
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_depth()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_depth()}.
 	 *
 	 * @return The depth of the hierarchical tree of objects.
 	 */
@@ -179,7 +179,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Does the topology context come from this system?
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_is_thissystem()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_is_thissystem()}.
 	 *
 	 * @return <code>true</code> if this topology was built using the system running 
 	 * this program, <code>false</code> instead (for instance if using another file-system 
@@ -195,11 +195,11 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Get OR'ed flags of <tt>HwlocTopologyFlag</tt> on this topology.
+	 * Get OR'ed flags of {@code HwlocTopologyFlag} on this topology.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_flags()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_flags()}.
 	 *
-	 * @return the flags previously set with <tt>set_flags()</tt>.
+	 * @return the flags previously set with {@code set_flags()}.
 	 */
 	public EnumSet<HwlocTopologyFlags> get_flags() {
 		long flags = jhwloc_topology_get_flags();
@@ -207,15 +207,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the type of objects at depth <tt>depth</tt>.
+	 * Returns the type of objects at depth {@code depth}.
 	 * <p>
-	 * Note that <tt>depth</tt> should between 0 and <tt>get_depth()</tt>-1.
+	 * Note that {@code depth} should between 0 and {@code get_depth()}-1.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_depth_type()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_depth_type()}.
 	 * 
 	 * @param depth Depth.
-	 * @return The type of objects at depth <tt>depth</tt> or <tt>null</tt> if
-	 * depth <tt>depth</tt> does not exist.
+	 * @return The type of objects at depth {@code depth} or {@code null} if
+	 * depth {@code depth} does not exist.
 	 */
 	public HwlocObjectType get_depth_type(int depth) {
 		int type = jhwloc_get_depth_type(depth);
@@ -227,24 +227,24 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the depth of objects of type <tt>type</tt>.
+	 * Returns the depth of objects of type {@code type}.
 	 * <p> 
-	 * Java binding of the hwloc operation <tt>hwloc_get_type_depth()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_type_depth()}.
 	 *
 	 * @param type Object type.
-	 * @return the depth of objects of type <tt>type</tt>. If no object of this type is
+	 * @return the depth of objects of type {@code type}. If no object of this type is
 	 * present on the underlying architecture, or if the OS doesn't provide this kind
 	 * of information, the function returns HWLOC.TYPE_DEPTH_UNKNOWN.
 	 * <p>
-	 * If type is absent but a similar type is acceptable, see also <tt>get_type_or_below_depth()</tt>
-	 * and <tt>get_type_or_above_depth()</tt>.
+	 * If type is absent but a similar type is acceptable, see also {@code get_type_or_below_depth()}
+	 * and {@code get_type_or_above_depth()}.
 	 * <p>
 	 * If HWLOC.OBJ_GROUP is given, the function may return HWLOC.TYPE_DEPTH_MULTIPLE
 	 * if multiple levels of Groups exist.
 	 * <p>
 	 * If a NUMA node, I/O or Misc object type is given, the function returns a virtual
 	 * value because these objects are stored in special levels that are not CPU-related.
-	 * This virtual depth may be passed to other hwloc functions such as <tt>get_obj_by_depth()</tt>
+	 * This virtual depth may be passed to other hwloc functions such as {@code get_obj_by_depth()}
 	 * but it should not be considered as an actual depth by the application. In particular,
 	 * it should not be compared with any other object depth or with the entire topology depth.
 	 */
@@ -253,78 +253,78 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the depth of objects of type <tt>type</tt> or above.
+	 * Returns the depth of objects of type {@code type} or above.
 	 * <p> 
-	 * Java binding of the hwloc operation <tt>hwloc_get_type_or_above_depth()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_type_or_above_depth()}.
 	 *
 	 * @param type Object type.
-	 * @return the depth of objects of type <tt>type</tt> or above. If no object of this type is
+	 * @return the depth of objects of type {@code type} or above. If no object of this type is
 	 * present on the underlying architecture, the function returns the depth of the first
-	 * "present" object typically containing <tt>type</tt>.
+	 * "present" object typically containing {@code type}.
 	 * <p>
 	 * This function is only meaningful for normal object types.  If a memory, I/O or Misc 
-	 * object type is given, the corresponding virtual depth is always returned (see <tt>get_type_depth()</tt>).
+	 * object type is given, the corresponding virtual depth is always returned (see {@code get_type_depth()}).
 	 * <p>
-	 * May return HWLOC.TYPE_DEPTH_MULTIPLE for HWLOC.OBJ_GROUP just like <tt>get_type_depth()</tt>.
+	 * May return HWLOC.TYPE_DEPTH_MULTIPLE for HWLOC.OBJ_GROUP just like {@code get_type_depth()}.
 	 */
 	public int get_type_or_above_depth(HwlocObjectType type) {
 		return jhwloc_get_type_or_above_depth(HwlocObjectType.GetType(type));
 	}
 
 	/**
-	 * Returns the depth of objects of type <tt>type</tt> or below.
+	 * Returns the depth of objects of type {@code type} or below.
 	 * <p> 
-	 * Java binding of the hwloc operation <tt>hwloc_get_type_or_below_depth()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_type_or_below_depth()}.
 	 *
 	 * @param type Object type.
-	 * @return the depth of objects of type <tt>type</tt> or below. If no object of this type is
+	 * @return the depth of objects of type {@code type} or below. If no object of this type is
 	 * present on the underlying architecture, the function returns the depth of the first
-	 * "present" object typically found inside <tt>type</tt>.
+	 * "present" object typically found inside {@code type}.
 	 * <p>
 	 * This function is only meaningful for normal object types.  If a memory, I/O or Misc 
-	 * object type is given, the corresponding virtual depth is always returned (see <tt>get_type_depth()</tt>).
+	 * object type is given, the corresponding virtual depth is always returned (see {@code get_type_depth()}).
 	 * <p>
-	 * May return HWLOC.TYPE_DEPTH_MULTIPLE for HWLOC.OBJ_GROUP just like <tt>get_type_depth()</tt>.
+	 * May return HWLOC.TYPE_DEPTH_MULTIPLE for HWLOC.OBJ_GROUP just like {@code get_type_depth()}.
 	 */
 	public int get_type_or_below_depth(HwlocObjectType type) {
 		return jhwloc_get_type_or_below_depth(HwlocObjectType.GetType(type));
 	}
 
 	/**
-	 * Returns the width of level type <tt>type</tt>.
+	 * Returns the width of level type {@code type}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_nbobjs_by_type()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_nbobjs_by_type()}.
 	 *
 	 * @param type Object type.
-	 * @return If no object for that <tt>type</tt> exists, 0 is returned. If there are several 
-	 * levels with objects of that <tt>type</tt>, -1 is returned.
+	 * @return If no object for that {@code type} exists, 0 is returned. If there are several 
+	 * levels with objects of that {@code type}, -1 is returned.
 	 */
 	public int get_nbobjs_by_type(HwlocObjectType type) {
 		return jhwloc_get_nbobjs_by_type(HwlocObjectType.GetType(type));
 	}
 
 	/**
-	 * Returns the width of level at depth <tt>depth</tt>.
+	 * Returns the width of level at depth {@code depth}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_nbobjs_by_depth()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_nbobjs_by_depth()}.
 	 * 
 	 * @param depth Depth.
-	 * @return -1 if depth <tt>depth</tt> does not exist.
+	 * @return -1 if depth {@code depth} does not exist.
 	 */
 	public int get_nbobjs_by_depth(int depth){
 		return jhwloc_get_nbobjs_by_depth(depth);
 	}
 
 	/**
-	 * Returns the topology object at logical index <tt>idx</tt> with type <tt>type</tt>.
+	 * Returns the topology object at logical index {@code idx} with type {@code type}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_obj_by_type()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_get_obj_by_type()}.	
 	 *
 	 * @param type Object type.
 	 * @param idx Logical index.
-	 * @return If no object for that <tt>type</tt> exists, <tt>null</tt> is returned. If
-	 * there are several levels with objects of that <tt>type</tt> (HWLOC.OBJ_GROUP),
-	 * <tt>null</tt> is returned and the caller may fallback to <tt>get_obj_by_depth()</tt>.
+	 * @return If no object for that {@code type} exists, {@code null} is returned. If
+	 * there are several levels with objects of that {@code type} (HWLOC.OBJ_GROUP),
+	 * {@code null} is returned and the caller may fallback to {@code get_obj_by_depth()}.
 	 */
 	public HwlocObject get_obj_by_type(HwlocObjectType type, int idx){
 		long handler = jhwloc_get_obj_by_type(HwlocObjectType.GetType(type), idx);
@@ -336,13 +336,13 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the topology object at logical index <tt>idx</tt> from depth <tt>depth</tt>.
+	 * Returns the topology object at logical index {@code idx} from depth {@code depth}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_obj_by_depth()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_obj_by_depth()}.
 	 *
 	 * @param depth Depth.
 	 * @param idx Logical index.
-	 * @return If no object for that index and depth exists, <tt>null</tt> is returned. 
+	 * @return If no object for that index and depth exists, {@code null} is returned. 
 	 */
 	public HwlocObject get_obj_by_depth(int depth, int idx) {
 		long handler = jhwloc_get_obj_by_depth(depth, idx);
@@ -356,9 +356,9 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Export the topology into an XML file.
 	 * <p>
-	 * This file may be loaded later through <tt>set_xml()</tt>.
+	 * This file may be loaded later through {@code set_xml()}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_export_xml()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_export_xml()}.
 	 * 
 	 * @param xmlpath Path to XML file.
 	 * @return 0 on success, -1 on error.
@@ -372,12 +372,12 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * <p>
 	 * Gather topology information from the XML file given at xmlpath. Setting the environment variable 
 	 * HWLOC_XML-FILE may also result in this behavior. This file may have been generated earlier with 
-	 * <tt>export_xml()</tt> or lstopo file.xml.
+	 * {@code export_xml()} or lstopo file.xml.
 	 * <p>
 	 * Note that this method does not actually load topology information; it just tells hwloc where 
-	 * to load it from. You’ll still need to invoke <tt>load()</tt> to actually load the topology information.
+	 * to load it from. You’ll still need to invoke {@code load()} to actually load the topology information.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_xml()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_xml()}.
 	 *
 	 * @param xmlpath Path to XML file.
 	 * @return 0 on success, -1 on error.
@@ -389,11 +389,11 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Export the topology as a synthetic string.
 	 * <p>
-	 * The exported string may be given back to <tt>set_synthetic()</tt>.
+	 * The exported string may be given back to {@code set_synthetic()}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_export_synthetic()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_export_synthetic()}.
 	 * 
-	 * @return The string representing the topology or <tt>null</tt> if the topology could not be 
+	 * @return The string representing the topology or {@code null} if the topology could not be 
 	 * exported, for instance if it is not symmetric.
 	 */
 	public String export_synthetic() {
@@ -411,15 +411,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * Setting the environment variable HWLOC_SYNTHETIC may also result in this behavior.
 	 * <p>
 	 * Note that this method does not actually load topology information; it just tells hwloc where 
-	 * to load it from. You’ll still need to invoke <tt>load()</tt> to actually load the topology information.
+	 * to load it from. You’ll still need to invoke {@code load()} to actually load the topology information.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_synthetic()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_synthetic()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>For convenience, this backend provides empty binding hooks which just return success.
 	 * <li>On success, the synthetic component replaces the previously enabled component (if any), but
-	 * the topology is not actually modified until <tt>load()</tt>. 
+	 * the topology is not actually modified until {@code load()}. 
 	 * </ul>
 	 * 
 	 * @param description String that describes the topology configuration.
@@ -435,12 +435,12 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * <p>
 	 * On some systems, processes may have different views of the machine, for instance the set
 	 * of allowed CPUs. By default, hwloc exposes the view from the current process. Calling
-	 * <tt>set_pid()</tt> permits to make it expose the topology of the machine from the point
+	 * {@code set_pid()} permits to make it expose the topology of the machine from the point
 	 * of view of another process.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_pid()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_pid()}.
 	 * 
-	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param pid {@code pid_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @return 0 on success, -1 on error.
 	 */
 	public int set_pid(int pid) {
@@ -448,16 +448,16 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Set OR'ed flags of <tt>HwlocTopologyFlags</tt> to this non-yet-loaded topology.
+	 * Set OR'ed flags of {@code HwlocTopologyFlags} to this non-yet-loaded topology.
 	 * <p>
 	 * If this function is called multiple times, the last invocation will erase and replace the 
 	 * set of flags that was previously set.
 	 * <p>
-	 * The flags set in the topology may be retrieved with <tt>get_flags()</tt>.
+	 * The flags set in the topology may be retrieved with {@code get_flags()}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_flags()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_flags()}.
 	 *
-	 * @param flags OR'ed flags of <tt>HwlocTopologyFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocTopologyFlags}.
 	 * @return 0 on success, -1 on error.
 	 */
 	public int set_flags(EnumSet<HwlocTopologyFlags> flags) {
@@ -467,11 +467,11 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Returns the top-object of the topology-tree.
 	 * <p>
-	 * Its type is <tt>HWLOC.OBJ_MACHINE</tt>.
+	 * Its type is {@code HWLOC.OBJ_MACHINE}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_root_obj()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_root_obj()}.
 	 *
-	 * @return The top-object of the topology-tree or <tt>null</tt>.
+	 * @return The top-object of the topology-tree or {@code null}.
 	 */
 	public HwlocObject get_root_obj() {
 		if(this.root != null)
@@ -483,13 +483,13 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the next object at depth <tt>depth</tt>.
+	 * Returns the next object at depth {@code depth}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_next_obj_by_depth()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_next_obj_by_depth()}.
 	 * 
 	 * @param depth Depth.
 	 * @param prev Previous object.
-	 * @return If <tt>prev</tt> is <tt>null</tt>, return the first object at depth <tt>depth</tt>.
+	 * @return If {@code prev} is {@code null}, return the first object at depth {@code depth}.
 	 */
 	public HwlocObject get_next_obj_by_depth(int depth, HwlocObject prev){
 		long handler = jhwloc_get_next_obj_by_depth(depth, prev);
@@ -501,15 +501,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the next object of type <tt>type</tt>.
+	 * Returns the next object of type {@code type}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_next_obj_by_type()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_next_obj_by_type()}.
 	 *
 	 * @param type Object type.
 	 * @param prev Previous object.
-	 * @return If <tt>prev</tt> is <tt>null</tt>, return the first object at type <tt>type</tt>. If 
-	 * there are multiple or no depth for given type, return <tt>null</tt> and let the caller fallback 
-	 * to <tt>get_next_obj_by_depth()</tt>.
+	 * @return If {@code prev} is {@code null}, return the first object at type {@code type}. If 
+	 * there are multiple or no depth for given type, return {@code null} and let the caller fallback 
+	 * to {@code get_next_obj_by_depth()}.
 	 */
 	public HwlocObject get_next_obj_by_type(HwlocObjectType type, HwlocObject prev) {
 		long handler = jhwloc_get_next_obj_by_type(HwlocObjectType.GetType(type), prev);
@@ -521,17 +521,17 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the object of type HWLOC.OBJ_NUMANODE with <tt>os_index</tt>.
+	 * Returns the object of type HWLOC.OBJ_NUMANODE with {@code os_index}.
 	 * <p>
 	 * This function is useful for converting a nodeset into the NUMA node objects it 
-	 * contains. When retrieving the current binding (e.g.  with <tt>get_membind()</tt> with
+	 * contains. When retrieving the current binding (e.g.  with {@code get_membind()} with
 	 * HWLOC.MEMBIND_BYNODESET), one may iterate over the bits of the resulting nodeset and
 	 * find the corresponding NUMA nodes with this function.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_numanode_obj_by_os_index()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_numanode_obj_by_os_index()}.
 	 * 
 	 * @param os_index OS index.
-	 * @return Return the object of type HWLOC.OBJ_NUMANODE with <tt>os_index</tt> or <tt>null</tt>
+	 * @return Return the object of type HWLOC.OBJ_NUMANODE with {@code os_index} or {@code null}
 	 * otherwise.
 	 */
 	public HwlocObject get_numanode_obj_by_os_index(int os_index) {
@@ -544,17 +544,17 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Returns the object of type HWLOC.OBJ_PU with <tt>os_index</tt>.
+	 * Returns the object of type HWLOC.OBJ_PU with {@code os_index}.
 	 * <p>
 	 * This function is useful for converting a CPU set into the PU objects it contains
-	 *  When retrieving the current binding (e.g. with <tt>get_cpubind()</tt>), one may
+	 *  When retrieving the current binding (e.g. with {@code get_cpubind()}), one may
 	 *  iterate over the bits of the resulting CPU set and find the corresponding PUs with
 	 *  this function.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_pu_obj_by_os_index()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_pu_obj_by_os_index()}.
 	 * 
 	 * @param os_index OS index.
-	 * @return Return the object of type HWLOC.OBJ_PU with <tt>os_index</tt> or <tt>null</tt>
+	 * @return Return the object of type HWLOC.OBJ_PU with {@code os_index} or {@code null}
 	 * otherwise.
 	 */
 	public HwlocObject get_pu_obj_by_os_index(int os_index) {
@@ -567,12 +567,12 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Bind current process or thread on CPUs given in physical <tt>cpuset</tt>.
+	 * Bind current process or thread on CPUs given in physical {@code cpuset}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_set_cpubind()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_set_cpubind()}.
 	 * 
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @throws HwlocException if the action is not supported or the binding cannot be enforced.
 	 */
 	public void set_cpubind(HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) throws HwlocException {
@@ -595,13 +595,13 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Bind a process <tt>pid</tt> on CPUs given in physical <tt>cpuset</tt>.
+	 * Bind a process {@code pid} on CPUs given in physical {@code cpuset}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_set_proc_cpubind()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_set_proc_cpubind()}.
 	 * 
-	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param pid {@code pid_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @throws HwlocException if the action is not supported or the binding cannot be enforced.
 	 */
 	public void set_proc_cpubind(int pid, HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) throws HwlocException {
@@ -624,13 +624,13 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Bind a thread <tt>thread</tt> on CPUs given in physical <tt>cpuset</tt>.
+	 * Bind a thread {@code thread} on CPUs given in physical {@code cpuset}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_set_thread_cpubind()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_set_thread_cpubind()}.
 	 * 
-	 * @param tid <tt>pthread_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param tid {@code pthread_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @throws HwlocException if the action is not supported or the binding cannot be enforced.
 	 */
 	public void set_thread_cpubind(int tid, HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) throws HwlocException {
@@ -655,13 +655,13 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get current process or thread binding.
 	 * <p>
-	 * Writes into <tt>cpuset</tt> the physical cpuset which the process or thread (according to
-	 * <tt>flags</tt>) was last bound to.
+	 * Writes into {@code cpuset} the physical cpuset which the process or thread (according to
+	 * {@code flags}) was last bound to.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_cpubind()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_cpubind()}.
 	 * 
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @return 0 on success, -1 on error.
 	 */
 	public int get_cpubind(HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) {
@@ -677,13 +677,13 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Get the current physical binding of process <tt>pid</tt>.
+	 * Get the current physical binding of process {@code pid}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_proc_cpubind()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_proc_cpubind()}.
 	 *
-	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param pid {@code pid_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @return 0 on success, -1 on error.
 	 */
 	public int get_proc_cpubind(int pid, HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) {
@@ -699,13 +699,13 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	}
 
 	/**
-	 * Get the current physical binding of thread <tt>thread</tt>.
+	 * Get the current physical binding of thread {@code thread}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_thread_cpubind()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_thread_cpubind()}.
 	 * 
-	 * @param tid <tt>pthread_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param tid {@code pthread_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @return 0 on success, -1 on error.
 	 */
 	public int get_thread_cpubind(int tid, HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) {
@@ -726,15 +726,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * The operating system may move some tasks from one processor to another at any time according 
 	 * to their binding, so this function may return something that is already outdated.
 	 * <p>
-	 * <tt>flags</tt> can include either <tt>HWLOC.CPUBIND_PROCESS</tt> or <tt>HWLOC.CPUBIND_THREAD</tt> to 
+	 * {@code flags} can include either {@code HWLOC.CPUBIND_PROCESS} or {@code HWLOC.CPUBIND_THREAD} to 
 	 * specify whether the query should be for the whole process (union of all CPUs on which all threads are 
-	 * running), or only the current thread. If the process is single-threaded, <tt>flags</tt> can be set to 
-	 * <tt>null</tt> to let hwloc use whichever method is available on the underlying OS.
+	 * running), or only the current thread. If the process is single-threaded, {@code flags} can be set to 
+	 * {@code null} to let hwloc use whichever method is available on the underlying OS.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_last_cpu_location()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_last_cpu_location()}.
 	 * 
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @return 0 on success, -1 on error.
 	 */
 	public int get_last_cpu_location(HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) {
@@ -755,11 +755,11 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * The operating system may move some tasks from one processor to another at any time according 
 	 * to their binding, so this function may return something that is already outdated.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_proc_last_cpu_location()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_proc_last_cpu_location()}.
 	 * 
-	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param pid {@code pid_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @param cpuset CPU set.
-	 * @param flags OR'ed flags of <tt>HwlocCPUBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocCPUBindFlags}.
 	 * @return 0 on success, -1 on error.
 	 */
 	public int get_proc_last_cpu_location(int pid, HwlocCPUSet cpuset, EnumSet<HwlocCPUBindFlags> flags) {
@@ -777,15 +777,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get complete CPU set.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_complete_cpuset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_complete_cpuset()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>The returned cpuset is not newly allocated and should thus not be changed or 
-	 * freed; <tt>clone()</tt> must be used to obtain a local copy.
+	 * freed; {@code clone()} must be used to obtain a local copy.
 	 * </ul>
 	 * 
-	 * @return the complete CPU set of logical processors of the system or <tt>null</tt>.
+	 * @return the complete CPU set of logical processors of the system or {@code null}.
 	 */
 	public HwlocCPUSet get_complete_cpuset() {
 		long handler = jhwloc_topology_get_complete_cpuset();
@@ -799,15 +799,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get allowed CPU set.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_allowed_cpuset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_allowed_cpuset()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>The returned cpuset is not newly allocated and should thus not be changed or 
-	 * freed; <tt>clone()</tt> must be used to obtain a local copy.
+	 * freed; {@code clone()} must be used to obtain a local copy.
 	 * </ul>
 	 * 
-	 * @return the CPU set of allowed logical processors of the system or <tt>null</tt>.
+	 * @return the CPU set of allowed logical processors of the system or {@code null}.
 	 */
 	public HwlocCPUSet get_allowed_cpuset() {
 		long handler = jhwloc_topology_get_allowed_cpuset();
@@ -821,16 +821,16 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get topology CPU set.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_topology_cpuset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_topology_cpuset()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>The returned cpuset is not newly allocated and should thus not be changed or 
-	 * freed; <tt>clone()</tt> must be used to obtain a local copy.
+	 * freed; {@code clone()} must be used to obtain a local copy.
 	 * </ul>
 	 * 
 	 * @return the CPU set of logical processors of the system for which hwloc provides 
-	 * topology information or <tt>null</tt>. This is equivalent to the cpuset of the
+	 * topology information or {@code null}. This is equivalent to the cpuset of the
 	 * system object.
 	 */
 	public HwlocCPUSet get_topology_cpuset() {
@@ -845,15 +845,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get complete node set.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_complete_nodeset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_complete_nodeset()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>The returned nodeset is not newly allocated and should thus not be changed or 
-	 * freed; <tt>clone()</tt> must be used to obtain a local copy.
+	 * freed; {@code clone()} must be used to obtain a local copy.
 	 * </ul>
 	 * 
-	 * @return the complete node set of memory of the system or <tt>null</tt>.
+	 * @return the complete node set of memory of the system or {@code null}.
 	 */
 	public HwlocNodeSet get_complete_nodeset() {
 		long handler = jhwloc_topology_get_complete_nodeset();
@@ -867,16 +867,16 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get topology node set.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_topology_nodeset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_topology_nodeset()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>The returned nodeset is not newly allocated and should thus not be changed or 
-	 * freed; <tt>clone()</tt> must be used to obtain a local copy.
+	 * freed; {@code clone()} must be used to obtain a local copy.
 	 * </ul>
 	 * 
 	 * @return the node set of memory of the system for which hwloc provides topology
-	 * information or <tt>null</tt>. This is equivalent to the nodeset of the system
+	 * information or {@code null}. This is equivalent to the nodeset of the system
 	 * object.
 	 */
 	public HwlocNodeSet get_topology_nodeset() {
@@ -891,15 +891,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get allowed node set.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_allowed_nodeset()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_allowed_nodeset()}.
 	 * <p>
 	 * Note
 	 * <ul>
 	 * <li>The returned nodeset is not newly allocated and should thus not be changed or 
-	 * freed; <tt>clone()</tt> must be used to obtain a local copy.
+	 * freed; {@code clone()} must be used to obtain a local copy.
 	 * </ul>
 	 * 
-	 * @return the node set of allowed memory of the system or <tt>null</tt>.
+	 * @return the node set of allowed memory of the system or {@code null}.
 	 */
 	public HwlocNodeSet get_allowed_nodeset() {
 		long handler = jhwloc_topology_get_allowed_nodeset();
@@ -913,7 +913,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Set the filtering for the given object type.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_type_filter()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_type_filter()}.	
 	 *
 	 * @param type Object type.
 	 * @param filter Filter type.
@@ -926,10 +926,10 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Get the current filtering for the given object type.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_get_type_filter()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_topology_get_type_filter()}.	
 	 * 
 	 * @param type Object type.
-	 * @return The current filtering or <tt>null</tt>.
+	 * @return The current filtering or {@code null}.
 	 */
 	public HwlocTypeFilter get_type_filter(HwlocObjectType type) {
 		int rc = jhwloc_topology_get_type_filter(HwlocObjectType.GetType(type));
@@ -945,7 +945,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * <p>
 	 * If some types do not support this filtering, they are silently ignored.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_all_types_filter()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_all_types_filter()}.	
 	 * 
 	 * @param filter Filter type.
 	 * @return 0 on success, -1 on error.
@@ -957,7 +957,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Set the filtering for all cache object types.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_cache_types_filter()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_cache_types_filter()}.	
 	 * 
 	 * @param filter Filter type.
 	 * @return 0 on success, -1 on error.
@@ -969,7 +969,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Set the filtering for all instruction cache object types.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_icache_types_filter()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_icache_types_filter()}.	
 	 * 
 	 * @param filter Filter type.
 	 * @return 0 on success, -1 on error.
@@ -981,7 +981,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Set the filtering for all I/O object types.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_topology_set_io_types_filter()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_topology_set_io_types_filter()}.	
 	 * 
 	 * @param filter Filter type.
 	 * @return 0 on success, -1 on error.
@@ -993,7 +993,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Returns the depth of parents where memory objects are attached.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_memory_parents_depth()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_get_memory_parents_depth()}.	
 	 * 
 	 * @return The depth of Normal parents of all memory children if all these parents have 
 	 * the same depth. For instance, the depth of the Package level if all NUMA nodes are 
@@ -1009,12 +1009,12 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Query the default memory binding policy and physical locality of the current process or thread.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_membind()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_get_membind()}.	
 	 * 
 	 * @param set Bitmap set.
-	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
-	 * @return This function has two output parameters: <tt>set</tt> and <tt>policy</tt>. The values returned
-	 * depend on both the <tt>flags</tt> passed in and the current memory binding policies and nodesets in
+	 * @param flags OR'ed flags of {@code HwlocMEMBindFlags}.
+	 * @return This function has two output parameters: {@code set} and {@code policy}. The values returned
+	 * depend on both the {@code flags} passed in and the current memory binding policies and nodesets in
 	 * the queried target.
 	 * <p>
 	 * Passing the HWLOC.MEMBIND_PROCESS flag specifies that the query target is the current policies and
@@ -1027,19 +1027,19 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * <p>
 	 * HWLOC.MEMBIND_STRICT is only meaningful when HWLOC.MEMBIND_PROCESS is also specified. In this 
 	 * case, hwloc will check the default memory policies and nodesets for all threads in the process. If
-	 * they are not identical, <tt>null</tt> is returned. If they are identical, the values are returned
-	 * in <tt>set</tt> and <tt>policy</tt>.
+	 * they are not identical, {@code null} is returned. If they are identical, the values are returned
+	 * in {@code set} and {@code policy}.
 	 * <p>
 	 * Otherwise, if HWLOC.MEMBIND_PROCESS is specified (and HWLOC.MEMBIND_STRICT is not specified), the
 	 * default set from each thread is logically OR'ed together. If all threads' default policies are the same,
-	 * <tt>policy</tt> is set to that policy. If they are different, <tt>policy</tt> is set to HWLOC.MEMBIND_MIXED.
+	 * {@code policy} is set to that policy. If they are different, {@code policy} is set to HWLOC.MEMBIND_MIXED.
 	 * <p>
 	 * In the HWLOC.MEMBIND_THREAD case (or when neither HWLOC.MEMBIND_PROCESS or HWLOC.MEMBIND_THREAD is 
-	 * specified), there is only one set and policy; they are returned in <tt>set</tt> and <tt>policy</tt>, respectively.
+	 * specified), there is only one set and policy; they are returned in {@code set} and {@code policy}, respectively.
 	 * <p>
-	 * If HWLOC.MEMBIND_BYNODESET is specified, <tt>set</tt> is considered a nodeset. Otherwise it's a cpuset.
+	 * If HWLOC.MEMBIND_BYNODESET is specified, {@code set} is considered a nodeset. Otherwise it's a cpuset.
 	 * <p>
-	 * If any other flags are specified, <tt>null</tt> is returned.
+	 * If any other flags are specified, {@code null} is returned.
 	 */
 	public HwlocMEMBindPolicy get_membind(HwlocBitmap set, EnumSet<HwlocMEMBindFlags> flags) {
 		int hwloc_flags;
@@ -1060,12 +1060,12 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	/**
 	 * Query the default memory binding policy and physical locality of the specified process.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_proc_membind()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_get_proc_membind()}.	
 	 * 
-	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param pid {@code pid_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @param set Bitmap set.
-	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
-	 * @return See <tt>get_membind()</tt>.
+	 * @param flags OR'ed flags of {@code HwlocMEMBindFlags}.
+	 * @return See {@code get_membind()}.
 	 */
 	public HwlocMEMBindPolicy get_proc_membind(int pid, HwlocBitmap set, EnumSet<HwlocMEMBindFlags> flags) {
 		int hwloc_flags;
@@ -1085,7 +1085,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 
 	/**
 	 * Set the default memory binding policy of the current process or thread to prefer the NUMA 
-	 * node(s) specified by <tt>set</tt>.
+	 * node(s) specified by {@code set}.
 	 * <p>
 	 * If neither HWLOC.MEMBIND_PROCESS nor HWLOC_MEMBIND_THREAD is specified, the current process
 	 * is assumed to be single-threaded. This is the most portable form as it permits hwloc to use
@@ -1093,11 +1093,11 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * <p>
 	 * If HWLOC.MEMBIND_BYNODESET is specified, set is considered a nodeset. Otherwise it's a cpuset.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_set_membind()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_set_membind()}.	
 	 * 
 	 * @param set Bitmap set.
 	 * @param policy Memory binding policy
-	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocMEMBindFlags}.
 	 * @throws HwlocException if the action is not supported or the binding cannot be enforced. 
 	 */
 	public void set_membind(HwlocBitmap set, HwlocMEMBindPolicy policy, EnumSet<HwlocMEMBindFlags> flags) throws HwlocException {
@@ -1120,7 +1120,7 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 
 	/**
 	 * Set the default memory binding policy of the specified process or thread to prefer the NUMA 
-	 * node(s) specified by <tt>set</tt>.
+	 * node(s) specified by {@code set}.
 	 * <p>
 	 * If neither HWLOC.MEMBIND_PROCESS nor HWLOC_MEMBIND_THREAD is specified, the current process
 	 * is assumed to be single-threaded. This is the most portable form as it permits hwloc to use
@@ -1128,12 +1128,12 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * <p>
 	 * If HWLOC.MEMBIND_BYNODESET is specified, set is considered a nodeset. Otherwise it's a cpuset.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_set_proc_membind()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_set_proc_membind()}.	
 	 * 
-	 * @param pid <tt>pid_t</tt> on Unix platforms, and <tt>HANDLE</tt> on native Windows platforms.
+	 * @param pid {@code pid_t} on Unix platforms, and {@code HANDLE} on native Windows platforms.
 	 * @param set Bitmap set.
 	 * @param policy Memory binding policy
-	 * @param flags OR'ed flags of <tt>HwlocMEMBindFlags</tt>.
+	 * @param flags OR'ed flags of {@code HwlocMEMBindFlags}.
 	 * @throws HwlocException if the action is not supported or the binding cannot be enforced. 
 	 */
 	public void set_proc_membind(int pid, HwlocBitmap set, HwlocMEMBindPolicy policy, EnumSet<HwlocMEMBindFlags> flags) throws HwlocException {
@@ -1158,15 +1158,15 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * Convert a NUMA node set into a CPU set and handle non-NUMA cases.
 	 * <p>
 	 * If the topology contains no NUMA nodes, the machine is considered as a single memory 
-	 * node, and the following behavior is used: if <tt>nodeset</tt> is empty, the returned
+	 * node, and the following behavior is used: if {@code nodeset} is empty, the returned
 	 * cpuset will be emptied as well. Otherwise, the returned cpuset will be entirely filled.
 	 * This is useful for manipulating memory binding sets
 	 * 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_cpuset_from_nodeset()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_cpuset_from_nodeset()}.	
 	 * 
 	 * @param nodeset NUMA node set.
-	 * @return CPU set or <tt>null</tt> on error. 
+	 * @return CPU set or {@code null} on error. 
 	 */
 	public HwlocCPUSet cpuset_from_nodeset(HwlocNodeSet nodeset) {
 		long handler = jhwloc_cpuset_from_nodeset(nodeset);
@@ -1184,14 +1184,14 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * the return node set, even if a full CPU set is given in input.
 	 * <p>
 	 * If the topology contains no NUMA nodes, the machine is considered as a single memory
-	 * node, and the following behavior is used: If <tt>cpuset</tt> is empty, the returned
+	 * node, and the following behavior is used: If {@code cpuset} is empty, the returned
 	 * nodeset will be emptied as well. Otherwise, the returned nodeset will be entirely filled.
 	 * 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_cpuset_to_nodeset()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_cpuset_to_nodeset()}.	
 	 * 
 	 * @param cpuset CPU set.
-	 * @return NUMA node set or <tt>null</tt> on error.
+	 * @return NUMA node set or {@code null} on error.
 	 */
 	public HwlocNodeSet cpuset_to_nodeset(HwlocCPUSet cpuset) {
 		long handler = jhwloc_cpuset_to_nodeset(cpuset);
@@ -1206,16 +1206,16 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * Find the depth of cache objects matching cache level and type.
 	 * 
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_cache_type_depth()</tt>.	
+	 * Java binding of the hwloc operation {@code hwloc_get_cache_type_depth()}.	
 	 * 
 	 * @param cachelevel Cache level.
 	 * @param cachetype Cache object type.
 	 * @return Return the depth of the topology level that contains cache objects whose attributes 
-	 * match <tt>cachelevel</tt> and <tt>cachetype</tt>.
+	 * match {@code cachelevel} and {@code cachetype}.
 	 * <p>
 	 * If no cache level matches, HWLOC.TYPE_DEPTH_UNKNOWN is returned.
 	 * <p>
-	 * If <tt>cachetype</tt> is HWLOC.OBJ_CACHE_UNIFIED, the depth of the unique matching unified 
+	 * If {@code cachetype} is HWLOC.OBJ_CACHE_UNIFIED, the depth of the unique matching unified 
 	 * cache level is returned.
 	 * <p>
 	 * If cachetype is HWLOC.OBJ_CACHE_DATA or HWLOC.OBJ_CACHE_INSTRUCTION, either a matching 

@@ -106,8 +106,8 @@
 				<configuration>
 					<outputDirectory>${maven.javadoc.path}</outputDirectory>
 					<quiet>true</quiet>
-					<!-- JDK 13+ reports the <tt> tags used in the Javadoc as HTML5 errors, which would make 'mvn install' fail -->
-					<doclint>none</doclint>
+					<!-- Check the syntax of the comments (HTML, references), but not that everything is documented -->
+					<doclint>all,-missing</doclint>
 				</configuration>
 				<executions>
 					<execution>

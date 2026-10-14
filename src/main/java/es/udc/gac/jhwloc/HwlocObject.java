@@ -150,7 +150,7 @@ public class HwlocObject {
 	/**
 	 * Return a constant stringified topology object type.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_obj_type_string()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_obj_type_string()}.
 	 *
 	 * @return The string representation.
 	 */
@@ -167,7 +167,7 @@ public class HwlocObject {
 	 * <p>
 	 * They are attached to parent as Normal children, not as Memory, I/O or Misc children.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_obj_type_is_normal()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_obj_type_is_normal()}.
 	 *
 	 * @return <code>true</code> if this object is a Normal object, <code>false</code> otherwise. 
 	 */
@@ -186,7 +186,7 @@ public class HwlocObject {
 	 * I/O objects are objects attached to their parents in the I/O children
 	 * list. This current includes Bridges, PCI and OS devices.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_obj_type_is_io()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_obj_type_is_io()}.
 	 *
 	 * @return <code>true</code> if this object is a I/O object, <code>false</code> otherwise. 
 	 */
@@ -205,7 +205,7 @@ public class HwlocObject {
 	 * Memory objects are objects attached to their parents in the Memory children
 	 * list. This current only includes NUMA nodes.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_obj_type_is_memory()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_obj_type_is_memory()}.
 	 *
 	 * @return <code>true</code> if this object is a Memory object, <code>false</code> otherwise. 
 	 */
@@ -221,7 +221,7 @@ public class HwlocObject {
 	/**
 	 * Check whether this object type is a Cache (Data, Unified or Instruction).  
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_obj_type_is_cache()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_obj_type_is_cache()}.
 	 *
 	 * @return <code>true</code> if this object is a Cache, <code>false</code> otherwise. 
 	 */
@@ -237,7 +237,7 @@ public class HwlocObject {
 	/**
 	 * Check whether this object type is a Data or Unified Cache.  
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_obj_type_is_dcache()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_obj_type_is_dcache()}.
 	 *
 	 * @return <code>true</code> if this object is a Data or Unified
 	 * Cache, <code>false</code> otherwise. 
@@ -254,7 +254,7 @@ public class HwlocObject {
 	/**
 	 * Check whether this object type is an Instruction Cache.  
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_obj_type_is_icache()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_obj_type_is_icache()}.
 	 *
 	 * @return <code>true</code> if this object is an Instruction Cache,
 	 * <code>false</code> otherwise. 

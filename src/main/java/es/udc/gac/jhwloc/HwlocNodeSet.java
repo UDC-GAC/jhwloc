@@ -13,11 +13,11 @@ public class HwlocNodeSet extends HwlocBitmap {
 	/**
 	 * Allocate a new empty bitmap.
 	 * <p>
-	 * The bitmap should be freed by a corresponding call to <tt>free()</tt>.
+	 * The bitmap should be freed by a corresponding call to {@code free()}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_alloc()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_alloc()}.
 	 *
-	 * @return A valid bitmap or <tt>null</tt>.
+	 * @return A valid bitmap or {@code null}.
 	 */
 	public static HwlocNodeSet alloc() {
 		return (HwlocNodeSet) HwlocBitmap.alloc(false);
@@ -27,11 +27,11 @@ public class HwlocNodeSet extends HwlocBitmap {
 	/**
 	 * Allocate a new full bitmap.
 	 * <p>
-	 * The bitmap should be freed by a corresponding call to <tt>free()</tt>.
+	 * The bitmap should be freed by a corresponding call to {@code free()}.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_bitmap_alloc_full()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_bitmap_alloc_full()}.
 	 *
-	 * @return A valid bitmap or <tt>null</tt>.
+	 * @return A valid bitmap or {@code null}.
 	 */
 	public static HwlocNodeSet alloc_full() {
 		return (HwlocNodeSet) HwlocBitmap.alloc_full(false);

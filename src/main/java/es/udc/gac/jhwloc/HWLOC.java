@@ -85,8 +85,8 @@ public class HWLOC {
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_IMPORTANT = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_IMPORTANT;
 
 	/**
-	 * Value returned by <tt>compare_types()</tt> when the types can not be compared.
-	 * It is the value of <tt>HWLOC_TYPE_UNORDERED</tt> in hwloc.
+	 * Value returned by {@code compare_types()} when the types can not be compared.
+	 * It is the value of {@code HWLOC_TYPE_UNORDERED} in hwloc.
 	 */
 	public static final int TYPE_UNORDERED = Integer.MAX_VALUE;
 
@@ -116,7 +116,7 @@ public class HWLOC {
 	 * <p>
 	 * Should be HWLOC.API_VERSION if running on the same version.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_get_api_version()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_get_api_version()}.
 	 *
 	 * @return hwloc API version at build time.
 	 */
@@ -127,7 +127,7 @@ public class HWLOC {
 	/**
 	 * Compare the depth of two object types.
 	 * <p>
-	 * Java binding of the hwloc operation <tt>hwloc_compare_types()</tt>.
+	 * Java binding of the hwloc operation {@code hwloc_compare_types()}.
 	 * <p>
 	 * Note
 	 * <ul>
@@ -141,9 +141,9 @@ public class HWLOC {
 	 * @param type1 First object type to be compared.
 	 * @param type2 Second object type to be compared.
 	 * @return This function returns less than, equal to, or greater than zero
-	 * respectively if <tt>type1</tt> objects usually include <tt>type2</tt>
-	 * objects, are the same as <tt>type2</tt> objects, or are included in
-	 * <tt>type2</tt> objects. If the types can not be compared (because neither
+	 * respectively if {@code type1} objects usually include {@code type2}
+	 * objects, are the same as {@code type2} objects, or are included in
+	 * {@code type2} objects. If the types can not be compared (because neither
 	 * is usually contained in the other), HWLOC.TYPE_UNORDERED is returned.
 	 * Object types containing CPUs can always be compared (usually, a system
 	 * contains machines which contain nodes which contain packages which contain
