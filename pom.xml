@@ -23,9 +23,21 @@
 		<mojo-exec-maven.version>3.6.4</mojo-exec-maven.version>
 		<maven.javadoc.version>3.12.0</maven.javadoc.version>
 		<maven.jar.version>3.5.1</maven.jar.version>
+		<maven.surefire.version>3.6.0</maven.surefire.version>
+		<!-- JUnit 6 needs Java 17, and jhwloc is built for Java 8 -->
+		<junit.version>5.14.4</junit.version>
 		<native.path>./src/main/native/</native.path>
 		<maven.javadoc.path>./javadoc/</maven.javadoc.path>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<resources>
@@ -105,6 +117,15 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.version}</version>
+				<configuration>
+					<!-- The native library is built by make in the compile phase and copied to lib -->
+					<argLine>-Djava.library.path=${project.basedir}/lib</argLine>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -65,6 +65,17 @@ export LD_LIBRARY_PATH=$HWLOC_HOME/lib:$LD_LIBRARY_PATH
 java -cp /path/to/jhwloc/lib/jhwloc-1.1.0.jar -Djava.library.path=/path/to/jhwloc/lib es.udc.gac.jhwloc.examples.HelloWorld
 ```
 
+## Running the tests
+
+The tests use JUnit 5 and a synthetic topology, so they do not depend on the machine. They need the same
+prerequisites as the installation, and `mvn test` builds the native library before running them:
+
+```bash
+mvn test
+```
+
+Add `-DskipTests` to `mvn install` to skip them.
+
 ## Projects using jhwloc
 
 * [Flame-MR: efficient MapReduce-based data processing](http://flamemr.des.udc.es)
