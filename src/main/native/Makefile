@@ -2,6 +2,9 @@ include ./Makefile.common
 
 all: libjhwloc.so
 
+# javac -h generates the JNI headers (it replaces javah, which was removed in JDK 10).
+# The hwloc libraries must be linked after the object files, otherwise linkers
+# using --as-needed drop the dependency on libhwloc.
 libjhwloc.so:
 	if [ ! -d "$(BUILD_DIR)" ]; then $(MKDIR) $(BUILD_DIR); fi
 	$(JAVAC) -h . -d $(BUILD_DIR)/classes -sourcepath $(SRC_DIR) \
