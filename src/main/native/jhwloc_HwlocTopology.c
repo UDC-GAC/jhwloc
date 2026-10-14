@@ -35,6 +35,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1lo
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_topology_load(topo);
 }
@@ -48,6 +49,7 @@ JNIEXPORT void JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1de
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_VOID_IF_NO_TOPOLOGY(env, topo);
 
 	api.jhwloc_topology_destroy(topo);
 }
@@ -61,6 +63,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1ab
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_topology_abi_check(topo);
 }
@@ -74,6 +77,7 @@ JNIEXPORT void JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1ch
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_VOID_IF_NO_TOPOLOGY(env, topo);
 
 	api.jhwloc_topology_check(topo);
 }
@@ -88,6 +92,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1d
 {
 	hwloc_topology_t newtopology;
 	hwloc_topology_t oldtopology = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, oldtopology, -1);
 
 	int rc = api.jhwloc_topology_dup(&newtopology, oldtopology);
 
@@ -103,6 +108,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1ge
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_topology_get_depth(topo);
 }
@@ -116,6 +122,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1depth_1
   (JNIEnv *env, jobject this, jint depth)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	hwloc_obj_type_t chwloc_obj_type = api.jhwloc_get_depth_type(topo, depth);
 
@@ -131,6 +138,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1memory_
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_get_memory_parents_depth(topo);
 }
@@ -144,6 +152,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1d
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 	
@@ -161,6 +170,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1o
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 
@@ -178,6 +188,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1o
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 
@@ -195,6 +206,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1nbobjs_
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 	
@@ -210,6 +222,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1nbobjs_
   (JNIEnv *env, jobject this, jint depth)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_get_nbobjs_by_depth(topo, depth);
 }
@@ -223,6 +236,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1is
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_topology_is_thissystem(topo);
 }
@@ -236,6 +250,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1g
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_topology_get_flags(topo);
 }
@@ -249,6 +264,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1obj_1b
   (JNIEnv *env, jobject this, jint jhwloc_obj_type, jint idx)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 	hwloc_obj_t obj = NULL;
@@ -267,6 +283,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1obj_1b
   (JNIEnv *env, jobject this, jint depth, jint idx)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_t obj = NULL;
 
 	obj = api.jhwloc_get_obj_by_depth(topo, depth, idx);
@@ -283,6 +300,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1numano
   (JNIEnv *env, jobject this, jint os_index)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_t obj = NULL;
 
 	obj = api.jhwloc_get_numanode_obj_by_os_index(topo, os_index);
@@ -299,6 +317,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1pu_1ob
   (JNIEnv *env, jobject this, jint os_index)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_t obj = NULL;
 
 	obj = api.jhwloc_get_pu_obj_by_os_index(topo, os_index);
@@ -315,6 +334,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1ex
   (JNIEnv *env, jobject this, jstring xmlpath)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	char *path = GetStringNative(env, xmlpath);
 
 	if(path == NULL)
@@ -332,6 +352,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jstring xmlpath)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	char *path = GetStringNative(env, xmlpath);
 
 	if(path == NULL)
@@ -349,6 +370,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jstring description)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	char *desc = GetStringNative(env, description);
 
 	if(desc == NULL)
@@ -366,6 +388,7 @@ JNIEXPORT jstring JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, NULL);
 	char buffer[2048];
 
 	int rc = api.jhwloc_topology_export_synthetic(topo, buffer, sizeof(buffer), 0);
@@ -386,6 +409,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jint pid)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	return api.jhwloc_topology_set_pid(topo, pid);
 }
 
@@ -398,6 +422,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jlong flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	return api.jhwloc_topology_set_flags(topo, flags);
 }
@@ -411,6 +436,7 @@ JNIEXPORT jobject JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1root
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, NULL);
 	hwloc_obj_t obj = NULL;
 	
 	obj = api.jhwloc_get_root_obj(topo);
@@ -430,6 +456,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1next_1
   (JNIEnv *env, jobject this, jint depth, jobject prev)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_t obj = NULL;
 	hwloc_obj_t prev_obj = NULL;
 
@@ -450,6 +477,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1next_1
   (JNIEnv *env, jobject this, jint jhwloc_obj_type, jobject prev)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 	hwloc_obj_t obj = NULL;
@@ -472,6 +500,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1cpubind
   (JNIEnv *env, jobject this, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_const_cpuset_t set = (hwloc_const_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	int rc = api.jhwloc_set_cpubind(topo, set, flags);
@@ -495,6 +524,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1proc_1c
   (JNIEnv *env, jobject this, jint pid, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_const_cpuset_t set = (hwloc_const_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	int rc = api.jhwloc_set_proc_cpubind(topo, pid, set, flags);
@@ -518,6 +548,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1thread_
   (JNIEnv *env, jobject this, jint tid, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_const_cpuset_t set = (hwloc_const_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	int rc = api.jhwloc_set_thread_cpubind(topo, tid, set, flags);
@@ -541,6 +572,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1cpubind
   (JNIEnv *env, jobject this, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_cpuset_t set = (hwloc_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	return api.jhwloc_get_cpubind(topo, set, flags);
@@ -555,6 +587,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1proc_1c
   (JNIEnv *env, jobject this, jint pid, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_cpuset_t set = (hwloc_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	return api.jhwloc_get_proc_cpubind(topo, pid, set, flags);
@@ -569,6 +602,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1thread_
   (JNIEnv *env, jobject this, jint tid, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_cpuset_t set = (hwloc_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	return api.jhwloc_get_thread_cpubind(topo, tid, set, flags);
@@ -583,6 +617,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1last_1c
   (JNIEnv *env, jobject this, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_cpuset_t set = (hwloc_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	return api.jhwloc_get_last_cpu_location(topo, set, flags);
@@ -597,6 +632,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1proc_1l
   (JNIEnv *env, jobject this, jint pid, jobject cpuset, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_cpuset_t set = (hwloc_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 
 	return api.jhwloc_get_proc_last_cpu_location(topo, pid, set, flags);
@@ -611,6 +647,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1g
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	hwloc_const_cpuset_t set = api.jhwloc_topology_get_complete_cpuset(topo);
 
@@ -626,6 +663,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1g
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	hwloc_const_cpuset_t set = api.jhwloc_topology_get_topology_cpuset(topo);
 
@@ -641,6 +679,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1g
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	hwloc_const_cpuset_t set = api.jhwloc_topology_get_allowed_cpuset(topo);
 
@@ -656,6 +695,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1g
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	hwloc_const_nodeset_t set = api.jhwloc_topology_get_complete_nodeset(topo);
 
@@ -671,6 +711,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1g
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	hwloc_const_nodeset_t set = api.jhwloc_topology_get_topology_nodeset(topo);
 
@@ -686,6 +727,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1g
   (JNIEnv *env, jobject this)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 
 	hwloc_const_nodeset_t set = api.jhwloc_topology_get_allowed_nodeset(topo);
 
@@ -701,6 +743,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jint jhwloc_obj_type, jint jhwloc_type_filter)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 	enum hwloc_type_filter_e chwloc_type_filter = GetHwlocTypeFilterNative(env, jhwloc_type_filter);
@@ -718,6 +761,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1ge
   (JNIEnv *env, jobject this, jint jhwloc_obj_type)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_type_t chwloc_obj_type = GetHwlocObjectTypeNative(env, jhwloc_obj_type);
 	RETURN_IF_EXCEPTION(env, -1);
 	enum hwloc_type_filter_e chwloc_type_filter;
@@ -739,6 +783,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jint jhwloc_type_filter)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	enum hwloc_type_filter_e chwloc_type_filter = GetHwlocTypeFilterNative(env, jhwloc_type_filter);
 	RETURN_IF_EXCEPTION(env, -1);
 
@@ -754,6 +799,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jint jhwloc_type_filter)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	enum hwloc_type_filter_e chwloc_type_filter = GetHwlocTypeFilterNative(env, jhwloc_type_filter);
 	RETURN_IF_EXCEPTION(env, -1);
 
@@ -769,6 +815,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jint jhwloc_type_filter)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	enum hwloc_type_filter_e chwloc_type_filter = GetHwlocTypeFilterNative(env, jhwloc_type_filter);
 	RETURN_IF_EXCEPTION(env, -1);
 
@@ -784,6 +831,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1topology_1se
   (JNIEnv *env, jobject this, jint jhwloc_type_filter)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	enum hwloc_type_filter_e chwloc_type_filter = GetHwlocTypeFilterNative(env, jhwloc_type_filter);
 	RETURN_IF_EXCEPTION(env, -1);
 
@@ -799,6 +847,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1membind
   (JNIEnv *env, jobject this, jobject jhwloc_bitmap, jint flags)
 {
     hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+    RETURN_IF_NO_TOPOLOGY(env, topo, -1);
     hwloc_bitmap_t set = (hwloc_bitmap_t) (*env)->GetLongField(env, jhwloc_bitmap, FID_jhwloc_HwlocBitmap_handler);
     hwloc_membind_policy_t policy;
 
@@ -819,6 +868,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1proc_1m
   (JNIEnv *env, jobject this, jint pid, jobject jhwloc_bitmap, jint flags)
 {
     hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+    RETURN_IF_NO_TOPOLOGY(env, topo, -1);
     hwloc_bitmap_t set = (hwloc_bitmap_t) (*env)->GetLongField(env, jhwloc_bitmap, FID_jhwloc_HwlocBitmap_handler);
     hwloc_membind_policy_t policy;
 
@@ -839,6 +889,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1membind
   (JNIEnv *env, jobject this, jobject jhwloc_bitmap, jint jhwloc_membindpolicy, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_bitmap_t set = (hwloc_bitmap_t) (*env)->GetLongField(env, jhwloc_bitmap, FID_jhwloc_HwlocBitmap_handler);
 	hwloc_membind_policy_t policy = GetHwlocMEMBindPolicyTypeNative(env, jhwloc_membindpolicy);
 	RETURN_IF_EXCEPTION(env, -1);
@@ -865,6 +916,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1set_1proc_1m
   (JNIEnv *env, jobject this, jint pid, jobject jhwloc_bitmap, jint jhwloc_membindpolicy, jint flags)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_bitmap_t set = (hwloc_bitmap_t) (*env)->GetLongField(env, jhwloc_bitmap, FID_jhwloc_HwlocBitmap_handler);
 	hwloc_membind_policy_t policy = GetHwlocMEMBindPolicyTypeNative(env, jhwloc_membindpolicy);
 	RETURN_IF_EXCEPTION(env, -1);
@@ -891,6 +943,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1cpuset_1fro
   (JNIEnv *env, jobject this, jobject nodeset)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_nodeset_t set = (hwloc_nodeset_t) (*env)->GetLongField(env, nodeset, FID_jhwloc_HwlocNodeSet_handler);
 	hwloc_cpuset_t cpuset = hwloc_bitmap_alloc();
 
@@ -911,6 +964,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1cpuset_1to_
   (JNIEnv *env, jobject this, jobject cpuset)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_cpuset_t set = (hwloc_cpuset_t) (*env)->GetLongField(env, cpuset, FID_jhwloc_HwlocCPUSet_handler);
 	hwloc_nodeset_t nodeset = hwloc_bitmap_alloc();
 
@@ -931,6 +985,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1cache_1
   (JNIEnv *env, jobject this, jint cachelevel, jint jhwloc_obj_cache_type)
 {
 	hwloc_topology_t topo = (hwloc_topology_t) (*env)->GetLongField(env, this, FID_jhwloc_HwlocTopology_handler);
+	RETURN_IF_NO_TOPOLOGY(env, topo, -1);
 	hwloc_obj_cache_type_t chwloc_obj_cache_type = GetHwlocObjectCacheTypeNative(env, jhwloc_obj_cache_type);
 	RETURN_IF_EXCEPTION(env, -1);
 

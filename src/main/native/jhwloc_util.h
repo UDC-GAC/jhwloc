@@ -124,6 +124,16 @@ void ThrowUnknownValue(JNIEnv *env, const char *what, long value);
  */
 #define RETURN_IF_EXCEPTION(env, value) \
 	do { if ((*(env))->ExceptionCheck(env)) return (value); } while (0)
+
+/*
+ * Throw an IllegalStateException and return if the topology was not initialized or was
+ * already destroyed, instead of passing a null pointer to hwloc, which crashes the JVM.
+ */
+#define NO_TOPOLOGY_MESSAGE "The topology is not initialized or was destroyed"
+#define RETURN_IF_NO_TOPOLOGY(env, topo, value) \
+	do { if ((topo) == NULL) { ThrowByName((env), "java/lang/IllegalStateException", NO_TOPOLOGY_MESSAGE); return (value); } } while (0)
+#define RETURN_VOID_IF_NO_TOPOLOGY(env, topo) \
+	do { if ((topo) == NULL) { ThrowByName((env), "java/lang/IllegalStateException", NO_TOPOLOGY_MESSAGE); return; } } while (0)
 hwloc_obj_type_t GetHwlocObjectTypeNative(JNIEnv *env, int jhwloc_obj_type);
 int GetHwlocObjectTypeJava(JNIEnv *env, hwloc_obj_type_t type);
 hwloc_obj_cache_type_t GetHwlocObjectCacheTypeNative(JNIEnv *env, int jhwloc_obj_cache_type);

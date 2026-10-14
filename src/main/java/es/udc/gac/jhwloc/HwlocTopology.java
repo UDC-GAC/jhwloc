@@ -70,7 +70,8 @@ public class HwlocTopology implements Cloneable, AutoCloseable {
 	 * Java binding of the hwloc operation <tt>hwloc_topology_destroy()</tt>.
 	 * <p>
 	 * It can be called more than once: a topology that was already destroyed (or
-	 * that was never initialized) is ignored.
+	 * that was never initialized) is ignored. The other methods of a topology that is
+	 * not initialized or was destroyed throw an <tt>IllegalStateException</tt>.
 	 */
 	public void destroy() {
 		if(handler != 0) {
