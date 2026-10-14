@@ -44,7 +44,7 @@ In order to use the jhwloc library in your projects, add the following dependenc
   <dependency>
    <groupId>es.udc.gac</groupId>
    <artifactId>jhwloc</artifactId>
-   <version>1.0</version> <!-- or latest version -->
+   <version>1.1.0</version> <!-- or latest version -->
   </dependency>
 ...
 </dependencies>
@@ -55,14 +55,14 @@ In order to use the jhwloc library in your projects, add the following dependenc
 You can test your installation running some of the examples included in jhwloc:
 
 ```bash
-java -cp /path/to/jhwloc/lib/jhwloc-1.0.jar -Djava.library.path=/path/to/jhwloc/lib es.udc.gac.jhwloc.examples.HelloWorld
+java -cp /path/to/jhwloc/lib/jhwloc-1.1.0.jar -Djava.library.path=/path/to/jhwloc/lib es.udc.gac.jhwloc.examples.HelloWorld
 ```
 
 If your native hwloc library (i.e. libhwloc.so) is not installed in a standard location (e.g. /usr/lib64), you need to set **LD_LIBRARY_PATH** environmental variable to the directory containing it (i.e. $HWLOC_HOME/lib). For instance, if hwloc is installed at /opt/hwloc (i.e. HWLOC_HOME=/opt/hwloc):
 
 ```bash
 export LD_LIBRARY_PATH=$HWLOC_HOME/lib:$LD_LIBRARY_PATH
-java -cp /path/to/jhwloc/lib/jhwloc-1.0.jar -Djava.library.path=/path/to/jhwloc/lib es.udc.gac.jhwloc.examples.HelloWorld
+java -cp /path/to/jhwloc/lib/jhwloc-1.1.0.jar -Djava.library.path=/path/to/jhwloc/lib es.udc.gac.jhwloc.examples.HelloWorld
 ```
 
 ## Projects using jhwloc
