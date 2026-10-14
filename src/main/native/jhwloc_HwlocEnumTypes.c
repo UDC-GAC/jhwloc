@@ -35,7 +35,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_java2hwloc_1cpubind
 		case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_THREAD_TYPE:               return HWLOC_CPUBIND_THREAD;
         case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_STRICT_TYPE:               return HWLOC_CPUBIND_STRICT;
         case es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE:            return HWLOC_CPUBIND_NOMEMBIND;
-        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_CPUBIND_UNKNOWN_TYPE: "+jhwloc_flag);
+        default: ThrowUnknownValue(env, "HWLOC_CPUBIND_UNKNOWN_TYPE", jhwloc_flag);
     }
     return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_UNKNOWN_TYPE;
 }
@@ -54,7 +54,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_hwloc2java_1cpubind
         case HWLOC_CPUBIND_THREAD:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_THREAD_TYPE;
         case HWLOC_CPUBIND_STRICT:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_STRICT_TYPE;
         case HWLOC_CPUBIND_NOMEMBIND:	return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_NOMEMBIND_TYPE;
-        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_CPUBIND_UNKNOWN: "+hwloc_flag);
+        default: ThrowUnknownValue(env, "HWLOC_CPUBIND_UNKNOWN", hwloc_flag);
      }
      return es_udc_gac_jhwloc_HwlocEnumTypes_CPUBIND_UNKNOWN_TYPE;
 }
@@ -75,7 +75,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_java2hwloc_1membind
 	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIGRATE_TYPE:		return HWLOC_MEMBIND_MIGRATE;
 	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NOCPUBIND_TYPE:   return HWLOC_MEMBIND_NOCPUBIND;
 	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BYNODESET_TYPE:	return HWLOC_MEMBIND_BYNODESET;
-	    default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_MEMBIND_UNKNOWN_TYPE: "+jhwloc_flag);
+	    default: ThrowUnknownValue(env, "HWLOC_MEMBIND_UNKNOWN_TYPE", jhwloc_flag);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
 }
@@ -96,7 +96,7 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_hwloc2java_1membind
         case HWLOC_MEMBIND_MIGRATE:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIGRATE_TYPE;
         case HWLOC_MEMBIND_NOCPUBIND:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NOCPUBIND_TYPE;
         case HWLOC_MEMBIND_BYNODESET:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_BYNODESET_TYPE;
-        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_MEMBIND_UNKNOWN: "+hwloc_flag);
+        default: ThrowUnknownValue(env, "HWLOC_MEMBIND_UNKNOWN", hwloc_flag);
      }
      return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
 }
@@ -114,7 +114,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_java2hwloc_1topolo
 		case es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_WHOLE_SYSTEM_TYPE:			return HWLOC_TOPOLOGY_FLAG_WHOLE_SYSTEM;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_IS_THISSYSTEM_TYPE:			return HWLOC_TOPOLOGY_FLAG_IS_THISSYSTEM;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES_TYPE:	return HWLOC_TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TOPOLOGY_FLAG_UNKNOWN_TYPE: "+jhwloc_flag);
+		default: ThrowUnknownValue(env, "HWLOC_TOPOLOGY_FLAG_UNKNOWN_TYPE", jhwloc_flag);
 	}
         return es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_UNKNOWN_TYPE;
 }
@@ -132,7 +132,7 @@ JNIEXPORT jlong JNICALL Java_es_udc_gac_jhwloc_HwlocEnumTypes_hwloc2java_1topolo
 		case HWLOC_TOPOLOGY_FLAG_WHOLE_SYSTEM:			return es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_WHOLE_SYSTEM_TYPE;
 		case HWLOC_TOPOLOGY_FLAG_IS_THISSYSTEM:			return es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_IS_THISSYSTEM_TYPE;
 		case HWLOC_TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES:	return es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES_TYPE;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TOPOLOGY_FLAG_UNKNOWN: "+hwloc_flag);
+		default: ThrowUnknownValue(env, "HWLOC_TOPOLOGY_FLAG_UNKNOWN", hwloc_flag);
 	}
         return es_udc_gac_jhwloc_HwlocEnumTypes_TOPOLOGY_FLAG_UNKNOWN_TYPE;
 }

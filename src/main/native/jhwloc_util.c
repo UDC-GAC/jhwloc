@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with jhwloc. If not, see <http://www.gnu.org/licenses/>.
  */
+#include <stdio.h>
 #include "jhwloc_util.h"
 
 extern int errno;
@@ -444,6 +445,19 @@ void ThrowByName(JNIEnv *env, const char *name, const char *msg)
 	(*env)->DeleteLocalRef(env, cls);
 }
 
+/*
+ * Throws a HwlocException whose message is "<what>: <value>". The message is
+ * built with snprintf(): a C string literal can not be concatenated with an
+ * integer using the '+' operator, which would only shift the pointer.
+ */
+void ThrowUnknownValue(JNIEnv *env, const char *what, long value)
+{
+	char msg[128];
+
+	snprintf(msg, sizeof(msg), "%s: %ld", what, value);
+	ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", msg);
+}
+
 hwloc_obj_type_t GetHwlocObjectTypeNative(JNIEnv *env, int jhwloc_obj_type)
 {
 	switch(jhwloc_obj_type)
@@ -466,7 +480,7 @@ hwloc_obj_type_t GetHwlocObjectTypeNative(JNIEnv *env, int jhwloc_obj_type)
 		case es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_PCI_DEVICE_TYPE:return HWLOC_OBJ_PCI_DEVICE;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_OS_DEVICE_TYPE:return HWLOC_OBJ_OS_DEVICE;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_MISC_TYPE:	return HWLOC_OBJ_MISC;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_OBJ_UNKNOWN_TYPE: "+jhwloc_obj_type);
+		default: ThrowUnknownValue(env, "HWLOC_OBJ_UNKNOWN_TYPE", jhwloc_obj_type);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_UNKNOWN_TYPE;
 }
@@ -493,7 +507,7 @@ int GetHwlocObjectTypeJava(JNIEnv *env, hwloc_obj_type_t type)
 		case HWLOC_OBJ_PCI_DEVICE: 	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_PCI_DEVICE_TYPE;
 		case HWLOC_OBJ_OS_DEVICE: 	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_OS_DEVICE_TYPE;
 		case HWLOC_OBJ_MISC: 		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_MISC_TYPE;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_OBJ_UNKNOWN: "+type);
+		default: ThrowUnknownValue(env, "HWLOC_OBJ_UNKNOWN", type);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_UNKNOWN_TYPE;
 }
@@ -505,7 +519,7 @@ hwloc_obj_cache_type_t GetHwlocObjectCacheTypeNative(JNIEnv *env, int jhwloc_obj
 		case es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_UNIFIED_TYPE:	return HWLOC_OBJ_CACHE_UNIFIED;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_DATA_TYPE:	return HWLOC_OBJ_CACHE_DATA;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_INSTRUCTION_TYPE:return HWLOC_OBJ_CACHE_INSTRUCTION;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_OBJ_CACHE_UNKNOWN_TYPE: "+jhwloc_obj_cache_type);
+		default: ThrowUnknownValue(env, "HWLOC_OBJ_CACHE_UNKNOWN_TYPE", jhwloc_obj_cache_type);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_UNKNOWN_TYPE;
 }
@@ -517,7 +531,7 @@ int GetHwlocObjectCacheTypeJava(JNIEnv *env, hwloc_obj_cache_type_t type)
 		case HWLOC_OBJ_CACHE_UNIFIED:		return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_UNIFIED_TYPE;
 		case HWLOC_OBJ_CACHE_DATA:			return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_DATA_TYPE;
 		case HWLOC_OBJ_CACHE_INSTRUCTION:	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_INSTRUCTION_TYPE;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_OBJ_CACHE_UNKNOWN: "+type);
+		default: ThrowUnknownValue(env, "HWLOC_OBJ_CACHE_UNKNOWN", type);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_OBJ_CACHE_UNKNOWN_TYPE;
 }
@@ -532,7 +546,7 @@ int GetHwlocMEMBindPolicyTypeNative(JNIEnv *env, int jhwloc_policy)
 	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_INTERLEAVE_TYPE:	return HWLOC_MEMBIND_INTERLEAVE;
 	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NEXTTOUCH_TYPE:   return HWLOC_MEMBIND_NEXTTOUCH;
 	    case es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIXED_TYPE:		return HWLOC_MEMBIND_MIXED;
-	    default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "MEMBIND_UNKNOWN_POLICY_TYPE: "+jhwloc_policy);
+	    default: ThrowUnknownValue(env, "MEMBIND_UNKNOWN_POLICY_TYPE", jhwloc_policy);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_POLICY_TYPE;
 }
@@ -547,7 +561,7 @@ int GetHwlocMEMBindPolicyTypeJava(JNIEnv *env, hwloc_membind_policy_t hwloc_poli
         case HWLOC_MEMBIND_INTERLEAVE:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_INTERLEAVE_TYPE;
         case HWLOC_MEMBIND_NEXTTOUCH:	return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_NEXTTOUCH_TYPE;
         case HWLOC_MEMBIND_MIXED:		return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_MIXED_TYPE;
-        default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "MEMBIND_UNKNOWN_POLICY: "+hwloc_policy);
+        default: ThrowUnknownValue(env, "MEMBIND_UNKNOWN_POLICY", hwloc_policy);
      }
      return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
 }
@@ -557,7 +571,7 @@ int GetHwlocCompareTypesJava(JNIEnv *env, int type)
 	switch(type)
 	{
 		case HWLOC_TYPE_UNORDERED :	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNORDERED_TYPE;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TYPE_UNKNOWN: "+type);
+		default: ThrowUnknownValue(env, "HWLOC_TYPE_UNKNOWN", type);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNKNOWN_TYPE;
 }
@@ -573,7 +587,7 @@ int GetHwlocGetTypeDepthJava(JNIEnv *env, enum hwloc_get_type_depth_e type)
 		case HWLOC_TYPE_DEPTH_OS_DEVICE:	return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_OS_DEVICE_TYPE;
 		case HWLOC_TYPE_DEPTH_MISC:			return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_MISC_TYPE;
 		case HWLOC_TYPE_DEPTH_UNKNOWN:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_UNKNOWN_TYPE;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TYPE_DEPTH_UNKNOWN: "+type);
+		default: ThrowUnknownValue(env, "HWLOC_TYPE_DEPTH_UNKNOWN", type);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNKNOWN_TYPE;
 }
@@ -586,7 +600,7 @@ int GetHwlocTypeFilterJava(JNIEnv *env, enum hwloc_type_filter_e filter)
 		case HWLOC_TYPE_FILTER_KEEP_NONE:		return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_NONE_TYPE;
 		case HWLOC_TYPE_FILTER_KEEP_STRUCTURE:	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_STRUCTURE_TYPE;
 		case HWLOC_TYPE_FILTER_KEEP_IMPORTANT:	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_IMPORTANT_TYPE;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TYPE_FILTER_UNKNOWN: "+filter);
+		default: ThrowUnknownValue(env, "HWLOC_TYPE_FILTER_UNKNOWN", filter);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_UNKNOWN_TYPE;
 }
@@ -599,7 +613,7 @@ enum hwloc_type_filter_e GetHwlocTypeFilterNative(JNIEnv *env, int filter)
 		case es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_NONE_TYPE:	return HWLOC_TYPE_FILTER_KEEP_NONE;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_STRUCTURE_TYPE:	return HWLOC_TYPE_FILTER_KEEP_STRUCTURE;
 		case es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_KEEP_IMPORTANT_TYPE:	return HWLOC_TYPE_FILTER_KEEP_IMPORTANT;
-		default: ThrowByName(env, "es/udc/gac/jhwloc/HwlocException", "HWLOC_TYPE_FILTER_UNKNOWN: "+filter);
+		default: ThrowUnknownValue(env, "HWLOC_TYPE_FILTER_UNKNOWN", filter);
 	}
 	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_FILTER_UNKNOWN_TYPE;
 }

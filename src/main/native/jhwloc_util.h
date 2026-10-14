@@ -133,6 +133,7 @@ typedef struct jhwloc_api {
 } jhwloc_api_t;
 
 void ThrowByName(JNIEnv *env, const char *name, const char *msg);
+void ThrowUnknownValue(JNIEnv *env, const char *what, long value);
 hwloc_obj_type_t GetHwlocObjectTypeNative(JNIEnv *env, int jhwloc_obj_type);
 int GetHwlocObjectTypeJava(JNIEnv *env, hwloc_obj_type_t type);
 hwloc_obj_cache_type_t GetHwlocObjectCacheTypeNative(JNIEnv *env, int jhwloc_obj_cache_type);
