@@ -548,32 +548,6 @@ int GetHwlocMEMBindPolicyTypeJava(JNIEnv *env, hwloc_membind_policy_t hwloc_poli
      return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
 }
 
-int GetHwlocCompareTypesJava(JNIEnv *env, int type)
-{
-	switch(type)
-	{
-		case HWLOC_TYPE_UNORDERED :	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNORDERED_TYPE;
-		default: ThrowUnknownValue(env, "HWLOC_TYPE_UNKNOWN", type);
-	}
-	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNKNOWN_TYPE;
-}
-
-int GetHwlocGetTypeDepthJava(JNIEnv *env, enum hwloc_get_type_depth_e type)
-{
-	switch(type)
-	{
-		case HWLOC_TYPE_DEPTH_MULTIPLE:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_MULTIPLE_TYPE;
-		case HWLOC_TYPE_DEPTH_NUMANODE:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_NUMANODE_TYPE;
-		case HWLOC_TYPE_DEPTH_BRIDGE:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_BRIDGE_TYPE;
-		case HWLOC_TYPE_DEPTH_PCI_DEVICE:	return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_PCI_DEVICE_TYPE;
-		case HWLOC_TYPE_DEPTH_OS_DEVICE:	return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_OS_DEVICE_TYPE;
-		case HWLOC_TYPE_DEPTH_MISC:			return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_MISC_TYPE;
-		case HWLOC_TYPE_DEPTH_UNKNOWN:		return es_udc_gac_jhwloc_HwlocEnumTypes_HWLOC_TYPE_DEPTH_UNKNOWN_TYPE;
-		default: ThrowUnknownValue(env, "HWLOC_TYPE_DEPTH_UNKNOWN", type);
-	}
-	return es_udc_gac_jhwloc_HwlocEnumTypes_TYPE_UNKNOWN_TYPE;
-}
-
 int GetHwlocTypeFilterJava(JNIEnv *env, enum hwloc_type_filter_e filter)
 {
 	switch(filter)

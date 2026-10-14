@@ -726,38 +726,6 @@ public final class HwlocEnumTypes {
 	private static final int MEMBIND_NEXTTOUCH_TYPE = 504;
 	private static final int MEMBIND_MIXED_TYPE = 505;
 
-	public enum HwlocCompareTypes {
-		/**
-		 * Value returned by <tt>hwloc_compare_types()</tt> when types can not
-		 * be compared. 
-		 */
-		HWLOC_TYPE_UNORDERED,
-		/**
-		 * Unknown hwloc compare type.
-		 */
-		HWLOC_TYPE_UNKNOWN;
-
-		private HwlocCompareTypes() {}
-
-		static int GetType(HwlocCompareTypes type) {
-			switch(type)
-			{
-			case HWLOC_TYPE_UNORDERED:	return TYPE_UNORDERED_TYPE;
-			default:					return TYPE_UNKNOWN_TYPE;
-			}
-		}
-
-		static HwlocCompareTypes GetType(int type) {
-			switch(type)
-			{
-			case TYPE_UNORDERED_TYPE:	return HWLOC_TYPE_UNORDERED;
-			default:					return HWLOC_TYPE_UNKNOWN;
-			}
-		}
-	}
-
-	private static final int TYPE_UNKNOWN_TYPE = -7;
-	private static final int TYPE_UNORDERED_TYPE = 600;
 
 	public enum HwlocTypeFilter {
 		/**
@@ -838,59 +806,6 @@ public final class HwlocEnumTypes {
 	private static final int TYPE_FILTER_KEEP_STRUCTURE_TYPE = 703;
 	private static final int TYPE_FILTER_KEEP_IMPORTANT_TYPE = 704;
 
-	public enum HwlocGetTypeDepth {
-		/**
-		 * Objects of given type exist at different depth in the topology (only for Groups).
-		 */
-		HWLOC_TYPE_DEPTH_MULTIPLE,
-		/**
-		 * Virtual depth for NUMA nodes.
-		 */
-		HWLOC_TYPE_DEPTH_NUMANODE,
-		/**
-		 * Virtual depth for bridge object level.
-		 */
-		HWLOC_TYPE_DEPTH_BRIDGE,
-		/**
-		 * Virtual depth for PCI device object level.
-		 */
-		HWLOC_TYPE_DEPTH_PCI_DEVICE,
-		/**
-		 * Virtual depth for software device object level. 
-		 */
-		HWLOC_TYPE_DEPTH_OS_DEVICE,
-		/**
-		 * Virtual depth for Misc object.
-		 */
-		HWLOC_TYPE_DEPTH_MISC,
-		/**
-		 * No object of given type exists in the topology.
-		 */
-		HWLOC_TYPE_DEPTH_UNKNOWN;
-
-		private HwlocGetTypeDepth() {}
-
-		static int GetType(HwlocGetTypeDepth type) {
-			switch(type)
-			{
-			case HWLOC_TYPE_DEPTH_MULTIPLE:		return HWLOC_TYPE_DEPTH_MULTIPLE_TYPE;
-			case HWLOC_TYPE_DEPTH_NUMANODE:		return HWLOC_TYPE_DEPTH_NUMANODE_TYPE;
-			case HWLOC_TYPE_DEPTH_BRIDGE:		return HWLOC_TYPE_DEPTH_BRIDGE_TYPE;
-			case HWLOC_TYPE_DEPTH_PCI_DEVICE:	return HWLOC_TYPE_DEPTH_PCI_DEVICE_TYPE;
-			case HWLOC_TYPE_DEPTH_OS_DEVICE: 	return HWLOC_TYPE_DEPTH_OS_DEVICE_TYPE;
-			case HWLOC_TYPE_DEPTH_MISC: 		return HWLOC_TYPE_DEPTH_MISC_TYPE;
-			default:							return HWLOC_TYPE_DEPTH_UNKNOWN_TYPE;
-			}
-		}
-	}
-
-	private static final int HWLOC_TYPE_DEPTH_UNKNOWN_TYPE = -9;
-	private static final int HWLOC_TYPE_DEPTH_MULTIPLE_TYPE = 801;
-	private static final int HWLOC_TYPE_DEPTH_NUMANODE_TYPE = 802;
-	private static final int HWLOC_TYPE_DEPTH_BRIDGE_TYPE = 803;
-	private static final int HWLOC_TYPE_DEPTH_PCI_DEVICE_TYPE = 804;
-	private static final int HWLOC_TYPE_DEPTH_OS_DEVICE_TYPE = 805;
-	private static final int HWLOC_TYPE_DEPTH_MISC_TYPE = 806;
 
 	/********************** PRIVATE NATIVE METHODS 	**********************/
 	private static native int java2hwloc_cpubindflag(int jhwloc_flag);

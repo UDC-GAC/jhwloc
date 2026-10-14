@@ -7,6 +7,22 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_UNORDERED
+#define es_udc_gac_jhwloc_HWLOC_TYPE_UNORDERED 2147483647L
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_UNKNOWN
+#define es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_UNKNOWN -1L
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_MULTIPLE
+#define es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_MULTIPLE -2L
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_NUMANODE
+#define es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_NUMANODE -3L
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_BRIDGE
+#define es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_BRIDGE -4L
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_PCI_DEVICE
+#define es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_PCI_DEVICE -5L
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_OS_DEVICE
+#define es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_OS_DEVICE -6L
+#undef es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_MISC
+#define es_udc_gac_jhwloc_HWLOC_TYPE_DEPTH_MISC -7L
 /*
  * Class:     es_udc_gac_jhwloc_HWLOC
  * Method:    jhwloc_get_api_version

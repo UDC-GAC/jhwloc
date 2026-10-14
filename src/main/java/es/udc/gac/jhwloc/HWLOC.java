@@ -1,8 +1,6 @@
 package es.udc.gac.jhwloc;
 
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocCPUBindFlags;
-import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocCompareTypes;
-import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocGetTypeDepth;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocMEMBindFlags;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocMEMBindPolicy;
 import es.udc.gac.jhwloc.HwlocEnumTypes.HwlocObjectBridgeType;
@@ -80,20 +78,38 @@ public class HWLOC {
 	public static final HwlocMEMBindPolicy MEMBIND_INTERLEAVE = HwlocMEMBindPolicy.HWLOC_MEMBIND_INTERLEAVE;
 	public static final HwlocMEMBindPolicy MEMBIND_NEXTTOUCH = HwlocMEMBindPolicy.HWLOC_MEMBIND_NEXTTOUCH;
 	public static final HwlocMEMBindPolicy MEMBIND_MIXED = HwlocMEMBindPolicy.HWLOC_MEMBIND_MIXED;
-	public static final HwlocCompareTypes TYPE_UNKNOWN = HwlocCompareTypes.HWLOC_TYPE_UNKNOWN;
-	public static final HwlocCompareTypes TYPE_UNORDERED = HwlocCompareTypes.HWLOC_TYPE_UNORDERED;
 	public static final HwlocTypeFilter TYPE_FILTER_UNKNOWN = HwlocTypeFilter.HWLOC_TYPE_FILTER_UNKNOWN;
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_ALL = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_ALL;
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_NONE = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_NONE;
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_STRUCTURE = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_STRUCTURE;
 	public static final HwlocTypeFilter TYPE_FILTER_KEEP_IMPORTANT = HwlocTypeFilter.HWLOC_TYPE_FILTER_KEEP_IMPORTANT;
-	public static final HwlocGetTypeDepth TYPE_DEPTH_UNKNOWN = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_UNKNOWN;
-	public static final HwlocGetTypeDepth TYPE_DEPTH_MULTIPLE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_MULTIPLE;
-	public static final HwlocGetTypeDepth TYPE_DEPTH_NUMANODE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_NUMANODE;
-	public static final HwlocGetTypeDepth TYPE_DEPTH_BRIDGE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_BRIDGE;
-	public static final HwlocGetTypeDepth TYPE_DEPTH_PCI_DEVICE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_PCI_DEVICE;
-	public static final HwlocGetTypeDepth TYPE_DEPTH_OS_DEVICE = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_OS_DEVICE;
-	public static final HwlocGetTypeDepth TYPE_DEPTH_MISC = HwlocGetTypeDepth.HWLOC_TYPE_DEPTH_MISC;
+
+	/**
+	 * Value returned by <tt>compare_types()</tt> when the types can not be compared.
+	 * It is the value of <tt>HWLOC_TYPE_UNORDERED</tt> in hwloc.
+	 */
+	public static final int TYPE_UNORDERED = Integer.MAX_VALUE;
+
+	/*
+	 * Special depths. They have the same values as in hwloc, so they can be compared with
+	 * the depth returned by the methods of HwlocTopology and also given to the methods that
+	 * take a depth (e.g. get_nbobjs_by_depth(HWLOC.TYPE_DEPTH_NUMANODE)).
+	 */
+
+	/** No object of the given type exists in the topology. */
+	public static final int TYPE_DEPTH_UNKNOWN = -1;
+	/** Objects of the given type exist at different depths in the topology (only for Groups). */
+	public static final int TYPE_DEPTH_MULTIPLE = -2;
+	/** Virtual depth for NUMA nodes. */
+	public static final int TYPE_DEPTH_NUMANODE = -3;
+	/** Virtual depth for bridge object level. */
+	public static final int TYPE_DEPTH_BRIDGE = -4;
+	/** Virtual depth for PCI device object level. */
+	public static final int TYPE_DEPTH_PCI_DEVICE = -5;
+	/** Virtual depth for software device object level. */
+	public static final int TYPE_DEPTH_OS_DEVICE = -6;
+	/** Virtual depth for Misc object. */
+	public static final int TYPE_DEPTH_MISC = -7;
 
 	/**
 	 * Indicate at runtime which hwloc API version was used at build time.

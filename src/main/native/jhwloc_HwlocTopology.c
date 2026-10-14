@@ -149,12 +149,6 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1d
 	
 	int rc = api.jhwloc_get_type_depth(topo, chwloc_obj_type);
 
-	if (rc == HWLOC_TYPE_DEPTH_UNKNOWN)
-		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_UNKNOWN);
-
-	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
-		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);
-
 	return rc;
 }
 
@@ -172,9 +166,6 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1o
 
 	int rc = api.jhwloc_get_type_or_above_depth(topo, chwloc_obj_type);
 
-	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
-		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);
-
 	return rc;
 }
 
@@ -191,9 +182,6 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1type_1o
 	RETURN_IF_EXCEPTION(env, -1);
 
 	int rc = api.jhwloc_get_type_or_below_depth(topo, chwloc_obj_type);
-
-	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
-		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);
 
 	return rc;
 }
@@ -947,13 +935,6 @@ JNIEXPORT jint JNICALL Java_es_udc_gac_jhwloc_HwlocTopology_jhwloc_1get_1cache_1
 	RETURN_IF_EXCEPTION(env, -1);
 
 	int rc = api.jhwloc_get_cache_type_depth(topo, cachelevel, chwloc_obj_cache_type);
-
-	/* The result is a depth or one of the special depths, which are converted as in get_type_depth() */
-	if (rc == HWLOC_TYPE_DEPTH_UNKNOWN)
-		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_UNKNOWN);
-
-	if (rc == HWLOC_TYPE_DEPTH_MULTIPLE)
-		return GetHwlocGetTypeDepthJava(env, HWLOC_TYPE_DEPTH_MULTIPLE);
 
 	return rc;
 }
