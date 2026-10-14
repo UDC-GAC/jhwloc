@@ -5,3 +5,29 @@ path = "**"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2018-2026 Universidade da Coruña (UDC)"
 SPDX-License-Identifier = "LGPL-3.0-or-later"
+
+# Files that the javadoc tool of the JDK copies into the generated documentation
+[[annotations]]
+path = [
+	"javadoc/apidocs/script.js",
+	"javadoc/apidocs/search.js",
+	"javadoc/apidocs/search-page.js",
+	"javadoc/apidocs/copy.svg",
+	"javadoc/apidocs/link.svg",
+	"javadoc/apidocs/stylesheet.css",
+	"javadoc/apidocs/resources/**",
+	"javadoc/apidocs/legal/ASSEMBLY_EXCEPTION",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "Oracle and/or its affiliates"
+SPDX-License-Identifier = "GPL-2.0-only WITH Classpath-exception-2.0"
+
+[[annotations]]
+path = [
+	"javadoc/apidocs/script-dir/**",
+	"javadoc/apidocs/legal/jquery.md",
+	"javadoc/apidocs/legal/jqueryUI.md",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "OpenJS Foundation and other contributors"
+SPDX-License-Identifier = "MIT"
