@@ -18,8 +18,9 @@ CP = cp
 # 
 # DO NOT change the following variables unless you know what you are doing
 #
-JAVAH = javah
+JAVAC = $(JAVA_HOME)/bin/javac
 SRC_DIR = ../java
+JAVA_SRC = $(SRC_DIR)/es/udc/gac/jhwloc
 BUILD_DIR = build
 LIB_DIR = ../../../lib
 

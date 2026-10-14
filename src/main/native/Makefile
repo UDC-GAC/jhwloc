@@ -4,11 +4,9 @@ all: libjhwloc.so
 
 libjhwloc.so:
 	if [ ! -d "$(BUILD_DIR)" ]; then $(MKDIR) $(BUILD_DIR); fi
-	$(JAVAH) -classpath $(SRC_DIR) es.udc.gac.jhwloc.HWLOC
-	$(JAVAH) -classpath $(SRC_DIR) es.udc.gac.jhwloc.HwlocObject
-	$(JAVAH) -classpath $(SRC_DIR) es.udc.gac.jhwloc.HwlocTopology
-	$(JAVAH) -classpath $(SRC_DIR) es.udc.gac.jhwloc.HwlocBitmap
-	$(JAVAH) -classpath $(SRC_DIR) es.udc.gac.jhwloc.HwlocEnumTypes
+	$(JAVAC) -h . -d $(BUILD_DIR)/classes -sourcepath $(SRC_DIR) \
+		$(JAVA_SRC)/HWLOC.java $(JAVA_SRC)/HwlocObject.java $(JAVA_SRC)/HwlocTopology.java \
+		$(JAVA_SRC)/HwlocBitmap.java $(JAVA_SRC)/HwlocEnumTypes.java
 	$(CC) $(CC_FLAGS) jhwloc_HwlocBitmap.c -o $(BUILD_DIR)/jhwloc_HwlocBitmap.o
 	$(CC) $(CC_FLAGS) jhwloc_HWLOC.c -o $(BUILD_DIR)/jhwloc_HWLOC.o
 	$(CC) $(CC_FLAGS) jhwloc_HwlocObject.c -o $(BUILD_DIR)/jhwloc_HwlocObject.o
