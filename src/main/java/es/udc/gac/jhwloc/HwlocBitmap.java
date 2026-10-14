@@ -3,16 +3,13 @@ package es.udc.gac.jhwloc;
 public class HwlocBitmap implements Cloneable {
 
 	private long handler;
-	private String bitmap;
 
 	protected HwlocBitmap() {
 		this.handler = -1;
-		this.bitmap = null;
 	}
 
 	HwlocBitmap(long handler) {
 		this.handler = handler;
-		this.bitmap = this.toString();
 	}
 
 	private void setHandler(long handler) {
@@ -246,8 +243,7 @@ public class HwlocBitmap implements Cloneable {
 	 */
 	@Override
 	public String toString() {
-		this.bitmap = jhwloc_bitmap_asprintf();
-		return this.bitmap;
+		return jhwloc_bitmap_asprintf();
 	}
 
 	/**
@@ -581,14 +577,15 @@ public class HwlocBitmap implements Cloneable {
 	}
 
 	/**
-	 * Compute the hash code of this bitmap. 
+	 * Compute the hash code of this bitmap from its current content, so a bitmap must not
+	 * be modified while it is used as a key of a hash table.
 	 * 
 	 * @return hash code.
 	 */
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 97 * hash + this.bitmap.hashCode();
+		hash = 97 * hash + this.toString().hashCode();
 		return hash;
 	}
 

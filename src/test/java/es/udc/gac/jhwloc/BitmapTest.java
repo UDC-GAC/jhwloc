@@ -1,9 +1,14 @@
 package es.udc.gac.jhwloc;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +61,45 @@ class BitmapTest {
 		} finally {
 			a.free();
 			b.free();
+		}
+	}
+
+	@Test
+	void hashCodeIsConsistentWithEquals() {
+		HwlocBitmap a = HwlocBitmap.alloc();
+		HwlocBitmap b = HwlocBitmap.alloc();
+
+		try {
+			a.set(3);
+			b.set(3);
+
+			assertEquals(a, b);
+			assertEquals(a.hashCode(), b.hashCode());
+
+			// The hash code follows the content, not the content when the bitmap was created
+			b.set(4);
+			assertNotEquals(a, b);
+			assertNotEquals(a.hashCode(), b.hashCode());
+		} finally {
+			a.free();
+			b.free();
+		}
+	}
+
+	@Test
+	void bitmapsOfATopologyCanBeHashed() {
+		try (HwlocTopology topo = new HwlocTopology()) {
+			topo.init();
+			topo.set_synthetic("core:2 pu:2");
+			topo.load();
+
+			// It used to throw a NullPointerException
+			HwlocCPUSet cpuset = topo.get_root_obj().getCPUSet();
+			assertDoesNotThrow(() -> cpuset.hashCode());
+
+			Set<HwlocBitmap> set = new HashSet<>();
+			set.add(cpuset);
+			assertTrue(set.contains(topo.get_root_obj().getCPUSet()));
 		}
 	}
 
