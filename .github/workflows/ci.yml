@@ -40,27 +40,44 @@ jobs:
         if: matrix.java == 21
         run: git diff --exit-code -- 'src/main/native/*.h'
 
-  # The oldest environment that is supported: hwloc 2.1, Maven 3.6 and a POSIX locale
+  # The oldest environment that is supported: hwloc 2.1, Maven 3.6 and a POSIX locale.
+  # Java is not installed with apt: the Java packages of this image fail to configure in
+  # the containers of GitHub (update-alternatives cannot create /usr/share/binfmts/jar).
   oldest:
-    name: Ubuntu 20.04 (hwloc 2.1, JDK 11) and Java 8
-    runs-on: ubuntu-latest
+    name: Ubuntu 20.04 (hwloc 2.1, Maven 3.6, JDK 11) and Java 8
+    runs-on: ubuntu-24.04
     container: ubuntu:20.04
     env:
       DEBIAN_FRONTEND: noninteractive
-      JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
     steps:
       - name: Install the tools
-        run: apt-get update && apt-get install -y git gcc make maven openjdk-11-jdk-headless openjdk-8-jre-headless libhwloc-dev
+        run: apt-get update && apt-get install -y git gcc make curl ca-certificates libhwloc-dev
       - uses: actions/checkout@v7
+      - name: Install Java 8, to run the jar
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 8
+      - name: Remember where Java 8 is
+        run: echo "JAVA8_HOME=$JAVA_HOME" >> "$GITHUB_ENV"
+      - name: Install JDK 11, to build
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 11
+      - name: Install Maven 3.6.3, the oldest that is supported
+        run: |
+          curl -fsSL https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz | tar -xz -C /opt
+          echo "/opt/apache-maven-3.6.3/bin" >> "$GITHUB_PATH"
       - name: Build and test
         run: mvn -B clean verify
       # The jar is built for Java 8, so it has to run on it
       - name: Run an example with Java 8
-        run: /usr/lib/jvm/java-8-openjdk-amd64/bin/java -cp "$(ls lib/jhwloc-*.jar)" -Djava.library.path=lib es.udc.gac.jhwloc.examples.HelloWorld
+        run: '"$JAVA8_HOME/bin/java" -cp "$(ls lib/jhwloc-*.jar)" -Djava.library.path=lib es.udc.gac.jhwloc.examples.HelloWorld'
 
   licenses:
     name: REUSE compliance
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: fsfe/reuse-action@v6
