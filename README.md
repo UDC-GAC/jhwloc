@@ -1,5 +1,7 @@
 # jhwloc: Java Hardware Locality library
 
+[![CI](https://github.com/UDC-GAC/jhwloc/actions/workflows/ci.yml/badge.svg)](https://github.com/UDC-GAC/jhwloc/actions/workflows/ci.yml)
+
 **jhwloc** is a Java wrapper for the [Portable Hardware Locality (hwloc)](http://www.open-mpi.org/projects/hwloc)
 
 ## Documentation
@@ -75,6 +77,8 @@ mvn test
 ```
 
 Add `-DskipTests` to `mvn install` to skip them.
+
+The continuous integration (GitHub Actions) runs them on Ubuntu 22.04 and 24.04 with JDK 11, 17 and 21, and on Ubuntu 20.04, which has the oldest supported hwloc (2.1), where it also runs the jar with Java 8.
 
 ## Projects using jhwloc
 
