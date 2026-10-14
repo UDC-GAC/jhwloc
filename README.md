@@ -4,7 +4,7 @@
 
 ## Documentation
 
-The complete Javadoc in HTML format that details all the methods of the public jhwloc API is available [here](http://gac.udc.es/~rober/jhwloc/javadoc).
+The complete Javadoc in HTML format that details all the methods of the public jhwloc API is included in this repository, in the [javadoc/apidocs](javadoc/apidocs) directory (open `index.html` with a web browser). It can also be regenerated with `mvn javadoc:javadoc`.
 
 ## Getting Started
 
