@@ -11,8 +11,9 @@
 	<url>https://github.com/UDC-GAC/jhwloc</url>
         <licenses>
                 <license>
-                <name>GNU General Public Licence Version 3</name>
-                <url>https://www.gnu.org/licenses/gpl.txt</url>
+                <name>GNU Lesser General Public License v3.0 or later</name>
+                <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+                <distribution>repo</distribution>
                 </license>
         </licenses>
 	<properties>

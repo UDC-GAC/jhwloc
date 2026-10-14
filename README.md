@@ -80,4 +80,4 @@ The jhwloc library is developed in the [Computer Architecture Group](http://gac.
 
 ## License
 
-This library is distributed as free software and is publicly available under the GPLv3 license (see the [LICENSE](LICENSE) file for more details)
+This library is distributed under the GNU Lesser General Public License, version 3 or later (see the [LICENSE](LICENSE) file for more details). jhwloc uses the hwloc library, whose license is included in the [NOTICE](NOTICE) file.
