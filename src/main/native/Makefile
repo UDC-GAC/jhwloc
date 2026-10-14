@@ -7,7 +7,7 @@ all: libjhwloc.so
 # using --as-needed drop the dependency on libhwloc.
 libjhwloc.so:
 	if [ ! -d "$(BUILD_DIR)" ]; then $(MKDIR) $(BUILD_DIR); fi
-	$(JAVAC) -h . -d $(BUILD_DIR)/classes -sourcepath $(SRC_DIR) \
+	$(JAVAC) -encoding UTF-8 -h . -d $(BUILD_DIR)/classes -sourcepath $(SRC_DIR) \
 		$(JAVA_SRC)/HWLOC.java $(JAVA_SRC)/HwlocObject.java $(JAVA_SRC)/HwlocTopology.java \
 		$(JAVA_SRC)/HwlocBitmap.java $(JAVA_SRC)/HwlocEnumTypes.java
 	$(CC) $(CC_FLAGS) jhwloc_HwlocBitmap.c -o $(BUILD_DIR)/jhwloc_HwlocBitmap.o
