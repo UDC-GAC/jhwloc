@@ -13,7 +13,7 @@ libjhwloc.so:
 	$(CC) $(CC_FLAGS) jhwloc_HwlocTopology.c -o $(BUILD_DIR)/jhwloc_HwlocTopology.o
 	$(CC) $(CC_FLAGS) jhwloc_HwlocEnumTypes.c -o $(BUILD_DIR)/jhwloc_HwlocEnumTypes.o
 	$(CC) $(CC_FLAGS) jhwloc_util.c -o $(BUILD_DIR)/jhwloc_util.o
-	$(CC) $(LIBJHWLOC_FLAGS) $(BUILD_DIR)/*.o -o $(BUILD_DIR)/libjhwloc.so
+	$(CC) $(LIBJHWLOC_FLAGS) $(BUILD_DIR)/*.o $(HWLOC_LIBS) -o $(BUILD_DIR)/libjhwloc.so
 	$(CP) $(BUILD_DIR)/libjhwloc.so $(LIB_DIR)
 
 clean:
