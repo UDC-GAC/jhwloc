@@ -552,7 +552,7 @@ int GetHwlocMEMBindPolicyTypeJava(JNIEnv *env, hwloc_membind_policy_t hwloc_poli
      return es_udc_gac_jhwloc_HwlocEnumTypes_MEMBIND_UNKNOWN_TYPE;
 }
 
-int GetHwlocCompareTypesJava(JNIEnv *env, enum hwloc_compare_types_e type)
+int GetHwlocCompareTypesJava(JNIEnv *env, int type)
 {
 	switch(type)
 	{

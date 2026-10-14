@@ -139,7 +139,7 @@ hwloc_obj_cache_type_t GetHwlocObjectCacheTypeNative(JNIEnv *env, int jhwloc_obj
 int GetHwlocObjectCacheTypeJava(JNIEnv *env, hwloc_obj_cache_type_t type);
 int GetHwlocMEMBindPolicyTypeNative(JNIEnv *env, int jhwloc_policy);
 int GetHwlocMEMBindPolicyTypeJava(JNIEnv *env, hwloc_membind_policy_t hwloc_policy);
-int GetHwlocCompareTypesJava(JNIEnv *env, enum hwloc_compare_types_e type);
+int GetHwlocCompareTypesJava(JNIEnv *env, int type);
 int GetHwlocGetTypeDepthJava(JNIEnv *env, enum hwloc_get_type_depth_e type);
 int GetHwlocTypeFilterJava(JNIEnv *env, enum hwloc_type_filter_e filter);
 enum hwloc_type_filter_e GetHwlocTypeFilterNative(JNIEnv *env, int filter);
