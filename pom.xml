@@ -126,6 +126,9 @@
 				<configuration>
 					<!-- The native library is built by make in the compile phase and copied to lib -->
 					<argLine>-Djava.library.path=${project.basedir}/lib</argLine>
+					<!-- One JVM for each test class: the library is loaded by the first class that uses HWLOC, so in a shared JVM a test
+					     that uses another class first passes or fails depending on the order of the classes, which is that of the file system -->
+					<reuseForks>false</reuseForks>
 				</configuration>
 			</plugin>
 			<plugin>

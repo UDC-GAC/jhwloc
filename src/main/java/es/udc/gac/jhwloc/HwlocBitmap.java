@@ -4,6 +4,12 @@ public class HwlocBitmap implements Cloneable {
 
 	private long handler;
 
+	// A bitmap can be allocated before any topology exists, and the native library is loaded by HWLOC
+	static {
+		@SuppressWarnings("unused")
+		int version = HWLOC.API_VERSION;
+	}
+
 	protected HwlocBitmap() {
 		this.handler = -1;
 	}
